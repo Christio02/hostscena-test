@@ -45,7 +45,7 @@ const MarqueeImages: React.FC = () => {
                 const isAffected = hoveredIndex !== null && hoveredIndex !== index;
 
                 const containerStyle: React.CSSProperties = {
-                    transition: "all 5s ease",
+                    transition: "all 2s ease",
                 };
 
                 if (effectMode === "fall" && isAffected) {
@@ -91,7 +91,7 @@ const MarqueeImages: React.FC = () => {
 
     return (
         <>
-            <div className="relative w-full h-140 flex flex-col justify-center gap-4 overflow-hidden p-4">
+            <div className="relative w-full h-[395px] flex flex-col justify-center gap-4 overflow-hidden">
                 {renderLane(false)}
                 {renderLane(true)}
 
