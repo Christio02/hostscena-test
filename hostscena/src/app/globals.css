@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Wittgenstein&display=swap');
 @import "tailwindcss";
 
 @tailwind base;
@@ -5,5 +6,18 @@
 @tailwind utilities;
 
 
+:root {
+    --font-wittgenstein: 'Wittgenstein', serif;
+    --font-source-sans: 'Source Sans 3', sans-serif;
+}
 
 
+body {
+    font-family: var(--font-source-sans), serif;
+}
+.font-title {
+    font-family: var(--font-wittgenstein), serif;
+}
+.font-body {
+    font-family: var(--font-source-sans), sans-serif;
+}
