@@ -11,6 +11,11 @@ const config: Config = {
                 title: ['var(--font-wittgenstein)', 'serif'],
             body: ['var(--font-source-sans)', 'sans-serif'],
             },
+            fontSize: {
+                xxs: "0.65rem",
+                mdplus: "1.125rem",
+                giant: "4.5rem",
+            },
         },
     },
     plugins: [],
