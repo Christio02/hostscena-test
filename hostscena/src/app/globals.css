@@ -5,19 +5,38 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Font Variables */
 :root {
     --font-wittgenstein: 'Wittgenstein', serif;
     --font-source-sans: 'Source Sans 3', sans-serif;
 }
 
-
+/* Default body font */
 body {
     font-family: var(--font-source-sans), serif;
 }
+
+/* Font family utility classes */
 .font-title {
     font-family: var(--font-wittgenstein), serif;
 }
 .font-body {
     font-family: var(--font-source-sans), sans-serif;
+}
+
+/* Font size utility classes */
+.text-xxs {
+    font-size: 0.65rem;
+}
+
+.text-mdplus {
+    font-size: 1.125rem;
+}
+
+.text-giant {
+    font-size: 4.5rem;
+}
+
+.text-debug {
+    font-size: 42px;
 }
