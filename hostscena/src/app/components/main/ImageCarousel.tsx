@@ -9,6 +9,7 @@ type EffectMode = "none" | "fall" | "split" | "crash";
 const MarqueeImages: React.FC = () => {
     const topRef = useRef<HTMLDivElement>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
+    const [scrollSpeed] = useState(1);
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [effectMode, setEffectMode] = useState<EffectMode>("fall");
@@ -18,8 +19,19 @@ const MarqueeImages: React.FC = () => {
 
         const scroll = () => {
             if (topRef.current && bottomRef.current) {
-                topRef.current.scrollLeft += 2;
-                bottomRef.current.scrollLeft -= 1;
+                const top = topRef.current;
+                const bottom = bottomRef.current;
+
+                top.scrollLeft += scrollSpeed;
+                bottom.scrollLeft -= scrollSpeed / 2;
+
+
+                if (top.scrollLeft >= top.scrollWidth / 2) {
+                    top.scrollLeft = 0;
+                }
+                if (Math.abs(bottom.scrollLeft) >= bottom.scrollWidth / 2) {
+                    bottom.scrollLeft = 0;
+                }
             }
             animationFrameId = requestAnimationFrame(scroll);
         };
@@ -27,6 +39,7 @@ const MarqueeImages: React.FC = () => {
         animationFrameId = requestAnimationFrame(scroll);
         return () => cancelAnimationFrame(animationFrameId);
     }, []);
+
 
     const getRandomTransform = () => {
         const x = Math.floor(Math.random() * 1000 - 500);
@@ -38,15 +51,22 @@ const MarqueeImages: React.FC = () => {
         <div
             ref={reverse ? bottomRef : topRef}
             className="whitespace-nowrap overflow-hidden w-full flex"
-            style={{ direction: reverse ? "rtl" : "ltr" }}
+            style={{direction: reverse ? "rtl" : "ltr"}}
         >
             {[...imageUrls, ...imageUrls].map((src, index) => {
-                //const isHovered = hoveredIndex === index;
                 const isAffected = hoveredIndex !== null && hoveredIndex !== index;
 
+                const isHovered = hoveredIndex === index;
+                const isResetting = hoveredIndex === null;
+
                 const containerStyle: React.CSSProperties = {
-                    transition: "all 2s ease",
+                    transition: isAffected && !isHovered
+                        ? "all 2s ease-out"
+                        : isResetting
+                            ? "all 0.3s ease-in"
+                            : "all 0.3s ease",
                 };
+
 
                 if (effectMode === "fall" && isAffected) {
                     containerStyle.transform = "translateY(500px)";
@@ -87,6 +107,7 @@ const MarqueeImages: React.FC = () => {
                 );
             })}
         </div>
+
     );
 
     return (
@@ -110,6 +131,7 @@ const MarqueeImages: React.FC = () => {
                     </button>
                 ))}
             </div>
+
         </>
     )
         ;
