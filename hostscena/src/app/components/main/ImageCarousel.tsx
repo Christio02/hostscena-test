@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import InteractiveTiltCard from "@/app/components/main/InteractiveTiltCard";
+
 
 const imageUrls = Array.from({ length: 18 }, (_, i) =>
     `/hostscena/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, "0")}.jpg`
@@ -13,18 +16,20 @@ const MarqueeImages: React.FC = () => {
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [effectMode, setEffectMode] = useState<EffectMode>("fall");
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+
 
     useEffect(() => {
         let animationFrameId: number;
 
         const scroll = () => {
-            if (topRef.current && bottomRef.current) {
+            if (hoveredIndex === null && topRef.current && bottomRef.current) {
                 const top = topRef.current;
                 const bottom = bottomRef.current;
 
-                top.scrollLeft += scrollSpeed;
+                top.scrollLeft += scrollSpeed / 2;
                 bottom.scrollLeft -= scrollSpeed / 2;
-
 
                 if (top.scrollLeft >= top.scrollWidth / 2) {
                     top.scrollLeft = 0;
@@ -33,13 +38,13 @@ const MarqueeImages: React.FC = () => {
                     bottom.scrollLeft = 0;
                 }
             }
+
             animationFrameId = requestAnimationFrame(scroll);
         };
 
         animationFrameId = requestAnimationFrame(scroll);
         return () => cancelAnimationFrame(animationFrameId);
-    }, []);
-
+    }, [scrollSpeed, hoveredIndex]);
 
     const getRandomTransform = () => {
         const x = Math.floor(Math.random() * 1000 - 500);
@@ -51,22 +56,20 @@ const MarqueeImages: React.FC = () => {
         <div
             ref={reverse ? bottomRef : topRef}
             className="whitespace-nowrap overflow-hidden w-full flex"
-            style={{direction: reverse ? "rtl" : "ltr"}}
+            style={{ direction: reverse ? "rtl" : "ltr" }}
         >
             {[...imageUrls, ...imageUrls].map((src, index) => {
                 const isAffected = hoveredIndex !== null && hoveredIndex !== index;
-
                 const isHovered = hoveredIndex === index;
                 const isResetting = hoveredIndex === null;
 
                 const containerStyle: React.CSSProperties = {
                     transition: isAffected && !isHovered
-                        ? "all 2s ease-out"
+                        ? "all 3s ease-out"
                         : isResetting
                             ? "all 0.3s ease-in"
                             : "all 0.3s ease",
                 };
-
 
                 if (effectMode === "fall" && isAffected) {
                     containerStyle.transform = "translateY(500px)";
@@ -84,41 +87,39 @@ const MarqueeImages: React.FC = () => {
                     containerStyle.opacity = 1;
                 }
 
-
                 return (
                     <div
                         key={`${reverse ? "b" : "t"}-${index}`}
-                        className="w-auto h-60 flex items-center justify-center bg-white mx-2 shrink-0 relative group"
+                        className="w-auto h-60 flex items-center justify-center bg-white mx-2 shrink-0 relative group cursor-pointer"
                         style={containerStyle}
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
+                        onClick={() => setSelectedImage(src)}
                     >
                         <img
                             src={src}
                             alt={`Image ${index + 1}`}
                             className="h-full object-contain transition-transform duration-500 w-full"
                         />
-                        <div
-                            className="absolute inset-0 bg-gray-600 bg-opacity-60 opacity-0 group-hover:opacity-60 flex items-center justify-center transition-opacity duration-300">
-                            <span className="text-white text-xl font-semibold opacity-100">{`Image ${index + 1}`}</span>
+                        <div className="absolute inset-0 bg-gray-600 bg-opacity-60 opacity-0 group-hover:opacity-60 flex items-center justify-center transition-opacity duration-300">
+                            <span className="text-white text-xl font-semibold">{`Image ${index + 1}`}</span>
                         </div>
                     </div>
-
                 );
             })}
         </div>
-
     );
 
     return (
         <>
+            {/* Marquee */}
             <div className="relative w-full h-[395px] flex flex-col justify-center gap-4 overflow-hidden">
                 {renderLane(false)}
                 {renderLane(true)}
-
-                {/* Hover Effect Toggle Buttons */}
             </div>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4  mt-100px">
+
+            {/* Effect Toggle Buttons */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 mt-100px z-10">
                 {["fall", "split", "none"].map((mode, i) => (
                     <button
                         key={mode}
@@ -132,10 +133,38 @@ const MarqueeImages: React.FC = () => {
                 ))}
             </div>
 
+            {/* Image Overlay with Drag Rotation */}
+            {selectedImage && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                    onClick={() => setSelectedImage(null)}
+                    style={{ perspective: 1200 }}
+                >
+                    {/* 3D Tilt Container */}
+                    <InteractiveTiltCard>
+                        <motion.div
+                            className="bg-white rounded-2xl shadow-xl p-6 max-w-full max-h-full overflow-hidden"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                className="absolute top-2 right-2 text-gray-700 hover:text-black text-2xl font-bold z-10"
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                &times;
+                            </button>
+                            <img
+                                src={selectedImage}
+                                alt="Selected"
+                                className="w-full h-auto max-h-[70vh] object-contain mx-auto"
+                            />
+                        </motion.div>
+                    </InteractiveTiltCard>
+                </div>
+            )}
+
+
         </>
-    )
-        ;
+    );
 };
 
 export default MarqueeImages;
-
