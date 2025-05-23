@@ -15,7 +15,7 @@ const MarqueeImages: React.FC = () => {
     const [scrollSpeed] = useState(1);
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [effectMode, setEffectMode] = useState<EffectMode>("fall");
+    const [effectMode] = useState<EffectMode>("none");
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
 
@@ -24,7 +24,7 @@ const MarqueeImages: React.FC = () => {
         let animationFrameId: number;
 
         const scroll = () => {
-            if (hoveredIndex === null && topRef.current && bottomRef.current) {
+            if (topRef.current && bottomRef.current) {
                 const top = topRef.current;
                 const bottom = bottomRef.current;
 
@@ -44,7 +44,7 @@ const MarqueeImages: React.FC = () => {
 
         animationFrameId = requestAnimationFrame(scroll);
         return () => cancelAnimationFrame(animationFrameId);
-    }, [scrollSpeed, hoveredIndex]);
+    }, [scrollSpeed]);
 
     const getRandomTransform = () => {
         const x = Math.floor(Math.random() * 1000 - 500);
@@ -118,20 +118,6 @@ const MarqueeImages: React.FC = () => {
                 {renderLane(true)}
             </div>
 
-            {/* Effect Toggle Buttons */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 mt-100px z-10">
-                {["fall", "split", "none"].map((mode, i) => (
-                    <button
-                        key={mode}
-                        onClick={() => setEffectMode(mode as EffectMode)}
-                        className={`w-12 h-12 rounded-full border-2 text-xl font-bold flex items-center justify-center transition-all ${
-                            effectMode === mode ? "bg-black text-white" : "bg-white text-black"
-                        }`}
-                    >
-                        {i + 1}
-                    </button>
-                ))}
-            </div>
 
             {/* Image Overlay with Drag Rotation */}
             {selectedImage && (
