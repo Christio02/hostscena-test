@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --font-wittgenstein: initial;
-  --font-source: initial;
+  --font-wittgenstein: 'Wittgenstein', serif;
+  --font-source: 'Source Sans 3', serif;
 
   --color-primary: #ffffff;
   --color-secondary: #000000;
 
-  --display: 3.563rem;
-  --h1: 3rem;
-  --h2: 2.75rem;
-  --h3: 2.25rem;
-  --h4: 1.75rem;
-  --h5: 1.625rem;
-  --body: 1.125rem;
-  --caption: 1rem;
-  --small: 0.875rem;
+  --display: 3.563rem; /* 57px */
+  --h1: 3rem; /* 48px */
+  --h2: 2.75rem; /* 44px */
+  --h2-mobile: 2.5rem; /* 40px */
+  --h3: 2.25rem; /* 36px */
+  --h4: 1.75rem; /* 28px */
+  --h5: 1.625rem; /* 26px */
+  --body: 1.125rem; /* 18px */
+  --caption: 1rem; /* 16px */
+  --small: 0.875rem; /* 14px */
+  --button: 2rem; /* 32px */
 }
 
 @layer base {
@@ -79,5 +81,16 @@
     font-weight: 300;
     font-style: italic;
     text-transform: uppercase;
+  }
+
+  .text-button {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--button);
+  }
+
+  @media (max-width: 990px) {
+    .text-button {
+      font-size: var(--h2-mobile);
+    }
   }
 }

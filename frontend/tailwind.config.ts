@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        mobile: '375px',
+        tablet: '990px',
+      },
       fontFamily: {
         sans: ['var(--font-source)'],
         heading: ['var(--font-wittgenstein)'],
