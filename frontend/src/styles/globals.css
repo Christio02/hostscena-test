@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-wittgenstein: initial;
+  --font-source: initial;
+
+  --color-primary: #ffffff;
+  --color-secondary: #000000;
+
+  --display: 3.563rem;
+  --h1: 3rem;
+  --h2: 2.75rem;
+  --h3: 2.25rem;
+  --h4: 1.75rem;
+  --h5: 1.625rem;
+  --body: 1.125rem;
+  --caption: 1rem;
+  --small: 0.875rem;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black font-sans;
+  }
+
+  .text-display {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--display);
+    text-transform: uppercase;
+  }
+
+  .text-h1 {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--h1);
+  }
+
+  .text-h2 {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--h2);
+  }
+
+  .text-h3 {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--h3);
+  }
+
+  .text-h4 {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--h4);
+  }
+
+  .text-h5 {
+    font-family: var(--font-source), serif;
+    font-size: var(--h5);
+  }
+
+  .text-body {
+    font-family: var(--font-source), serif;
+    font-size: var(--body);
+  }
+
+  .text-caption {
+    font-family: var(--font-source), serif;
+    font-size: var(--caption);
+    font-weight: 600;
+  }
+
+  .text-small {
+    font-family: var(--font-source), serif;
+    font-size: var(--small);
+    font-weight: 300;
+  }
+
+  .text-tag {
+    font-family: var(--font-source), serif;
+    font-size: var(--small);
+    font-weight: 300;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+}
