@@ -9,27 +9,48 @@
   --color-primary: #ffffff;
   --color-secondary: #000000;
 
-  --display: 3.563rem; /* 57px */
-  --h1: 3rem; /* 48px */
-  --h2: 2.75rem; /* 44px */
-  --h2-mobile: 2.5rem; /* 40px */
-  --h3: 2.25rem; /* 36px */
-  --h4: 1.75rem; /* 28px */
-  --h5: 1.625rem; /* 26px */
-  --body: 1.125rem; /* 18px */
-  --caption: 1rem; /* 16px */
-  --small: 0.875rem; /* 14px */
-  --button: 2rem; /* 32px */
+  /* Typografi fra Figma */
+  --logo-h1: 3.563rem;      /* 57px */
+  --logo-h2: 2.688rem;      /* 43px */
+
+  --h1: 3rem;               /* 48px */
+  --h2: 3.25rem;            /* 52px */
+  --h2-mobile: 2.5rem;      /* 40px */
+  --h3: 1.875rem;           /* 30px */
+  --h4: 1.75rem;            /* 28px */
+  --h5: 1.625rem;           /* 26px */
+  --h6: 1.125rem;           /* 18px */
+  --h6-mobile: 1rem;        /* 16px */
+
+  --body: 1.125rem;         /* 18px */
+  --caption: 1rem;          /* 16px */
+  --small: 0.875rem;        /* 14px */
+  --tiny: 0.875rem;         /* 14px */
+  --2s: 0.875rem;           /* 14px */
+
+  --calendar-title: 1.25rem; /* 20px */
+  --calendar-time: 1rem;     /* 16px */
+
+  --title-s: 1.4375rem;      /* 23px */
+  --tag: 1rem;               /* 16px */
+
+  --button: 2rem;           /* 32px */
 }
 
 @layer base {
   body {
-    @apply bg-white text-black font-sans;
+    @apply bg-white text-black;
   }
 
-  .text-display {
+  .text-logo-h1 {
     font-family: var(--font-wittgenstein), serif;
-    font-size: var(--display);
+    font-size: var(--logo-h1);
+    text-transform: uppercase;
+  }
+
+  .text-logo-h2 {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--logo-h2);
     text-transform: uppercase;
   }
 
@@ -58,29 +79,47 @@
     font-size: var(--h5);
   }
 
-  .text-body {
+  .text-h6 {
+    font-family: var(--font-source), serif;
+    font-size: var(--h6);
+  }
+
+  .text-body,
+  .text-brodtekst {
     font-family: var(--font-source), serif;
     font-size: var(--body);
   }
 
-  .text-caption {
+  .text-undertekst {
+    font-family: var(--font-source), serif;
+    font-size: var(--body);
+    font-weight: lighter;
+  }
+
+  .text-caption,
+  .text-tag,
+  .text-calendar-time {
     font-family: var(--font-source), serif;
     font-size: var(--caption);
-    font-weight: 600;
+    font-weight: 300;
   }
 
-  .text-small {
+  .text-small,
+  .text-2s,
+  .text-s {
     font-family: var(--font-source), serif;
     font-size: var(--small);
     font-weight: 300;
   }
 
-  .text-tag {
-    font-family: var(--font-source), serif;
-    font-size: var(--small);
-    font-weight: 300;
-    font-style: italic;
-    text-transform: uppercase;
+  .text-calendar-title {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--calendar-title);
+  }
+
+  .text-title-s {
+    font-family: var(--font-wittgenstein), serif;
+    font-size: var(--title-s);
   }
 
   .text-button {
@@ -88,7 +127,15 @@
     font-size: var(--button);
   }
 
-  @media (max-width: 990px) {
+  @media (max-width: 989px) {
+    .text-h2 {
+      font-size: var(--h2-mobile);
+    }
+
+    .text-h6 {
+      font-size: var(--h6-mobile);
+    }
+
     .text-button {
       font-size: var(--h2-mobile);
     }
