@@ -42,6 +42,7 @@
     @apply bg-white text-black;
   }
 
+  /* Typography */
   .text-logo-h1 {
     font-family: var(--font-wittgenstein), serif;
     font-size: var(--logo-h1);
@@ -139,5 +140,21 @@
     .text-button {
       font-size: var(--h2-mobile);
     }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply border border-secondary bg-primary hover:bg-secondary hover:text-primary;
+  }
+}
+
+@layer utilities {
+  .font-source {
+    font-family: var(--font-source), serif;
+  }
+
+  .font-wittgenstein {
+    font-family: var(--font-wittgenstein), serif;
   }
 }

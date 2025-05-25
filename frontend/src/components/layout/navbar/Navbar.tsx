@@ -45,7 +45,7 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  className="border-[1px] border-secondary hover:bg-secondary hover:text-primary px-[10px]"
+                  className="btn px-[10px]"
                 >
                   {label}
                 </Link>
