@@ -11,6 +11,7 @@ export default {
       screens: {
         mobile: '375px',
         tablet: '990px',
+        desktop: '1440px',
       },
       fontFamily: {
         sans: ['var(--font-source)'],

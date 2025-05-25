@@ -42,11 +42,7 @@ export default function Navbar() {
             {navLinks
               .filter((link) => link.label.toLowerCase() !== 'hjem')
               .map(({ label, href }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="btn px-[10px]"
-                >
+                <Link key={href} href={href} className="btn px-[10px]">
                   {label}
                 </Link>
               ))}
