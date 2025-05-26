@@ -2,7 +2,7 @@ import Image from 'next/image'
 const logo = '/assets/images/logo/logo_no_border.svg'
 import { email, postalAddress, visitingAddress } from '@/mockdata/text'
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
-import BackgroundBoxes from '@/components/ui/buyFestivalPass/BackgroundBoxes'
+import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { HiArrowLongRight } from 'react-icons/hi2'
 
 const footerImage = '/assets/images/footer_image.png'
@@ -34,7 +34,7 @@ export default function Footer() {
         {/* TODO: add link to festival pass purchase page  */}
         {/* Festivalpass knapp */}
         <div className="order-2 tablet:order-3  flex items-center justify-center py-[20px] tablet:pr-[20px]">
-          <BackgroundBoxes
+          <BuyFestivalPass
             className="w-full tablet:w-[287px] h-[116px]"
             imageSrc={footerImage}
             button={

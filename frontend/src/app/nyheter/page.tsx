@@ -1,8 +1,10 @@
+import NewsGrid from '@/components/ui/news/NewsGrid'
+import mockNews from '@/mockdata/news'
+
 export default function Nyheter() {
   return (
     <section>
-      <h1 className="text-h1">Nyheter</h1>
-      <p className="text-body">Nyheter om arrangementene her.</p>
+      <NewsGrid news={mockNews} />
     </section>
   )
 }

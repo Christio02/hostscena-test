@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        mobile: '375px',
+        mobile: '450px',
         tablet: '990px',
         desktop: '1440px',
       },

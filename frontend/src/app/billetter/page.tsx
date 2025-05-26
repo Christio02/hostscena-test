@@ -1,10 +1,10 @@
-import BackgroundBoxes from '@/components/ui/buyFestivalPass/BackgroundBoxes'
+import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
 
 export default function Billetter() {
   return (
     <section>
-      <BackgroundBoxes
+      <BuyFestivalPass
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
         className="min-h-[300px] tablet:h-[700px] w-full"
         button={

@@ -8,7 +8,7 @@ interface BackgroundBoxesProps {
   content?: ReactNode
 }
 
-export default function BackgroundBoxes({
+export default function BuyFestivalPass({
   imageSrc,
   className = '',
   button,
