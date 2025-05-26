@@ -10,7 +10,7 @@ type Props = {
 export default function BlackTitleBar({ title, linkText, linkUrl }: Props) {
   return (
     <div className="bg-secondary py-[40px] tablet:py-[30px] px-[20px] text-primary flex justify-between items-center">
-      <h1 className="text-h2">{title}</h1>
+      <h2 className="text-h2">{title}</h2>
       {linkText && linkUrl && (
         <Link href={linkUrl} className="flex items-center gap-1 text-h6">
           {linkText.toUpperCase()}

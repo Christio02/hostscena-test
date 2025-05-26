@@ -1,10 +1,11 @@
-import BlackTitleBar from '@/components/ui/blackTitleBar/blackTitleBar'
+import BorderTitleBar from "@/components/ui/borderTitleBar/BorderTitleBar";
+
 
 export default function Home() {
   return (
     <div>
       {/*<ImageSnake />*/}
-      <BlackTitleBar title="Nyheter" linkText="alle nyheter" linkUrl="/nyheter" />
+      <BorderTitleBar title="Ukeoversikt" linkText="dag for dag" linkUrl="/" />
     </div>
   )
 }

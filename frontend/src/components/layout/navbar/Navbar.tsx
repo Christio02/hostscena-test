@@ -1,16 +1,22 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { navLinks } from '@/constants/navigation'
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const toggleMenu = () => setOpen((prev) => !prev)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <header className="relative z-50">
