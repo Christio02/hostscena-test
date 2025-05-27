@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { navLinks } from '@/constants/navigation'
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Image from 'next/image'
+import NavLinks from "@/components/layout/navbar/NavLinks";
+import MobileNavbar from "@/components/layout/navbar/MobileNavbar";
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 
@@ -27,6 +27,8 @@ export default function Navbar() {
             />
           </Link>
 
+          <NavLinks />
+
           <div className="tablet:hidden">
             <button
               onClick={toggleMenu}
@@ -38,50 +40,11 @@ export default function Navbar() {
             </button>
           </div>
 
-          <nav className="hidden tablet:flex gap-[10px] text-button">
-            {navLinks
-              .filter((link) => link.label.toLowerCase() !== 'hjem')
-              .map(({ label, href }) => (
-                <Link key={href} href={href} className="btn px-[10px]">
-                  {label}
-                </Link>
-              ))}
-          </nav>
+
         </div>
       </div>
 
-      {open && (
-        <div className="absolute top-full left-0 w-full bg-white border-b border-black tablet:hidden">
-          <nav>
-            <div className="flex flex-col items-center gap-[10px] px-[20px] py-[20px]">
-              {navLinks
-                .filter((link) => link.label.toLowerCase() !== 'hjem')
-                .map(({ label, href }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className="w-full text-center border-[1px] border-secondary text-button hover:bg-secondary hover:text-primary"
-                    onClick={() => setOpen(false)}
-                  >
-                    {label}
-                  </Link>
-                ))}
-            </div>
-
-            <div className="flex gap-[20px] justify-center w-full border-t border-black py-[20px]">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <FaFacebook size={48} />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <FaInstagram size={48} />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <FaYoutube size={48} />
-              </a>
-            </div>
-          </nav>
-        </div>
-      )}
+      {open && <MobileNavbar onClose={() => setOpen(false)} />}
     </header>
   )
 }

@@ -10,7 +10,9 @@ export default {
     extend: {
       screens: {
         mobile: '450px',
+        phone: '720px',
         tablet: '990px',
+        laptop: '1150px',
         desktop: '1440px',
       },
       fontFamily: {
