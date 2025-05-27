@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import NavLinks from "@/components/layout/navbar/NavLinks";
-import MobileNavbar from "@/components/layout/navbar/MobileNavbar";
+import NavLinks from '@/components/layout/navbar/NavLinks'
+import MobileNavbar from '@/components/layout/navbar/MobileNavbar'
 const logo = '/assets/images/logo/logo_no_border.svg'
 
 interface NavbarProps {
@@ -16,9 +16,7 @@ export default function Navbar({ fixed = true }: NavbarProps) {
   const toggleMenu = () => setOpen((prev) => !prev)
 
   return (
-      <header
-          className={`w-full z-50 ${fixed ? 'fixed top-0 left-0 bg-white' : 'relative'}`}
-      >
+    <header className={`w-full z-50 ${fixed ? 'fixed top-0 left-0 bg-white' : 'relative'}`}>
       <div className="border-b border-black px-[20px] py-[15px] tablet:py-[14px] bg-white">
         <div className="flex justify-between items-center">
           <Link href="/">
@@ -44,8 +42,6 @@ export default function Navbar({ fixed = true }: NavbarProps) {
               <span className="w-[28px] h-[3px] bg-black" />
             </button>
           </div>
-
-
         </div>
       </div>
 
