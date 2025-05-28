@@ -1,4 +1,4 @@
-import ProgramColumn from "@/components/ui/program/ProgramColumn";
+import ProgramColumn from "@/components/ui/program/week/ProgramColumn";
 import events from '@/mockdata/events'
 import type Event from '@/interfaces/event'
 import BorderTitleBar from "@/components/ui/borderTitleBar/BorderTitleBar";

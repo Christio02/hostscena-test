@@ -1,6 +1,7 @@
 import Event from '@/interfaces/event'
+import slugify from "@/utils/slugify";
 
-const events: Event[] = [
+const rawEvents = [
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde01.jpg',
         title: 'TITTEL',
@@ -110,5 +111,10 @@ const events: Event[] = [
         location: 'Løvenvold Theater'
     }
 ]
+
+const events: Event[] = rawEvents.map(e => ({
+    ...e,
+    slug: slugify(e.title)
+}))
 
 export default events

@@ -8,7 +8,7 @@ import HomeMobileNavbar from '@/components/layout/navbar/homepage/HomeMobileNavb
 import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
-import ProgramContainer from "@/components/ui/program/ProgramContainer";
+import ProgramContainer from "@/components/ui/program/week/ProgramContainer";
 
 export default function Home() {
   return (

@@ -2,16 +2,18 @@
 
 import { useState } from 'react'
 import type Event from '@/interfaces/event'
+import Link from "next/link";
 
 interface Props {
     event: Event
     isLast?: boolean
 }
 
-export default function EventCard({ event, isLast }: Props) {
+export default function ProgramCell({ event, isLast }: Props) {
     const [hover, setHover] = useState(false)
 
     return (
+        <Link href={`/program/${event.slug}`} className="block">
         <div
             className={`min-w-[256px] text-center relative overflow-hidden border-t border-x border-secondary p-[10px] cursor-pointer group ${
                 isLast ? 'border-b' : ''
@@ -34,5 +36,6 @@ export default function EventCard({ event, isLast }: Props) {
                 <span className="font-bold">{event.startTime}</span> {event.location}
             </p>
         </div>
+        </Link>
     )
 }

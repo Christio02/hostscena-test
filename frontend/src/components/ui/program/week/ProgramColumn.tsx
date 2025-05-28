@@ -1,4 +1,4 @@
-import EventCard from './EventCard'
+import ProgramCell from './ProgramCell'
 import type Event from '@/interfaces/event'
 
 interface Props {
@@ -23,7 +23,7 @@ export default function ProgramColumn({ date, events }: Props) {
                 {events
                     .sort((a, b) => a.startTime.localeCompare(b.startTime))
                     .map((event, index) => (
-                        <EventCard
+                        <ProgramCell
                             key={index}
                             event={event}
                             isLast={index === events.length - 1}

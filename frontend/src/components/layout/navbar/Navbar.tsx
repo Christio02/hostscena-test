@@ -6,6 +6,7 @@ import Image from 'next/image'
 import NavLinks from '@/components/layout/navbar/NavLinks'
 import MobileNavbar from '@/components/layout/navbar/MobileNavbar'
 import useScrollDirection from '@/utils/useScrollDirection'
+import {usePathname} from "next/navigation";
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 
@@ -18,6 +19,7 @@ export default function Navbar({ fixed = true }: NavbarProps) {
   const toggleMenu = () => setOpen((prev) => !prev)
   const [show, setShow] = useState(true)
   const scrollDirection = useScrollDirection()
+  const pathname = usePathname()
 
   useEffect(() => {
     if (scrollDirection === 'down') {
@@ -26,6 +28,10 @@ export default function Navbar({ fixed = true }: NavbarProps) {
       setShow(true)
     }
   }, [scrollDirection])
+
+  useEffect(() => {
+    if (pathname !== '/') setShow(true)
+  }, [pathname])
 
   return (
       <header className={`w-full z-50 ${fixed ? 'fixed' : 'relative'} ${show ? 'top-0' : '-top-28'} left-0 bg-white transition-all duration-300 ease-in-out`}>
