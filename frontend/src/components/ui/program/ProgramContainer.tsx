@@ -18,11 +18,13 @@ export default function ProgramContainer() {
     return (
         <>
             <BorderTitleBar title="Ukeoversikt" linkText="Dag for dag" linkUrl="/" />
-        <div className="flex gap-[20px] px-[40px] py-[20px]">
+            <div className="overflow-x-scroll">
+        <div className="flex gap-[20px] px-[40px] w-fit">
             {dates.map((date) => (
                 <ProgramColumn key={date} date={date} events={grouped[date]} />
             ))}
         </div>
+            </div>
         </>
     )
 }

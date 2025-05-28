@@ -15,8 +15,8 @@ export default function ProgramColumn({ date, events }: Props) {
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0')
 
     return (
-        <div className="flex flex-col w-full gap-[20px]">
-            <div className="bg-secondary text-primary text-center text-[1.5rem] font-wittgenstein py-[10px] uppercase">
+        <div className="flex flex-col w-full gap-[20px] py-[20px]">
+            <div className="min-w-[256px] bg-secondary text-primary text-center text-[1.5rem] font-wittgenstein py-[10px] uppercase">
                 {`${weekday} ${day}.${month}`}
             </div>
             <div>

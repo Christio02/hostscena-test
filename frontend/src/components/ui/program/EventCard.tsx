@@ -13,7 +13,7 @@ export default function EventCard({ event, isLast }: Props) {
 
     return (
         <div
-            className={`text-center relative overflow-hidden border-t border-x border-secondary p-[10px] cursor-pointer group ${
+            className={`min-w-[256px] text-center relative overflow-hidden border-t border-x border-secondary p-[10px] cursor-pointer group ${
                 isLast ? 'border-b' : ''
             }`}
             onMouseEnter={() => setHover(true)}

@@ -17,7 +17,7 @@ export default function Home() {
       <ImageSnake />
       <HomeNavbar />
       <HomeMobileNavbar />
-      <BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />
+        {/*<BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />*/}
       <BuyFestivalPassHome
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
         button={
