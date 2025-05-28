@@ -144,6 +144,19 @@
   .btn {
     @apply border border-secondary bg-primary hover:bg-secondary hover:text-primary;
   }
+
+  .parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .bg-static {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 @layer utilities {

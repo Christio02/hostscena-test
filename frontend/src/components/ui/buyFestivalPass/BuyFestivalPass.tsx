@@ -36,7 +36,7 @@ export default function BuyFestivalPass({
       </div>
 
       {/* Only show on mobile */}
-      {content && <div className="block border-0 tablet:hidden mt-[20px]">{content}</div>}
+      {content && <div className="block border-0 tablet:hidden py-[10px]">{content}</div>}
     </div>
   )
 }
