@@ -22,7 +22,7 @@ export default function Footer() {
               className="h-full border-secondary border-[1px] px-[14.4px] py-[13.6px]"
             />
           </div>
-          <div className="w-px h-full bg-black hidden tablet:block" />
+          <div className="w-[1px] h-full bg-black hidden tablet:block" />
           <div className="flex flex-col justify-center">
             <h2 className="text-h4">Kontakt:</h2>
             <p className="text-s">{email}</p>

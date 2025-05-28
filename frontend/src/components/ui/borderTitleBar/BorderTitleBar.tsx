@@ -10,7 +10,7 @@ type Props = {
 
 export default function BorderTitleBar({ title, linkText, linkUrl, borderTop = true }: Props) {
   return (
-    <div className="px-[20px]">
+    <div className="px-[20px] py-[20px]">
       <div
         className="py-[10px] flex justify-between items-center border-b border-black"
         style={{ borderTop: borderTop ? '1px solid black' : 'none' }}

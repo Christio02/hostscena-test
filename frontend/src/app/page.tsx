@@ -8,6 +8,7 @@ import HomeMobileNavbar from '@/components/layout/navbar/homepage/HomeMobileNavb
 import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
+import ProgramContainer from "@/components/ui/program/ProgramContainer";
 
 export default function Home() {
   return (
@@ -25,6 +26,13 @@ export default function Home() {
           </button>
         }
       />
+        <BlackTitleBar
+            title="Program"
+            linkText="alle arrangementer"
+            linkUrl="/program"
+            hideLinkOnMobile={true}
+        />
+        <ProgramContainer />
       <BuyFestivalPass
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
         className="min-h-[300px] block tablet:hidden w-full"
@@ -42,12 +50,6 @@ export default function Home() {
       />
       <BlackTitleBar title="Nyheter" linkText="alle nyheter" linkUrl="/nyheter" />
       <NewsGrid news={mockNews} limitMobile={3} limitTablet={4} limitDesktop={6} />
-      <BlackTitleBar
-        title="Program"
-        linkText="alle arrangementer"
-        linkUrl="/program"
-        hideLinkOnMobile={true}
-      />
     </>
   )
 }
