@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { Source_Sans_3, Wittgenstein } from 'next/font/google'
 import Footer from '@/components/layout/footer/Footer'
 import NavbarWrapper from '@/components/layout/navbar/NavbarWrapper'
+import LayoutPadding from "@/components/layout/layoutPadding/layoutPadding";
 
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="no" className={`${sourceSans.variable} ${wittgenstein.variable}`}>
       <body className="font-sans">
         <NavbarWrapper />
+        <LayoutPadding />
         <main>{children}</main>
         <Footer />
       </body>
