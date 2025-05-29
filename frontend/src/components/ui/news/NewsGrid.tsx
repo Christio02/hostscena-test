@@ -40,7 +40,7 @@ export default function NewsGrid({ news, limitMobile, limitTablet, limitDesktop 
   return (
     <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-[20px] p-[20px]">
       {visibleNews.map((item, index) => (
-        <NewsCard key={index} imageSrc={item.image} title={item.title} />
+          <NewsCard key={index} news={item} />
       ))}
     </div>
   )

@@ -4,7 +4,6 @@ export default interface News {
   tag?: string
   person?: string
   date: string
-  startTime: string
-  endTime: string
-  location: string
+  time: string
+  slug: string
 }

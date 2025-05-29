@@ -1,15 +1,14 @@
 import News from '@/interfaces/news'
+import slugify from '@/utils/slugify'
 
-const mockNews: News[] = [
+const rawNews = [
   {
     image: '/assets/images/newsMock/news1.png',
     title: 'PUBLIKUMSVERKTURUS 15 MARS I ÅLESUND',
     tag: 'Arrangement',
     person: 'Høstscena Ensemblet',
     date: '2025-03-15',
-    startTime: '18:00',
-    endTime: '20:00',
-    location: 'Ålesund Kulturhus',
+    time: '18:00',
   },
   {
     image: '/assets/images/newsMock/news2.png',
@@ -17,9 +16,7 @@ const mockNews: News[] = [
     tag: 'Frivillig',
     person: 'Festivalteam',
     date: '2025-05-10',
-    startTime: '17:00',
-    endTime: '19:00',
-    location: 'Frivilligsentralen',
+    time: '17:00',
   },
   {
     image: '/assets/images/newsMock/news3.png',
@@ -27,9 +24,7 @@ const mockNews: News[] = [
     tag: 'Fagseminar',
     person: 'Ulike gjester',
     date: '2025-04-05',
-    startTime: '10:00',
-    endTime: '15:00',
-    location: 'Plassen Molde',
+    time: '10:00',
   },
   {
     image: '/assets/images/newsMock/news4.png',
@@ -37,9 +32,7 @@ const mockNews: News[] = [
     tag: 'Film',
     person: 'Filmcrew Høstscena',
     date: '2024-12-01',
-    startTime: '20:00',
-    endTime: '22:00',
-    location: 'NF Kino Ålesund',
+    time: '20:00',
   },
   {
     image: '/assets/images/newsMock/news5.png',
@@ -47,9 +40,7 @@ const mockNews: News[] = [
     tag: 'Film',
     person: 'Produksjonsteamet',
     date: '2024-11-15',
-    startTime: '12:00',
-    endTime: '12:15',
-    location: 'Online',
+    time: '12:00',
   },
   {
     image: '/assets/images/newsMock/news6.png',
@@ -57,9 +48,7 @@ const mockNews: News[] = [
     tag: 'Litteratur',
     person: 'Forfattere',
     date: '2025-06-01',
-    startTime: '19:00',
-    endTime: '21:00',
-    location: 'Parken Kulturhus',
+    time: '19:00',
   },
   {
     image: '/assets/images/newsMock/news1.png',
@@ -67,9 +56,7 @@ const mockNews: News[] = [
     tag: 'Festival',
     person: 'Norske regissører',
     date: '2025-09-21',
-    startTime: '16:00',
-    endTime: '23:00',
-    location: 'Kulturarena Ålesund',
+    time: '16:00',
   },
   {
     image: '/assets/images/newsMock/news2.png',
@@ -77,10 +64,13 @@ const mockNews: News[] = [
     tag: 'Presse',
     person: 'Høstscena',
     date: '2025-01-10',
-    startTime: '10:00',
-    endTime: '11:00',
-    location: 'Høstscena Hovedkontor',
+    time: '10:00',
   },
 ]
+
+const mockNews: News[] = rawNews.map(n => ({
+  ...n,
+  slug: slugify(n.title),
+}))
 
 export default mockNews

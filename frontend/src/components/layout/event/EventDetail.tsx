@@ -32,7 +32,7 @@ export default function EventDetail({ event }: Props) {
                 <div>
                     {tag && <p className="text-tag italic">{tag.toUpperCase()}</p>}
                     <h1 className="text-h4 phone:text-h3">{title}</h1>
-                    <p className="text-caption">{formattedDate} KL: {startTime} - {endTime}</p>
+                    <p className="text-caption">{formattedDate} kl. {startTime} - {endTime}</p>
                     <p className="text-caption">{location}</p>
                 </div>
                 {link && (
