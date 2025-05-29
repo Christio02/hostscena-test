@@ -1,33 +1,32 @@
-import Image from "next/image";
-import Event from "@/interfaces/event";
-import Link from "next/link";
+import Image from 'next/image'
+import Event from '@/interfaces/event'
+import Link from 'next/link'
 
 interface Props {
-    event: Event
+  event: Event
 }
 
 export default function DayCard({ event }: Props) {
-    const { title, image, performer, startTime, endTime, location, slug } = event
-    return (
-
-                    <Link href={`/program/${slug}`} className="block">
-    <div className="w-full border border-secondary">
+  const { title, image, performer, startTime, endTime, location, slug } = event
+  return (
+    <Link href={`/program/${slug}`} className="block">
+      <div className="w-full border border-secondary">
         <div className="relative w-full h-[190px] phone:h-[170px] tablet:h-[260px]">
-            <Image src={image} alt={title} fill className="object-cover w-full" priority />
+          <Image src={image} alt={title} fill className="object-cover w-full" priority />
         </div>
         <div className="flex flex-col justify-between px-[10px]">
-            <div className="py-[10px] border-b border-secondary">
-                <h1 className="text-title-s">{title}</h1>
-            </div>
-            <div className="py-[5px]">
+          <div className="py-[10px] border-b border-secondary">
+            <h1 className="text-title-s">{title}</h1>
+          </div>
+          <div className="py-[5px]">
             <p className="text-caption">{performer}</p>
-                <p className="text-caption">{startTime} - {endTime}</p>
-                <p className="text-caption">{location}</p>
-                </div>
-
+            <p className="text-caption">
+              {startTime} - {endTime}
+            </p>
+            <p className="text-caption">{location}</p>
+          </div>
         </div>
-    </div>
-                    </Link>
-
-    )
+      </div>
+    </Link>
+  )
 }

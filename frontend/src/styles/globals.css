@@ -38,6 +38,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-white text-black text-body;
   }
@@ -108,13 +112,12 @@
     font-size: var(--s);
   }
 
-  .text-tag{
+  .text-tag {
     font-family: var(--font-source), serif;
     font-size: var(--tag);
     font-weight: 300;
     font-style: italic;
   }
-
 
   .text-calendar-title {
     font-family: var(--font-wittgenstein), serif;

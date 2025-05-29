@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import NavLinks from '@/components/layout/navbar/NavLinks'
 import MobileNavbar from '@/components/layout/navbar/MobileNavbar'
 import useScrollDirection from '@/utils/useScrollDirection'
-import {usePathname} from "next/navigation";
+import { usePathname } from 'next/navigation'
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 
@@ -34,7 +34,9 @@ export default function Navbar({ fixed = true }: NavbarProps) {
   }, [pathname])
 
   return (
-      <header className={`w-full z-50 ${fixed ? 'fixed' : 'relative'} ${show ? 'top-0' : '-top-28'} left-0 bg-white transition-all duration-300 ease-in-out`}>
+    <header
+      className={`w-full z-50 ${fixed ? 'fixed' : 'relative'} ${show ? 'top-0' : '-top-28'} left-0 bg-white transition-all duration-300 ease-in-out`}
+    >
       <div className="border-b border-black px-[20px] py-[15px] tablet:py-[14px] bg-white">
         <div className="flex justify-between items-center">
           <Link href="/">

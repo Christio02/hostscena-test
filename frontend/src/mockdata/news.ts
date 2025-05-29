@@ -68,7 +68,7 @@ const rawNews = [
   },
 ]
 
-const mockNews: News[] = rawNews.map(n => ({
+const mockNews: News[] = rawNews.map((n) => ({
   ...n,
   slug: slugify(n.title),
 }))

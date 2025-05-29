@@ -8,7 +8,7 @@ import HomeMobileNavbar from '@/components/layout/navbar/homepage/HomeMobileNavb
 import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
-import WeekContainer from "@/components/ui/program/week/WeekContainer";
+import WeekContainer from '@/components/ui/program/week/WeekContainer'
 
 export default function Home() {
   return (
@@ -17,7 +17,14 @@ export default function Home() {
       <ImageSnake />
       <HomeNavbar />
       <HomeMobileNavbar />
-        {/*<BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />*/}
+      <BlackTitleBar
+        title="Program"
+        linkText="alle arrangementer"
+        linkUrl="/program"
+        hideLinkOnMobile={true}
+      />
+      <WeekContainer hasLink={false} />
+      <BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />
       <BuyFestivalPassHome
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
         button={
@@ -26,13 +33,7 @@ export default function Home() {
           </button>
         }
       />
-        <BlackTitleBar
-            title="Program"
-            linkText="alle arrangementer"
-            linkUrl="/program"
-            hideLinkOnMobile={true}
-        />
-        <WeekContainer hasLink={false}/>
+
       <BuyFestivalPass
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
         className="min-h-[300px] block tablet:hidden w-full"
