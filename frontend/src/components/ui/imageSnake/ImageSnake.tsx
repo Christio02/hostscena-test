@@ -14,7 +14,7 @@ const SEGMENT_COUNT = 7
 const SEGMENT_SIZE = 300
 const STEP_SIZE = 200
 const ADD_INTERVAL = 300
-const MARGIN = 0
+const MARGIN = -100
 const MIN_DISTANCE = SEGMENT_SIZE * 0.2
 const MAX_ATTEMPTS = 10
 
@@ -147,7 +147,7 @@ const ImageSnake = () => {
   }, [addNewSegment])
 
   return (
-    <div ref={containerRef} className="relative w-full h-[calc(100vh-280px)] overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden">
       <div className="absolute inset-0">
         {segments.map((seg, i) => (
           <div

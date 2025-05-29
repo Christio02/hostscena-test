@@ -1,4 +1,4 @@
-import ProgramCell from './ProgramCell'
+import WeekCell from './WeekCell'
 import type Event from '@/interfaces/event'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 
 
-export default function ProgramColumn({ date, events }: Props) {
+export default function WeekColumn({ date, events }: Props) {
     const formattedDate = new Date(date)
     const weekday = formattedDate.toLocaleDateString('no-NO', { weekday: 'short' }).toUpperCase()
     const day = formattedDate.getDate().toString().padStart(2, '0')
@@ -23,7 +23,7 @@ export default function ProgramColumn({ date, events }: Props) {
                 {events
                     .sort((a, b) => a.startTime.localeCompare(b.startTime))
                     .map((event, index) => (
-                        <ProgramCell
+                        <WeekCell
                             key={index}
                             event={event}
                             isLast={index === events.length - 1}

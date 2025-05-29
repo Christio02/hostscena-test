@@ -9,7 +9,7 @@ interface Props {
     isLast?: boolean
 }
 
-export default function ProgramCell({ event, isLast }: Props) {
+export default function WeekCell({ event, isLast }: Props) {
     const [hover, setHover] = useState(false)
 
     return (

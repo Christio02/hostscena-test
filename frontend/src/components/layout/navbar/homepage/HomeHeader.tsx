@@ -3,7 +3,7 @@ const logo = '/assets/images/logo/logo_no_border.svg'
 
 export default function HomeHeader() {
   return (
-    <header className="flex items-center px-[20px] pb-[20px]">
+    <header className="flex items-center px-[20px] ">
       <div className="flex py-[20px] border-b border-secondary w-full gap-[10px]">
         <Image
           src={logo}
