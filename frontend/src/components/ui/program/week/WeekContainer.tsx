@@ -20,7 +20,7 @@ export default function WeekContainer({ hasLink = true, onSwitch }: Props) {
         <BorderTitleBar title="Ukeoversikt" />
       )}
       <div className="overflow-x-auto w-full scroll-pl-[40px] snap-x snap-mandatory">
-        <div className="flex gap-[20px] px-[40px] w-fit">
+        <div className="flex gap-[20px] px-[20px] tablet:px-[40px] w-fit">
           {dates.map((date) => (
             <WeekColumn key={date} date={date} events={grouped[date]} />
           ))}
