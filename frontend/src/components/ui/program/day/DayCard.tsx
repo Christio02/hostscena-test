@@ -10,7 +10,7 @@ export default function DayCard({ event }: Props) {
   const { title, image, performer, startTime, endTime, location, slug } = event
   return (
     <Link href={`/program/${slug}`} className="block">
-      <div className="w-full border border-secondary">
+      <div className="w-full border border-secondary hover-lift">
         <div className="relative w-full h-[190px] phone:h-[170px] tablet:h-[260px]">
           <Image src={image} alt={title} fill className="object-cover w-full" priority />
         </div>

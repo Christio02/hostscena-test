@@ -10,7 +10,7 @@ interface Props {
 export default function WeekColumn({ date, events }: Props) {
   return (
     <div className="flex flex-col w-full gap-[20px] py-[20px]">
-      <DateBadge date={date} className="min-w-[256px] bg-secondary" />
+      <DateBadge date={date} className="min-w-[17vw] bg-secondary" />
       <div>
         {events
           .sort((a, b) => a.startTime.localeCompare(b.startTime))
