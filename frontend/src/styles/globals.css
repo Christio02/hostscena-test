@@ -24,7 +24,7 @@
 
   --body: 1.125rem; /* 18px */
   --s: 1.125rem; /* 18px */
-  --caption: 1rem; /* 16px */
+  --caption: 1.125rem; /* 18px */
   --tiny: 0.875rem; /* 14px */
   --2s: 0.875rem; /* 14px */
 
@@ -32,14 +32,14 @@
   --calendar-time: 1rem; /* 16px */
 
   --title-s: 1.4375rem; /* 23px */
-  --tag: 1rem; /* 16px */
+  --tag: 1.125rem; /* 16px */
 
   --button: 2rem; /* 32px */
 }
 
 @layer base {
   body {
-    @apply bg-white text-black;
+    @apply bg-white text-black text-body;
   }
 
   /* Typography */
@@ -85,8 +85,7 @@
     font-size: var(--h6);
   }
 
-  .text-body,
-  .text-brodtekst {
+  .text-body {
     font-family: var(--font-source), serif;
     font-size: var(--body);
   }
@@ -98,7 +97,6 @@
   }
 
   .text-caption,
-  .text-tag,
   .text-calendar-time {
     font-family: var(--font-source), serif;
     font-size: var(--caption);
@@ -109,6 +107,14 @@
     font-family: var(--font-source), serif;
     font-size: var(--s);
   }
+
+  .text-tag{
+    font-family: var(--font-source), serif;
+    font-size: var(--tag);
+    font-weight: 300;
+    font-style: italic;
+  }
+
 
   .text-calendar-title {
     font-family: var(--font-wittgenstein), serif;

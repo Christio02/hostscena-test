@@ -7,5 +7,6 @@ export default interface Event {
     endTime: string
     location: string
     link?: string
+    tag?: string
     slug: string
 }

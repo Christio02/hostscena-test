@@ -9,7 +9,9 @@ const rawEvents = [
         date: '2025-09-24',
         startTime: '12:00',
         endTime: '13:00',
-        location: 'Sted'
+        location: 'Sted',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde02.jpg',
@@ -18,7 +20,9 @@ const rawEvents = [
         date: '2025-09-24',
         startTime: '08:00',
         endTime: '13:00',
-        location: 'Baker Walderhaug'
+        location: 'Baker Walderhaug',
+        tag: 'Litteratur',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde03.jpg',
@@ -27,7 +31,9 @@ const rawEvents = [
         date: '2025-09-24',
         startTime: '15:00',
         endTime: '16:00',
-        location: 'Løvenvold Theater'
+        location: 'Løvenvold Theater',
+        tag: 'Festival',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde04.jpg',
@@ -36,7 +42,9 @@ const rawEvents = [
         date: '2025-09-25',
         startTime: '11:00',
         endTime: '12:00',
-        location: 'Ålesund VGS(Fagerlia)'
+        location: 'Ålesund VGS(Fagerlia)',
+        tag: 'musikk',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde05.jpg',
@@ -45,7 +53,9 @@ const rawEvents = [
         date: '2025-09-25',
         startTime: '18:00',
         endTime: '19:00',
-        location: 'Arbeideren Kulturhus'
+        location: 'Arbeideren Kulturhus',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde06.jpg',
@@ -54,7 +64,9 @@ const rawEvents = [
         date: '2025-09-25',
         startTime: '20:00',
         endTime: '21:00',
-        location: 'Sobra scene'
+        location: 'Sobra scene',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde07.jpg',
@@ -63,7 +75,9 @@ const rawEvents = [
         date: '2025-09-26',
         startTime: '11:00',
         endTime: '13:00',
-        location: 'Jugendstilsenteret og Kube kunstmuseum'
+        location: 'Jugendstilsenteret og Kube kunstmuseum',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde08.jpg',
@@ -72,7 +86,9 @@ const rawEvents = [
         date: '2025-09-26',
         startTime: '19:00',
         endTime: '20:30',
-        location: 'Parken Kulturhus'
+        location: 'Parken Kulturhus',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde09.jpg',
@@ -81,7 +97,9 @@ const rawEvents = [
         date: '2025-09-26',
         startTime: '22:00',
         endTime: '02:00',
-        location: 'Arbeideren Kulturhus'
+        location: 'Arbeideren Kulturhus',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde10.jpg',
@@ -90,7 +108,9 @@ const rawEvents = [
         date: '2025-09-27',
         startTime: '16:00',
         endTime: '17:00',
-        location: 'Sted annonseres'
+        location: 'Sted annonseres',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde11.jpg',
@@ -99,7 +119,9 @@ const rawEvents = [
         date: '2025-09-27',
         startTime: '20:00',
         endTime: '02:00',
-        location: 'Arbeideren Kulturhus'
+        location: 'Arbeideren Kulturhus',
+        tag: 'Dans',
+        link: '/'
     },
     {
         image: '/assets/images/snake/Hostscena-bildeslange-bilde12.jpg',
@@ -108,7 +130,9 @@ const rawEvents = [
         date: '2025-09-28',
         startTime: '18:00',
         endTime: '20:00',
-        location: 'Løvenvold Theater'
+        location: 'Løvenvold Theater',
+        tag: 'Dans',
+        link: '/'
     }
 ]
 

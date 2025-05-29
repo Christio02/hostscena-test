@@ -19,7 +19,7 @@ const wittgenstein = Wittgenstein({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="no" className={`${sourceSans.variable} ${wittgenstein.variable}`}>
-      <body className="font-sans">
+      <body>
         <NavbarWrapper />
         <LayoutPadding />
         <main>{children}</main>
