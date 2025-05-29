@@ -30,7 +30,7 @@ export default function DayContainer({ onSwitch }: Props) {
         const capitalized = formatted.charAt(0).toUpperCase() + formatted.slice(1)
 
         return (
-          <section key={date} id={date} className="flex flex-col gap-[10px] pb-[40px]">
+          <section key={date} id={date} className="flex flex-col  ">
             <BorderTitleBar title={capitalized} />
             <DayGrid events={grouped[date]} />
           </section>
