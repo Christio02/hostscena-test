@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import DayContainer from '@/components/ui/program/day/DayContainer'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
-import BlackTitleBar from "@/components/ui/blackTitleBar/BlackTitleBar";
+import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 
 export default function Program() {
   const [mode, setMode] = useState<'day' | 'week'>('day')

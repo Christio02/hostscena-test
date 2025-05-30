@@ -1,10 +1,9 @@
-import BlackTitleBar from "@/components/ui/blackTitleBar/BlackTitleBar";
+import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 
 export default function Kart() {
   return (
     <section>
-        <BlackTitleBar title="Kart" />
-
+      <BlackTitleBar title="Kart" />
     </section>
   )
 }
