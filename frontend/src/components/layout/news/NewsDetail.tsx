@@ -30,7 +30,7 @@ export default function newsDetail({ news }: Props) {
             {tag && <p className="text-tag italic">{tag.toUpperCase()}</p>}
             <h1 className="text-h4 phone:text-h3">{title}</h1>
             <p className="text-caption">
-              {formattedDate} kl. {time}
+              Publisert: {formattedDate} kl. {time}
             </p>
             {person && <p className="text-caption">Av: {person}</p>}
           </div>

@@ -11,13 +11,30 @@ type Props = { onSwitch: () => void }
 
 export default function DayContainer({ onSwitch }: Props) {
   const grouped = groupEventsByDate(events)
-  const dates = Object.keys(grouped).sort()
+  const dates = Object.keys(grouped).sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
 
   const [hasMounted, setHasMounted] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const handlePrev = () => setActiveIndex((prev) => Math.max(prev - 1, 0))
-  const handleNext = () => setActiveIndex((prev) => Math.min(prev + 1, dates.length - 1))
+  const handlePrev = () => setActiveIndex((prev) => (prev - 1 + dates.length) % dates.length)
+  const handleNext = () => setActiveIndex((prev) => (prev + 1) % dates.length)
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 990)
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (!isMobile) setActiveIndex(0)
+  }, [isMobile])
 
   useEffect(() => {
     setHasMounted(true)
@@ -40,22 +57,24 @@ export default function DayContainer({ onSwitch }: Props) {
 
       {/* Mobile slider nav */}
       <div className="block tablet:hidden px-[20px]">
-        <div className="flex items-center justify-center gap-[40px] border-b border-secondary pb-[20px]">
-          <button onClick={handlePrev} disabled={activeIndex === 0}>
-            <LiaLongArrowAltLeftSolid size={44} />
-          </button>
-          <p className="text-h4 text-center text-nowrap">
-            {capitalizeFirstLetter(
-              new Date(dates[activeIndex]).toLocaleDateString('no-NO', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'numeric',
-              }),
-            )}
-          </p>
-          <button onClick={handleNext} disabled={activeIndex === dates.length - 1}>
-            <LiaLongArrowAltRightSolid size={44} />
-          </button>
+        <div className="flex items-center justify-center  border-b border-secondary pb-[20px]">
+          <div className="flex justify-between min-w-[300px]">
+            <button onClick={handlePrev}>
+              <LiaLongArrowAltLeftSolid size={44} />
+            </button>
+            <p className="text-h4 text-center text-nowrap">
+              {capitalizeFirstLetter(
+                new Date(dates[activeIndex]).toLocaleDateString('no-NO', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'numeric',
+                }),
+              )}
+            </p>
+            <button onClick={handleNext}>
+              <LiaLongArrowAltRightSolid size={44} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -73,7 +92,7 @@ export default function DayContainer({ onSwitch }: Props) {
               key={date}
               id={date}
               className={`flex flex-col transition-all duration-300 ${
-                index === activeIndex || (typeof window !== 'undefined' && window.innerWidth >= 640)
+                index === activeIndex || (typeof window !== 'undefined' && window.innerWidth >= 990)
                   ? 'block'
                   : 'hidden'
               }`}
