@@ -6,4 +6,5 @@ export default interface News {
   date: string
   time: string
   slug: string
+  content?: any[]
 }

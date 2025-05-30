@@ -9,4 +9,5 @@ export default interface Event {
   link?: string
   tag?: string
   slug: string
+  content?: any[]
 }

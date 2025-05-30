@@ -3,13 +3,14 @@ import type News from '@/interfaces/news'
 import Image from 'next/image'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
+import { PortableText } from '@portabletext/react'
 
 interface Props {
   news: News
 }
 
-export default function newsDetail({ news }: Props) {
-  const { title, tag, person, image, date, time } = news
+export default function NewsDetail({ news }: Props) {
+  const { title, tag, person, image, date, time, content } = news
   const formattedDate = capitalizeFirstLetter(
     new Date(date).toLocaleDateString('no-NO', {
       weekday: 'long',
@@ -38,15 +39,15 @@ export default function newsDetail({ news }: Props) {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full pt-[20px] px-[20px]">
-        <div className="max-w-[990px]">
-          <p>
-            Her kommer Sanity-tekst senere. Inntil videre mocker vi kun data for testing av design
-            og routing.
-          </p>
-          <p>
-            Etter hvert vil denne siden vise richtext-innhold fra Sanity, inkludert beskrivelse,
-            bilder, lenker og mer.
-          </p>
+          <div className="max-w-[650px] space-y-[40px]">
+            <PortableText
+                value={content}
+                components={{
+                    block: {
+                        normal: ({ children }) => <p className="mb-4">{children}</p>,
+                    },
+                }}
+            />
         </div>
       </div>
 

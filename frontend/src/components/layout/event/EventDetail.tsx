@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { HiArrowLongRight } from 'react-icons/hi2'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
+import { PortableText } from '@portabletext/react'
 
 interface Props {
   event: Event
 }
 
 export default function EventDetail({ event }: Props) {
-  const { title, tag, image, date, startTime, endTime, location, link } = event
+  const { title, tag, image, date, startTime, endTime, location, link, content } = event
   const formattedDate = capitalizeFirstLetter(
     new Date(date).toLocaleDateString('no-NO', {
       weekday: 'long',
@@ -48,16 +49,16 @@ export default function EventDetail({ event }: Props) {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full pt-[20px] px-[20px]">
-        <div className="max-w-[990px]">
-          <p>
-            Her kommer Sanity-tekst senere. Inntil videre mocker vi kun data for testing av design
-            og routing.
-          </p>
-          <p>
-            Etter hvert vil denne siden vise richtext-innhold fra Sanity, inkludert beskrivelse,
-            bilder, lenker og mer.
-          </p>
+      <div className="flex flex-col items-center justify-center w-full pt-[40px] pb-[20px] px-[20px]">
+        <div className="max-w-[650px] space-y-[40px]">
+            <PortableText
+                value={content}
+                components={{
+                    block: {
+                        normal: ({ children }) => <p>{children}</p>,
+                    },
+                }}
+            />
         </div>
       </div>
 

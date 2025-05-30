@@ -11,6 +11,7 @@
     "format": "prettier --write . && next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
     "framer-motion": "^12.15.0",
     "next": "^15.3.2",
     "react": "^19.0.0",
