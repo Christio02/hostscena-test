@@ -7,6 +7,7 @@ type Props = {
   linkUrl?: string
   onClick?: () => void
   borderTop?: boolean
+  noPadding?: boolean
 }
 
 export default function BorderTitleBar({
@@ -15,11 +16,12 @@ export default function BorderTitleBar({
   linkUrl,
   onClick,
   borderTop = true,
+  noPadding = false,
 }: Props) {
   const showLink = linkText && (linkUrl || onClick)
 
   return (
-    <div className="px-[20px] py-[20px]">
+    <div className={noPadding ? '' : 'px-[20px] py-[20px]'}>
       <div
         className="py-[10px] flex justify-between items-center border-b border-black"
         style={{ borderTop: borderTop ? '1px solid black' : 'none' }}

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type Location from '@/interfaces/location'
+import Marquee from '@/components/ui/marquee/Marquee'
 
 interface Props {
   location: Location
@@ -12,18 +13,15 @@ export default function LocationCard({ location }: Props) {
   const Wrapper = link ? Link : 'div'
 
   return (
-      <Wrapper href={link ?? '#'}>
-        <div className="w-[172px]">
-          <div className="relative w-full h-[221px] tablet:hover-lift">
-            <Image
-                src={image}
-                alt={name}
-                fill
-                className="object-cover"
-            />
-          </div>
-          <p className="text-2s mt-[10px]">{name}</p>
+    <Wrapper href={link ?? '#'}>
+      <div className="w-[172px]">
+        <div className="relative w-full h-[221px] tablet:hover-lift">
+          <Image src={image} alt={name} fill className="object-cover" />
         </div>
-      </Wrapper>
+        <div className="text-2s pt-[10px]">
+          <Marquee text={name} />
+        </div>
+      </div>
+    </Wrapper>
   )
 }

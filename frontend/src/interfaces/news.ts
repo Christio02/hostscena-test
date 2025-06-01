@@ -1,3 +1,5 @@
+import { PortableTextBlock } from '@portabletext/types'
+
 export default interface News {
   image: string
   title: string
@@ -6,5 +8,5 @@ export default interface News {
   date: string
   time: string
   slug: string
-  content?: any[]
+  content?: PortableTextBlock[]
 }

@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import News from '@/interfaces/news'
 import Link from 'next/link'
-import Marquee from "@/components/ui/marquee/Marquee";
-
+import Marquee from '@/components/ui/marquee/Marquee'
 
 interface Props {
   news: News

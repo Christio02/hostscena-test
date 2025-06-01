@@ -1,6 +1,7 @@
 import InfoItem from '@/components/ui/info/InfoItem'
 import ContactBox from '@/components/ui/contact/ContactBox'
-import LocationContainer from "@/components/ui/location/LocationContainer";
+import LocationContainer from '@/components/ui/location/LocationContainer'
+import About from '@/components/layout/about/About'
 
 export default function InfoContainer() {
   const items = [
@@ -8,7 +9,7 @@ export default function InfoContainer() {
     { title: 'Kart', content: <p>Her er kartet over området.</p> },
     { title: 'Lokaler', content: <LocationContainer /> },
     { title: 'Kontakt', content: <ContactBox /> },
-    { title: 'Om Høstscena', content: <p>Festivalbeskrivelse her.</p> },
+    { title: 'Om Høstscena', content: <About /> },
   ]
 
   return (

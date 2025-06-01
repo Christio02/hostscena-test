@@ -23,31 +23,31 @@ export default function InfoItem({ title, content, isLast }: Props) {
   }, [open])
 
   return (
-      <div className={`border-t border-secondary ${isLast ? 'border-b' : ''}`}>
-        <div
-            className="py-[10px] px-[5px] flex justify-between items-center hover:bg-secondary hover:text-primary transition-all duration-300 cursor-pointer"
-            onClick={() => setOpen((prev) => !prev)}
-        >
-          <div>{title && <h3 className="text-h3">{title}</h3>}</div>
-          <p className="flex items-center gap-1 text-h6">
-            LES MER
-            <HiArrowLongRight
-                size={30}
-                className={`transform transition-transform duration-300 ${
-                    open ? 'rotate-90' : 'rotate-0'
-                }`}
-            />
-          </p>
-        </div>
+    <div className={`border-t border-secondary ${isLast ? 'border-b' : ''}`}>
+      <div
+        className="py-[10px] flex justify-between items-center hover:bg-secondary hover:text-primary transition-all duration-300 cursor-pointer"
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        <div>{title && <h3 className="text-h3">{title}</h3>}</div>
+        <p className="flex items-center gap-1 text-h6">
+          LES MER
+          <HiArrowLongRight
+            size={30}
+            className={`transform transition-transform duration-300 ${
+              open ? 'rotate-90' : 'rotate-0'
+            }`}
+          />
+        </p>
+      </div>
 
-        <div
-            className="overflow-hidden transition-all duration-300 ease-in-out"
-            style={{ maxHeight: `${height}px` }}
-        >
-          <div ref={ref} className="py-[20px] items-center flex w-full justify-center">
-            {content}
-          </div>
+      <div
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: `${height}px` }}
+      >
+        <div ref={ref} className="py-[40px] items-center flex w-full justify-center">
+          {content}
         </div>
       </div>
+    </div>
   )
 }

@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from '@portabletext/types'
+
 export default interface Event {
   image: string
   title: string
@@ -9,5 +11,5 @@ export default interface Event {
   link?: string
   tag?: string
   slug: string
-  content?: any[]
+  content?: PortableTextBlock[]
 }
