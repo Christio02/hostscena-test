@@ -5,6 +5,9 @@ export const buyTickets2 =
   'NB! Du er nødt til å sikre deg plass ved å hente ut en fribillett til hvert arrangement! Dersom du ikke får benyttet din billett setter vi pris på at du sier ifra. Ved spørsmål ta kontakt på mail til miriam@hostscena.no'
 
 // Kontakt
+export const name = 'Siri Forberg'
 export const email = 'siri@hostscena.no'
+export const phone = '+47 930 89 940'
+export const jobTitle = 'Festivalsjef'
 export const visitingAddress = 'Besøksadresse: Lorkenesgt. 2, 6002 Ålesund'
 export const postalAddress = 'Postadresse: Postboks 349, 6001 Ålesund'
