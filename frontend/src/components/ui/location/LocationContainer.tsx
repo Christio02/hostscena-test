@@ -1,12 +1,32 @@
-import LocationCard from './LocationCard'
-import locations from '@/mockdata/locations'
+"use client"
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import LocationCard from './LocationCard';
+import locations from '@/mockdata/locations';
 
 export default function LocationContainer() {
     return (
-        <div className="flex gap-[20px] flex-wrap justify-center min-w-[750px]">
+        <Swiper
+            modules={[Autoplay]}
+            freeMode={true}
+            spaceBetween={20}
+            slidesPerView={'auto'}
+            loop={true}
+            autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            }}
+            speed={5000}
+        >
             {locations.map((loc) => (
-                <LocationCard key={loc.name} location={loc} />
+                <SwiperSlide key={loc.name} style={{ width: '172px' }}>
+                    <LocationCard location={loc} />
+                </SwiperSlide>
             ))}
-        </div>
-    )
+        </Swiper>
+    );
 }
