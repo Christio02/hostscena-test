@@ -31,7 +31,7 @@ const getMockContent = (text1: string, text2: string, text3?: string, text4?: st
 const rawNews = [
   {
     image: '/assets/images/newsMock/news1.png',
-    title: 'PUBLIKUMSVERKTURUS 15 MARS I ÅLESUND',
+    title: 'PUBLIKUMSVERKTURUS 15 MARS I ÅLESUND test PUBLIKUMSVERKTURUS 15 MARS I ÅLESUND',
     tag: 'Arrangement',
     person: 'Høstscena Ensemblet',
     date: '2025-03-15',

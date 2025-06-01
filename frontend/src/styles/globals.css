@@ -4,6 +4,7 @@
 
 :root {
   --swiper-wrapper-transition-timing-function: linear !important;
+  --marquee-translate: -50px;
 
   --font-wittgenstein: 'Wittgenstein', serif;
   --font-source: 'Source Sans 3', serif;
@@ -185,6 +186,22 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
 
+  @keyframes marquee-bounce {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(var(--marquee-translate));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee-bounce 10s ease-in-out infinite;
+    will-change: transform;
+  }
 }
 
 @layer utilities {

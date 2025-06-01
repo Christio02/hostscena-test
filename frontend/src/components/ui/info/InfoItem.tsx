@@ -25,9 +25,7 @@ export default function InfoItem({ title, content, isLast }: Props) {
   return (
       <div className={`border-t border-secondary ${isLast ? 'border-b' : ''}`}>
         <div
-            className={`py-[10px] px-[5px] flex justify-between items-center hover:bg-secondary hover:text-primary transition-all duration-300 ${
-                open ? 'bg-secondary text-primary' : ''
-            } cursor-pointer`}
+            className="py-[10px] px-[5px] flex justify-between items-center hover:bg-secondary hover:text-primary transition-all duration-300 cursor-pointer"
             onClick={() => setOpen((prev) => !prev)}
         >
           <div>{title && <h3 className="text-h3">{title}</h3>}</div>
