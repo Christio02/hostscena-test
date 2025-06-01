@@ -51,14 +51,14 @@ export default function EventDetail({ event }: Props) {
 
       <div className="flex flex-col items-center justify-center w-full pt-[40px] pb-[20px] px-[20px]">
         <div className="max-w-[650px] space-y-[40px]">
-            <PortableText
-                value={content}
-                components={{
-                    block: {
-                        normal: ({ children }) => <p>{children}</p>,
-                    },
-                }}
-            />
+          <PortableText
+            value={content}
+            components={{
+              block: {
+                normal: ({ children }) => <p>{children}</p>,
+              },
+            }}
+          />
         </div>
       </div>
 

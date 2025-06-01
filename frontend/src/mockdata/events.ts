@@ -1,7 +1,7 @@
 import Event from '@/interfaces/event'
 import slugify from '@/utils/slugify'
 
-const getMockContent = (text1: string, text2: string, text3?: string, text4?: string) => ([
+const getMockContent = (text1: string, text2: string, text3?: string, text4?: string) => [
   {
     _type: 'block',
     style: 'normal',
@@ -28,7 +28,7 @@ const getMockContent = (text1: string, text2: string, text3?: string, text4?: st
     children: [{ _type: 'span', text: text4, marks: [] }],
     markDefs: [],
   },
-])
+]
 
 const rawEvents = [
   {
@@ -41,10 +41,12 @@ const rawEvents = [
     location: 'Sted',
     tag: 'Dans',
     link: '/',
-    content: getMockContent('Den italienske koreografen Cristina Rizzo vises for første gang i Norge!',
-        'Hennes forestilling «ULTRAS sleeping dances» er del av festivalens åpningsdag. Høstscena er stolte over å kunne presentere denne koreografen, som har vært en viktig del av italiensk scenekunst siden nittitallet. Med dette tar festivalen skrittet videre for i enda større grad å la samtidsdansen bli del av festivalprogrammet. ULTRAS sleeping dances en hypnotisk reise inn i grenselandet mellom drøm og virkelighet.Med et popkulturelt lydbilde skapes en kontrastfylt atmosfære som forsterker verkets drømmende kvalitet.​ ULTRAS sleeping dances er en opplevelse som inviterer publikum til å reflektere over kroppens rolle i samfunnet. Det er en poetisk og samtidig kraftfull manifestasjon av menneskelig tilstedeværelse og sårbarhet.​',
-        'Cristina Kristal Rizzo er en fremtredende italiensk koreograf og danser basert i Firenze. Hun startet sin profesjonelle karriere i New York, hvor hun utdannet seg ved Martha Graham School of Contemporary Dance og studerte under pionerer som Merce Cunningham og Trisha Brown.​ På 1990-tallet var hun med på å grunnlegge det banebrytende kollektivet Kinkaleri, som fikk internasjonal anerkjennelse for sitt innovative arbeid. Siden 2008 har Rizzo utviklet en selvstendig karriere med fokus på eksperimentell koreografi som kombinerer teoretisk refleksjon med fysisk intensitet.​ Hennes arbeid, inkludert TOCCARE The white dance, VN Serenade og ULTRAS sleeping dances, har blitt vist på prestisjetunge festivaler og institusjoner over hele Europa. Rizzo er også aktiv innen undervisning, foredrag og teoretisk skriving, og hun har skapt koreografier for ledende operahus og museer i Italia og internasjonalt.',
-        'Gå ikke glipp av muligheten til å oppleve dette unike kunstneriske universet hvor dansen sover, drømmer og våkner i deg!'),
+    content: getMockContent(
+      'Den italienske koreografen Cristina Rizzo vises for første gang i Norge!',
+      'Hennes forestilling «ULTRAS sleeping dances» er del av festivalens åpningsdag. Høstscena er stolte over å kunne presentere denne koreografen, som har vært en viktig del av italiensk scenekunst siden nittitallet. Med dette tar festivalen skrittet videre for i enda større grad å la samtidsdansen bli del av festivalprogrammet. ULTRAS sleeping dances en hypnotisk reise inn i grenselandet mellom drøm og virkelighet.Med et popkulturelt lydbilde skapes en kontrastfylt atmosfære som forsterker verkets drømmende kvalitet.​ ULTRAS sleeping dances er en opplevelse som inviterer publikum til å reflektere over kroppens rolle i samfunnet. Det er en poetisk og samtidig kraftfull manifestasjon av menneskelig tilstedeværelse og sårbarhet.​',
+      'Cristina Kristal Rizzo er en fremtredende italiensk koreograf og danser basert i Firenze. Hun startet sin profesjonelle karriere i New York, hvor hun utdannet seg ved Martha Graham School of Contemporary Dance og studerte under pionerer som Merce Cunningham og Trisha Brown.​ På 1990-tallet var hun med på å grunnlegge det banebrytende kollektivet Kinkaleri, som fikk internasjonal anerkjennelse for sitt innovative arbeid. Siden 2008 har Rizzo utviklet en selvstendig karriere med fokus på eksperimentell koreografi som kombinerer teoretisk refleksjon med fysisk intensitet.​ Hennes arbeid, inkludert TOCCARE The white dance, VN Serenade og ULTRAS sleeping dances, har blitt vist på prestisjetunge festivaler og institusjoner over hele Europa. Rizzo er også aktiv innen undervisning, foredrag og teoretisk skriving, og hun har skapt koreografier for ledende operahus og museer i Italia og internasjonalt.',
+      'Gå ikke glipp av muligheten til å oppleve dette unike kunstneriske universet hvor dansen sover, drømmer og våkner i deg!',
+    ),
   },
   {
     image: '/assets/images/snake/Hostscena-bildeslange-bilde02.jpg',
@@ -68,7 +70,10 @@ const rawEvents = [
     location: 'Løvenvold Theater',
     tag: 'Festival',
     link: '/',
-    content: getMockContent('En varm forestilling i kald tid.', 'Medvirkende byr på ettertanke og energi.'),
+    content: getMockContent(
+      'En varm forestilling i kald tid.',
+      'Medvirkende byr på ettertanke og energi.',
+    ),
   },
   {
     image: '/assets/images/snake/Hostscena-bildeslange-bilde04.jpg',
@@ -164,7 +169,10 @@ const rawEvents = [
     location: 'Arbeideren Kulturhus',
     tag: 'Dans',
     link: '/',
-    content: getMockContent('En helaften med alt du ikke visste du trengte.', 'Uventede kombinasjoner og energiske innslag.'),
+    content: getMockContent(
+      'En helaften med alt du ikke visste du trengte.',
+      'Uventede kombinasjoner og energiske innslag.',
+    ),
   },
   {
     image: '/assets/images/snake/Hostscena-bildeslange-bilde12.jpg',

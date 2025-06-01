@@ -112,6 +112,11 @@
     font-size: var(--s);
   }
 
+  .text-2s {
+    font-family: var(--font-source), serif;
+    font-size: var(--2s);
+  }
+
   .text-tag {
     font-family: var(--font-source), serif;
     font-size: var(--tag);
@@ -177,6 +182,20 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
 }
 
 @layer utilities {

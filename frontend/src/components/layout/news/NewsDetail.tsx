@@ -39,15 +39,15 @@ export default function NewsDetail({ news }: Props) {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full pt-[20px] px-[20px]">
-          <div className="max-w-[650px] space-y-[40px]">
-            <PortableText
-                value={content}
-                components={{
-                    block: {
-                        normal: ({ children }) => <p className="mb-4">{children}</p>,
-                    },
-                }}
-            />
+        <div className="max-w-[650px] space-y-[40px]">
+          <PortableText
+            value={content}
+            components={{
+              block: {
+                normal: ({ children }) => <p className="mb-4">{children}</p>,
+              },
+            }}
+          />
         </div>
       </div>
 
