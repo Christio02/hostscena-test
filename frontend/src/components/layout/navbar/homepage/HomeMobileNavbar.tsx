@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { navLinks } from '@/constants/navigation'
-import Link from 'next/link'
 import Navbar from '@/components/layout/navbar/Navbar'
-import { motion, AnimatePresence } from 'framer-motion'
+import { navLinks } from '@/constants/navigation'
 import useScrollDirection from '@/utils/useScrollDirection'
+import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 export default function HomeMobileNavbar() {
   const [showNavbar, setShowNavbar] = useState(false)
