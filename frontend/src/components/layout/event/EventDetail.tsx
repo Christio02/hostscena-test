@@ -1,11 +1,11 @@
 'use client'
+import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
 import type Event from '@/interfaces/event'
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
+import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HiArrowLongRight } from 'react-icons/hi2'
-import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
-import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
-import { PortableText } from '@portabletext/react'
 
 interface Props {
   event: Event
@@ -51,14 +51,16 @@ export default function EventDetail({ event }: Props) {
 
       <div className="flex flex-col items-center justify-center w-full pt-[40px] pb-[20px] px-[20px]">
         <div className="max-w-[650px] space-y-[40px]">
-          <PortableText
-            value={content}
-            components={{
-              block: {
-                normal: ({ children }) => <p>{children}</p>,
-              },
-            }}
-          />
+          {content && (
+            <PortableText
+              value={content}
+              components={{
+                block: {
+                  normal: ({ children }) => <p>{children}</p>,
+                },
+              }}
+            />
+          )}
         </div>
       </div>
 
