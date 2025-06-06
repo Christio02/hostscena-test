@@ -1,13 +1,25 @@
-import Image from 'next/image'
-const logo = '/assets/images/logo/logo_no_border.svg'
-import { email, postalAddress, visitingAddress } from '@/mockdata/text'
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
+'use client'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
+import { email, postalAddress, visitingAddress } from '@/mockdata/text'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
 import { HiArrowLongRight } from 'react-icons/hi2'
+const logo = '/assets/images/logo/logo_no_border.svg'
 
 const footerImage = '/assets/images/footer_image.png'
 
 export default function Footer() {
+  const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  if (!mounted) return null
+  if (pathname.startsWith('/studio')) {
+    return null
+  }
   return (
     <footer className="pt-[60px] px-[20px]">
       <div className="tablet:border-t border-secondary flex flex-col tablet:flex-row tablet:justify-between">
