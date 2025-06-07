@@ -9,17 +9,13 @@ export default defineType({
       name: 'image',
       title: 'Bilde',
       type: 'image',
+      description: 'Hovedbilde for arrangementet',
       options: { hotspot: true },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'title',
       title: 'Tittel',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'performer',
-      title: 'Artist',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -36,13 +32,17 @@ export default defineType({
       name: 'startTime',
       title: 'Starttid',
       type: 'string',
-      description: 'eks: "19:00"',
+      validation: (Rule) =>
+        Rule.regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).error('Må være i HH:mm format'),
+      placeholder: 'HH:mm (eks: 21:00)',
     }),
     defineField({
       name: 'endTime',
       title: 'Sluttid',
       type: 'string',
-      description: 'eks: "21:00"',
+      validation: (Rule) =>
+        Rule.regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).error('Må være i HH:mm format'),
+      placeholder: 'HH:mm (eks: 21:00)',
     }),
     defineField({
       name: 'location',
@@ -62,21 +62,12 @@ export default defineType({
       type: 'string',
       description: 'Valgfri kort tagg/sjanger (eks: "Jazz", "Verksted", etc.)',
     }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+    // utdrag kan også legges inn her
     defineField({
       name: 'content',
       title: 'Innhold',
       type: 'portableText',
-      description: 'Trykk Enter for å legge til nytt avsnitt',
+      description: 'Trykk Enter for nytt avsnitt, Shift+Enter for linjeskift',
     }),
     defineField({
       name: 'contributors',
@@ -176,7 +167,7 @@ export default defineType({
           type: 'file',
           description: 'Last opp video fil',
           options: {
-            accept: '*/.mp4',
+            accept: 'video/*',
           },
           hidden: ({ parent }) => parent?.videoType !== 'upload',
           validation: (Rule) =>
@@ -202,6 +193,14 @@ export default defineType({
           }
         },
       },
+    }),
+    defineField({
+      name: 'spotifyLink',
+      title: 'Spotify lenke',
+      type: 'url',
+      description:
+        'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`)',
+      validation: (Rule) => Rule.uri({ allowRelative: false }).required(),
     }),
     defineField({
       name: 'imageCarousel',

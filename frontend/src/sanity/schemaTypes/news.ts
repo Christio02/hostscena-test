@@ -43,18 +43,11 @@ export default defineType({
       name: 'time',
       title: 'Klokkeslett',
       type: 'string',
+      validation: (Rule) =>
+        Rule.regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).error('Må være i HH:mm format'),
       description: 'Valgfritt: f.eks. “18:00”',
     }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+
     defineField({
       name: 'content',
       title: 'Innhold',
