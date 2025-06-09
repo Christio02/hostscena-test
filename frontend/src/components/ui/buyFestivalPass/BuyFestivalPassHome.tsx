@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
@@ -16,55 +16,62 @@ export default function BuyFestivalPassHome({ imageSrc, button }: Props) {
   const buttonRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const section = sectionRef.current
-    const button = buttonRef.current
-    if (!section || !button) return
+    let ctx: gsap.Context | null = null
+    const frame = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        if (!sectionRef.current || !buttonRef.current) return
 
-    // Pin the section
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top-=80 top',
-      end: '+=100%',
-      pin: true,
-      scrub: true,
-      anticipatePin: 1,
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top-=80 top',
+          end: '+=100%',
+          pin: true,
+          scrub: true,
+          anticipatePin: 1,
+        })
+
+        gsap.fromTo(
+          buttonRef.current,
+          { y: '50vh', scale: 0.75 },
+          {
+            y: '0vh',
+            scale: 1.25,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top-=80 top',
+              end: 'bottom end',
+              scrub: true,
+            },
+          },
+        )
+      }, sectionRef)
     })
 
-    // Animate button with normal scroll + scale up
-    gsap.fromTo(
-        button,
-        { y: '50vh', scale: 0.75 },
-        {
-          y: '0vh',
-          scale: 1.25,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top-=80 top',
-              end: 'bottom end',
-            scrub: true,
-          },
-        }
-    )
-
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      cancelAnimationFrame(frame)
+      ctx?.revert()
     }
   }, [])
 
   return (
-      <section ref={sectionRef} className="hidden tablet:block relative w-full h-[calc(100vh-79px)] overflow-hidden">
+    <main>
+      <section
+        ref={sectionRef}
+        className="hidden tablet:block relative w-full h-[calc(100vh-79px)] overflow-hidden"
+      >
         <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${imageSrc})` }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${imageSrc})` }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-30" />
         </div>
         <div
-            ref={buttonRef}
-            className="absolute inset-0 flex items-center justify-center will-change-transform"
+          ref={buttonRef}
+          className="absolute inset-0 flex items-center justify-center will-change-transform"
         >
           {button}
         </div>
       </section>
+    </main>
   )
 }

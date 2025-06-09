@@ -1,11 +1,11 @@
-import ArchiveItem from "@/components/ui/archive/ArchiveItem";
+import ArchiveItem from '@/components/ui/archive/ArchiveItem'
 
 export default function ArchiveContainer() {
   const items = [
-      {title:'2024', link:"https://www.vg.no"},
-    {title:'2023', link:"https://www.vg.no"},
-    {title:'2022', link:"https://www.vg.no"},
-    {title:'2021', link:"https://www.vg.no"}
+    { title: '2024', link: 'https://www.vg.no' },
+    { title: '2023', link: 'https://www.vg.no' },
+    { title: '2022', link: 'https://www.vg.no' },
+    { title: '2021', link: 'https://www.vg.no' },
   ]
 
   return (
