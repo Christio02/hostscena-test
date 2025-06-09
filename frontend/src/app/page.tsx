@@ -9,14 +9,14 @@ import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPass
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
-import ImageCarousel from "@/components/ui/imageCarousel/ImageCarousel";
+import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
 
 export default function Home() {
   return (
     <>
       <HomeHeader />
       <ImageSnake />
-        <ImageCarousel />
+      <ImageCarousel />
       <HomeNavbar />
       <HomeMobileNavbar />
       <BlackTitleBar
