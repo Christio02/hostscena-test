@@ -147,7 +147,7 @@ const ImageSnake = () => {
   }, [addNewSegment])
 
   return (
-    <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden">
+    <div ref={containerRef} className="hidden tablet:block relative w-full h-[calc(100vh-268px)] overflow-hidden">
       <div className="absolute inset-0">
         {segments.map((seg, i) => (
           <div
