@@ -14,7 +14,7 @@ import {
 import { SINGLE_MAP_QUERY } from '@/sanity/queries/map'
 import { ALL_NEWS_QUERY, NEWS_DETAIL_QUERY, NEWS_QUERY } from '@/sanity/queries/news'
 import { TICKETS_QUERY } from '@/sanity/queries/tickets'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 // News hooks
 export function useNews() {
@@ -68,7 +68,7 @@ export function useUpcomingEvents() {
   })
 }
 
-// Home page hook
+// Home page hooks
 export function useHome() {
   return useQuery({
     queryKey: ['home'],
@@ -77,7 +77,31 @@ export function useHome() {
   })
 }
 
-// Contact hook
+export function useHomeHeader() {
+  return useQuery({
+    queryKey: ['home', 'header'],
+    queryFn: () => sanityFetch({ query: HOME_HEADER_QUERY }),
+    staleTime: 10 * 60 * 1000,
+  })
+}
+
+export function useBackgroundVideo() {
+  return useQuery({
+    queryKey: ['home', 'background-video'],
+    queryFn: () => sanityFetch({ query: BACKGROUND_VIDEO_QUERY }),
+    staleTime: 10 * 60 * 1000,
+  })
+}
+
+export function useImageSnake() {
+  return useQuery({
+    queryKey: ['home', 'image-snake'],
+    queryFn: () => sanityFetch({ query: IMAGE_SNAKE_QUERY }),
+    staleTime: 10 * 60 * 1000,
+  })
+}
+
+// Contact hooks
 export function useContactPersons() {
   return useQuery({
     queryKey: ['contact-persons'],
