@@ -1,12 +1,12 @@
 'use client'
 
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import NavLinks from '@/components/layout/navbar/NavLinks'
 import MobileNavbar from '@/components/layout/navbar/MobileNavbar'
+import NavLinks from '@/components/layout/navbar/NavLinks'
 import useScrollDirection from '@/utils/useScrollDirection'
+import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 

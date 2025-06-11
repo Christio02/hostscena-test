@@ -1,9 +1,9 @@
 'use client'
 
+import NavLinks from '@/components/layout/navbar/NavLinks'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
-import NavLinks from '@/components/layout/navbar/NavLinks'
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 

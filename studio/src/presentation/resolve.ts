@@ -1,4 +1,4 @@
-import { defineLocations, PresentationPluginOptions } from 'sanity/presentation'
+import {defineLocations, PresentationPluginOptions} from 'sanity/presentation'
 
 export const resolve: PresentationPluginOptions['resolve'] = {
   locations: {
@@ -14,7 +14,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
             title: doc?.title || 'Untitled News',
             href: `/nyheter/${doc?.slug}`,
           },
-          { title: 'Alle nyheter', href: `/nyheter` },
+          {title: 'Alle nyheter', href: `/nyheter`},
         ],
       }),
     }),
@@ -31,7 +31,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
             title: doc?.title || 'Untitled Event',
             href: `/program/${doc?.slug}`,
           },
-          { title: 'Alle arrangementer', href: `/program` },
+          {title: 'Alle arrangementer', href: `/program`},
         ],
       }),
     }),
@@ -44,7 +44,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
       },
       resolve: (doc) => {
         const slug = doc?.slug
-        if (!slug) return { locations: [] }
+        if (!slug) return {locations: []}
 
         return {
           locations: [

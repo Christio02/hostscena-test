@@ -13,9 +13,6 @@ export default function LayoutPadding() {
 
   if (!mounted) return null
 
-  if (pathname.startsWith('/studio')) {
-    return null
-  }
   const isHome = pathname === '/'
 
   return <div className={isHome ? '' : 'pt-[71px] tablet:pt-[79px]'} />
