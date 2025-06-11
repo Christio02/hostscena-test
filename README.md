@@ -7,15 +7,29 @@ A Next.js + Sanity CMS website for the Høstscena festival, built using the clea
 This project follows a monorepo structure with workspaces:
 
 ```
-├── package.json          # Root package.json with workspace configuration
-├── frontend/            # Next.js application
-│   ├── package.json     # Frontend dependencies
-│   ├── .env.local       # Frontend environment variables (NEXT_PUBLIC_*)
+HostScena/
+├── package.json              # Root workspace configuration
+├── .gitignore               # Root gitignore
+├── netlify.toml             # Deployment config
+│
+├── frontend/                # Next.js app (localhost:3000)
+│   ├── package.json
+│   ├── .env.local           # NEXT_PUBLIC_* variables
+│   ├── sanity.config.ts     # Embedded studio config
 │   └── src/
-└── studio/              # Sanity Studio
-    ├── package.json     # Studio dependencies
-    ├── .env.production  # Studio environment variables (SANITY_STUDIO_*)
+│       ├── app/             # Next.js App Router
+│       ├── components/      # React components
+│       ├── sanity/          # Sanity integration
+│       └── styles/          # CSS files
+│
+└── studio/                  # Sanity Studio (localhost:3333)
+    ├── package.json
+    ├── .env.production      # SANITY_STUDIO_* variables
+    ├── sanity.config.ts     # Studio configuration
     └── src/
+        ├── schemaTypes/     # Content schemas
+        ├── structure/       # Studio structure
+        └── presentation/    # Preview resolvers
 ```
 
 ## Environment Variables
