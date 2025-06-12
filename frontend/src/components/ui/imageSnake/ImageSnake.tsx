@@ -33,6 +33,20 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
 
+  if (!images || images.length === 0) {
+    return (
+      <div className="relative w-full h-[calc(100vh-268px)] overflow-hidden flex items-center justify-center">
+        <div className="text-center p-8">
+          <p className="text-lg font-source text-gray-500">
+            Ingen bilder tilgjengelig for bildeslangen.
+          </p>
+          <p className="text-sm font-source text-gray-400 mt-2">
+            Legg til bilder i Sanity Studio for å vise bildeslangen.
+          </p>
+        </div>
+      </div>
+    )
+  }
   // const getNextImage = (): string => {
   //   const img = sampleImages[imageIndexRef.current % sampleImages.length]
   //   imageIndexRef.current += 1
