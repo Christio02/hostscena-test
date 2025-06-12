@@ -1,3 +1,4 @@
+import { HomeProps } from '@/interfaces/home'
 import { sanityFetch } from '@/sanity/lib/live'
 import {
   CONTACT_PERSONS_QUERY,
@@ -14,7 +15,7 @@ import {
 import { SINGLE_MAP_QUERY } from '@/sanity/queries/map'
 import { ALL_NEWS_QUERY, NEWS_DETAIL_QUERY, NEWS_QUERY } from '@/sanity/queries/news'
 import { TICKETS_QUERY } from '@/sanity/queries/tickets'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 
 // News hooks
 export function useNews() {
@@ -68,10 +69,15 @@ export function useUpcomingEvents() {
   })
 }
 
-export function useHome() {
-  return useQuery({
+export function useHome(): UseQueryResult<HomeProps, Error> {
+  return useQuery<HomeProps, Error>({
     queryKey: ['home'],
-    queryFn: () => sanityFetch({ query: SINGLE_HOME_QUERY }),
+    queryFn: async (): Promise<HomeProps> => {
+      const res = await sanityFetch({
+        query: SINGLE_HOME_QUERY,
+      })
+      return res.data
+    },
     staleTime: 10 * 60 * 1000, // 10 minutes
   })
 }

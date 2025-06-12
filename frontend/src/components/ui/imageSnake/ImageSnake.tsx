@@ -1,4 +1,6 @@
 'use client'
+import { ImageSnakeItem } from '@/interfaces/home'
+import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -23,7 +25,7 @@ const sampleImages = Array.from(
   (_, i) => `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
 )
 
-const ImageSnake = () => {
+const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const pathTimeRef = useRef<number>(0)
@@ -31,11 +33,17 @@ const ImageSnake = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
 
-  const getNextImage = (): string => {
-    const img = sampleImages[imageIndexRef.current % sampleImages.length]
+  // const getNextImage = (): string => {
+  //   const img = sampleImages[imageIndexRef.current % sampleImages.length]
+  //   imageIndexRef.current += 1
+  //   return img
+  // }
+
+  const getNextImage = useCallback((): string => {
+    const img = images[imageIndexRef.current % images.length]
     imageIndexRef.current += 1
-    return img
-  }
+    return urlFor(img.asset).url()
+  }, [images])
 
   const calculateNextPosition = (
     lastPosition: { x: number; y: number } | null,
@@ -134,7 +142,7 @@ const ImageSnake = () => {
 
       return [newSegment, ...prev].slice(0, SEGMENT_COUNT)
     })
-  }, [])
+  }, [getNextImage])
 
   useEffect(() => {
     addNewSegment()

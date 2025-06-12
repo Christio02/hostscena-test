@@ -4,7 +4,8 @@ export const SINGLE_HOME_QUERY = defineQuery(`
   *[_type == "home"][0] {
     _id,
     _type,
-    date,
+    startDate,
+    endDate,
     location,
     imageSnake[] {
       _key,
@@ -35,8 +36,9 @@ export const SINGLE_HOME_QUERY = defineQuery(`
 // query for just the header info
 export const HOME_HEADER_QUERY = defineQuery(`
   *[_type == "home"][0] {
-    date,
-    location
+  startDate,
+  endDate,
+  location
   }
 `)
 

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'home',
@@ -6,10 +6,23 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'date',
-      title: 'Dato',
-      type: 'string',
-      description: 'Dato til festivalen som vises i header',
+      name: 'startDate',
+      title: 'StartDato',
+      type: 'date',
+      description: 'StartDato til festivalen som vises i header',
+      options: {
+        dateFormat: 'DD-MM-YYYY',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'endDate',
+      title: 'SluttDato',
+      type: 'date',
+      description: 'SluttDato til festivalen som vises i header',
+      options: {
+        dateFormat: 'DD-MM-YYYY',
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -28,7 +41,9 @@ export default defineType({
           type: 'image',
           options: {
             hotspot: true,
+            accept: 'image/*',
           },
+
           fields: [
             {
               name: 'alt',
@@ -39,6 +54,10 @@ export default defineType({
           ],
         },
       ],
+      options: {
+        sortable: true,
+        layout: 'grid',
+      },
     }),
     defineField({
       name: 'backgroundVideo',

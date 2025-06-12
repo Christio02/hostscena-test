@@ -2,6 +2,20 @@ import {defineLocations, PresentationPluginOptions} from 'sanity/presentation'
 
 export const resolve: PresentationPluginOptions['resolve'] = {
   locations: {
+    // home content type
+    home: defineLocations({
+      select: {
+        _id: '_id',
+      },
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: 'Hjemmeside',
+            href: '/',
+          },
+        ],
+      }),
+    }),
     // news content type
     news: defineLocations({
       select: {

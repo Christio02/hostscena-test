@@ -1,20 +1,40 @@
-import NewsGrid from '@/components/ui/news/NewsGrid'
-import mockNews from '@/mockdata/news'
-import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
-import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import HomeHeader from '@/components/layout/navbar/homepage/HomeHeader'
-import HomeNavbar from '@/components/layout/navbar/homepage/HomeNavbar'
 import HomeMobileNavbar from '@/components/layout/navbar/homepage/HomeMobileNavbar'
-import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
+import HomeNavbar from '@/components/layout/navbar/homepage/HomeNavbar'
+import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
-import { buyTickets1, buyTickets2 } from '@/mockdata/text'
+import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
+import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
+import NewsGrid from '@/components/ui/news/NewsGrid'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
+import { HomeProps } from '@/interfaces/home'
+import mockNews from '@/mockdata/news'
+import { buyTickets1, buyTickets2 } from '@/mockdata/text'
+import { sanityFetch } from '@/sanity/lib/live'
+import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 
-export default function Home() {
+export default async function Home() {
+  const { data: home } = await sanityFetch({
+    query: SINGLE_HOME_QUERY,
+  })
+
+  const homeData: HomeProps = {
+    startDate: home?.startDate || 'Dato kommer',
+    endDate: home?.endDate || 'Dato kommer',
+    location: home?.location || 'Lokasjon Kommer',
+    imageSnake: home?.imageSnake || [],
+    backgroundVideo: home?.backgroundVideo || null,
+    ...home,
+  }
+
   return (
     <>
-      <HomeHeader />
-      <ImageSnake />
+      <HomeHeader
+        startDate={homeData.startDate}
+        endDate={homeData.endDate}
+        location={homeData.location}
+      />
+      <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />
       <BlackTitleBar
