@@ -32,25 +32,96 @@ HostScena/
         └── presentation/    # Preview resolvers
 ```
 
+## Dataset Strategy
+
+This project uses **two datasets** to ensure safe development:
+
+- **testing**: For local development and content testing
+- **production**: For live website and deployed studio
+
+### Local Development (localhost)
+
+Frontend (localhost:3000) → connects to testing dataset
+Studio (localhost:3333) → connects to testing dataset
+
+### Production Deployment
+
+Frontend (Netlify) → connects to production dataset
+Studio (mange.sanity.io) → connects to production dataset
+
 ## Environment Variables
 
-### Frontend (.env.local)
+### Frontend (.env.local) - Local Development
 
 ```bash
 NEXT_PUBLIC_SANITY_PROJECT_ID=<id>
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2025-06-03
+NEXT_PUBLIC_SANITY_DATASET=testing
+NEXT_PUBLIC_SANITY_API_VERSION=2025-06-12
 SANITY_API_READ_TOKEN=your-token-here
 ```
 
-### Studio (.env.production)
+### Studio (.env.local) - Local Development
+
+```bash
+SANITY_STUDIO_PROJECT_ID="jbwzfx7e"
+SANITY_STUDIO_DATASET="testing"
+SANITY_STUDIO_API_VERSION="2025-06-12"
+SANITY_STUDIO_PREVIEW_URL="http://localhost:3000"
+```
+
+### Studio (.env.production) - Production Deployment
 
 ```bash
 SANITY_STUDIO_PROJECT_ID="<id>"
 SANITY_STUDIO_DATASET="production"
-SANITY_STUDIO_API_VERSION="2025-06-03"
+SANITY_STUDIO_API_VERSION="2025-06-12"
 SANITY_STUDIO_PREVIEW_URL="https://hostscena.netlify.app"
 ```
+
+### Netlify Environment Variables - Production Deployment
+
+These are set in the Netlify dashboard
+
+```bash
+
+NEXT_PUBLIC_SANITY_PROJECT_ID=<id>
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2025-06-12
+SANITY_API_READ_TOKEN=your-token-here
+```
+
+## Moving Changes from Testing to Production
+
+### For Schema Changes (Recommended)
+
+```bash
+# 1. Deploy schema changes to production studio
+npm run deploy:studio
+
+# 2. Manually recreate content in production studio
+# This ensures data integrity and lets you review changes
+```
+
+### For Content-Only Changes
+
+```bash
+
+# 1. Always backup production first
+npx sanity dataset export production backup-$(date +%Y%m%d).tar.gz
+
+# 2. Export specific document types from testing
+npx sanity dataset export testing --types article,event,person --output changes.tar.gz
+
+# 3. Import to production (merges, doesn't replace)
+npx sanity dataset import changes.tar.gz production
+
+```
+
+## ⚠️ Important Dataset Safety Warning
+
+**Never use `--replace` on production dataset - always backup first!**
+
+The `--replace` flag will completely overwrite your production data. Always use the merge approach shown above for safer content transfers.
 
 ## Development
 
@@ -79,6 +150,13 @@ Start only the studio:
 npm run dev:studio
 ```
 
+### Testing Content Changes
+
+1. Edit content in local Studio (localhost:3333)
+2. Click "Publish" to save changes to testing dataset
+3. View changes immediately in local frontend (localhost:3000)
+4. When satisfied, migrate changes to production dataset
+
 ## Deployment
 
 ### Deploy Studio
@@ -90,7 +168,7 @@ npx sanity deploy
 
 ### Deploy Frontend
 
-Deploy to your preferred hosting platform (Netlify, Vercel, etc.)
+Automatically happens when merging a PR into `main` branch via Netlify. If you need to manually trigger a build, run:
 
 ```bash
 npm run build --workspace=frontend
@@ -99,7 +177,7 @@ npm run build --workspace=frontend
 ## Content Management
 
 - **Studio URL (Local)**: <http://localhost:3333>
-- **Studio URL (Production)**: <https://hostscena.sanity.studio/>
+- **Studio URL (Production)**: Go to mange.sanity.io and select the project, then click "Open Studio"
 - **Frontend URL**: <https://hostscena.netlify.app>
 
 ## Kom i gang

@@ -68,7 +68,6 @@ export function useUpcomingEvents() {
   })
 }
 
-// Home page hooks
 export function useHome() {
   return useQuery({
     queryKey: ['home'],
@@ -101,7 +100,6 @@ export function useImageSnake() {
   })
 }
 
-// Contact hooks
 export function useContactPersons() {
   return useQuery({
     queryKey: ['contact-persons'],
@@ -126,7 +124,6 @@ export function useSocialLinks() {
   })
 }
 
-// Map hook
 export function useMap() {
   return useQuery({
     queryKey: ['map'],
@@ -135,7 +132,6 @@ export function useMap() {
   })
 }
 
-// Tickets hook
 export function useTickets() {
   return useQuery({
     queryKey: ['tickets'],

@@ -1,6 +1,5 @@
 import { defineQuery } from 'next-sanity'
 
-// query for single home document (most common pattern)
 export const SINGLE_HOME_QUERY = defineQuery(`
   *[_type == "home"][0] {
     _id,
