@@ -28,10 +28,14 @@ const sampleImages = Array.from(
 const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
-  const pathTimeRef = useRef<number>(0)
-  const angleDirectionRef = useRef<number>(Math.random() > 0.5 ? 1 : -1)
+  const pathTimeRef = useRef<number>(null)
+  // const angleDirectionRef = useRef<number>(Math.random() > 0.5 ? 1 : -1)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
+  const [angleDirectionRef, setAngleDirectionRef] = useState(0)
+  useEffect(() => {
+    setAngleDirectionRef(Math.random() > 0.5 ? 1 : -1)
+  }, [])
 
   // const getNextImage = (): string => {
   //   const img = sampleImages[imageIndexRef.current % sampleImages.length]
