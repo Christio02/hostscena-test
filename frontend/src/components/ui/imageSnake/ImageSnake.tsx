@@ -38,6 +38,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   }, [])
 
   const getNextImage = useCallback((): string => {
+    if (!images.length) return '' // or provide fallback image URL
     const img = images[imageIndexRef.current % images.length]
     imageIndexRef.current += 1
     return urlFor(img.asset).url()
@@ -148,7 +149,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
     intervalRef.current = setInterval(addNewSegment, ADD_INTERVAL)
     return () => {
       if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current)
+        clearInterval(intervalRef.c)
       }
     }
   }, [addNewSegment, mounted])
