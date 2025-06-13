@@ -1,3 +1,4 @@
+// ImageSnake.tsx
 'use client'
 import { ImageSnakeItem } from '@/interfaces/home'
 import { urlFor } from '@/sanity/lib/image'
@@ -20,27 +21,20 @@ const MARGIN = -100
 const MIN_DISTANCE = SEGMENT_SIZE * 0.2
 const MAX_ATTEMPTS = 10
 
-const sampleImages = Array.from(
-  { length: 18 },
-  (_, i) => `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
-)
-
 const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
+  const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const pathTimeRef = useRef<number>(null)
+  const pathTimeRef = useRef<number>(0)
   const angleDirectionRef = useRef<number>(0)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
 
-  // const getNextImage = (): string => {
-  //   const img = sampleImages[imageIndexRef.current % sampleImages.length]
-  //   imageIndexRef.current += 1
-  //   return img
-  // }
-
+  // Only run on client
   useEffect(() => {
+    setMounted(true)
     angleDirectionRef.current = Math.random() > 0.5 ? 1 : -1
+    pathTimeRef.current = 0
   }, [])
 
   const getNextImage = useCallback((): string => {
@@ -149,6 +143,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   }, [getNextImage])
 
   useEffect(() => {
+    if (!mounted) return
     addNewSegment()
     intervalRef.current = setInterval(addNewSegment, ADD_INTERVAL)
     return () => {
@@ -156,7 +151,14 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
         clearInterval(intervalRef.current)
       }
     }
-  }, [addNewSegment])
+  }, [addNewSegment, mounted])
+
+  // Only render the snake after mount (client-side)
+  if (!mounted) {
+    return (
+      <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden" />
+    )
+  }
 
   return (
     <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden">
@@ -178,7 +180,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
               width={SEGMENT_SIZE}
               height={SEGMENT_SIZE}
               alt={`Segment ${i}`}
-              className="w-full h-full object-contain" //object-cover to change images to square
+              className="w-full h-full object-contain"
             />
           </div>
         ))}
