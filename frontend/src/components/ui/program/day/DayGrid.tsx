@@ -1,5 +1,5 @@
-import DayCard from './DayCard'
 import type Event from '@/interfaces/event'
+import DayCard from './DayCard'
 
 interface Props {
   events: Event[]

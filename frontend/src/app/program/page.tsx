@@ -1,16 +1,22 @@
 'use client'
-
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import DayContainer from '@/components/ui/program/day/DayContainer'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
-import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
+import Event from '@/interfaces/event'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 
-export default function Program() {
+interface ProgramProps {
+  events: Event[]
+}
+export default function ProgramClient({ events }: ProgramProps) {
   const [mode, setMode] = useState<'day' | 'week'>('day')
   const [direction, setDirection] = useState(1)
+  // Add debugging
+  console.log('Events in client:', events)
+  console.log('Events length in client:', events?.length)
 
-  const switchToDay = () => {
+  const switchToDay = async () => {
     setDirection(-1)
     setMode('day')
   }
@@ -35,6 +41,19 @@ export default function Program() {
     }),
   }
 
+  if (!events || events.length < 1) {
+    return (
+      <div className="relative w-full h-[calc(100vh-268px)] overflow-hidden flex items-center justify-center">
+        <div className="text-center p-8">
+          <p className="text-lg font-source text-gray-500">Ingen arrangmenter i program</p>
+          <p className="text-sm font-source text-gray-400 mt-2">
+            Legg til nye arrangmenter i sanity studio!
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <section className="relative w-full">
       <BlackTitleBar title="Program" />
@@ -49,9 +68,9 @@ export default function Program() {
           transition={{ duration: 0.2 }}
         >
           {mode === 'day' ? (
-            <DayContainer onSwitch={switchToWeek} />
+            <DayContainer onSwitch={switchToWeek} events={events} />
           ) : (
-            <WeekContainer onSwitch={switchToDay} />
+            <WeekContainer onSwitch={switchToDay} events={events} />
           )}
         </motion.div>
       </AnimatePresence>

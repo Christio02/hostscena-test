@@ -1,14 +1,15 @@
-import WeekColumn from '@/components/ui/program/week/WeekColumn'
-import events from '@/mockdata/events'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
+import WeekColumn from '@/components/ui/program/week/WeekColumn'
+import Event from '@/interfaces/event'
 import { groupEventsByDate } from '@/utils/groupEventsByDate'
 
 interface Props {
   hasLink?: boolean
   onSwitch?: () => void
+  events: Event[]
 }
 
-export default function WeekContainer({ hasLink = true, onSwitch }: Props) {
+export default function WeekContainer({ hasLink = true, onSwitch, events }: Props) {
   const grouped = groupEventsByDate(events)
   const dates = Object.keys(grouped).sort()
 

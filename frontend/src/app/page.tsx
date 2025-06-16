@@ -11,20 +11,20 @@ import { HomeProps } from '@/interfaces/home'
 import mockNews from '@/mockdata/news'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
 import { sanityFetch } from '@/sanity/lib/live'
+import { EVENT_QUERY } from '@/sanity/queries/event'
 import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 
 export default async function Home() {
-  const { data: home } = await sanityFetch({
-    query: SINGLE_HOME_QUERY,
-  })
+  const { data: home } = await sanityFetch({ query: SINGLE_HOME_QUERY })
+  const { data: events } = await sanityFetch({ query: EVENT_QUERY })
 
   const homeData: HomeProps = {
+    ...home,
     startDate: home?.startDate || 'Dato kommer',
     endDate: home?.endDate || 'Dato kommer',
     location: home?.location || 'Lokasjon Kommer',
     imageSnake: home?.imageSnake || [],
-    backgroundVideo: home?.backgroundVideo || null,
-    ...home,
+    backgroundVideo: home?.backgroundVideo || undefined,
   }
 
   return (
@@ -43,7 +43,7 @@ export default async function Home() {
         linkUrl="/program"
         hideLinkOnMobile={true}
       />
-      <WeekContainer hasLink={false} />
+      <WeekContainer hasLink={false} events={events} />
       <BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />
       <BuyFestivalPassHome
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"

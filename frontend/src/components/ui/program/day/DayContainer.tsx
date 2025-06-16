@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import DayGrid from './DayGrid'
-import events from '@/mockdata/events'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
-import { groupEventsByDate } from '@/utils/groupEventsByDate'
 import DateBadge from '@/components/ui/program/dateBadge/DateBadge'
-import { LiaLongArrowAltRightSolid, LiaLongArrowAltLeftSolid } from 'react-icons/lia'
+import Event from '@/interfaces/event'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
+import { groupEventsByDate } from '@/utils/groupEventsByDate'
+import { useEffect, useState } from 'react'
+import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia'
+import DayGrid from './DayGrid'
 
-type Props = { onSwitch: () => void }
+type Props = { onSwitch: () => void; events: Event[] }
 
-export default function DayContainer({ onSwitch }: Props) {
+export default function DayContainer({ onSwitch, events }: Props) {
   const grouped = groupEventsByDate(events)
   const dates = Object.keys(grouped).sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
 
