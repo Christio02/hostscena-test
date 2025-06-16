@@ -30,19 +30,24 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
 
-  // Only run on client
+  // Runs to make sure client has mounted
   useEffect(() => {
     setMounted(true)
     angleDirectionRef.current = Math.random() > 0.5 ? 1 : -1
     pathTimeRef.current = 0
   }, [])
 
+  const sampleImages = Array.from(
+    { length: 18 },
+    (_, i) =>
+      `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
+  )
   const getNextImage = useCallback((): string => {
-    if (!images.length) return '' // or provide fallback image URL
-    const img = images[imageIndexRef.current % images.length]
+    if (!sampleImages.length) return ''
+    const img = sampleImages[imageIndexRef.current % sampleImages.length]
     imageIndexRef.current += 1
-    return urlFor(img.asset).url()
-  }, [images])
+    return img
+  }, [])
 
   const calculateNextPosition = (
     lastPosition: { x: number; y: number } | null,
