@@ -10,7 +10,6 @@ import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import { HomeProps } from '@/interfaces/home'
 import mockNews from '@/mockdata/news'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
-import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
 import { sanityFetch } from '@/sanity/lib/live'
 import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
@@ -31,14 +30,12 @@ export default async function Home() {
 
   return (
     <>
-      <HomeHeader />
-      <ImageSnake />
-      <ImageCarousel />
       <HomeHeader
         startDate={homeData.startDate}
         endDate={homeData.endDate}
         location={homeData.location}
       />
+      <ImageCarousel />
       <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />
