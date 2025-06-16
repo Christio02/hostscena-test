@@ -12,7 +12,6 @@ export default function NavbarWrapper() {
   if (!mounted) return null
 
   const isHome = pathname === '/'
-  const isStudio = pathname.startsWith('/studio')
-  if (isHome || isStudio) return null
+  if (isHome) return null
   return <Navbar />
 }
