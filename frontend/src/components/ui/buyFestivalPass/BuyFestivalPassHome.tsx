@@ -32,10 +32,10 @@ export default function BuyFestivalPassHome({ imageSrc, button }: Props) {
 
         gsap.fromTo(
           buttonRef.current,
-          { y: '50vh', scale: 0.75 },
+          { y: '50vh', scale: 0.9 },
           {
             y: '0vh',
-            scale: 1.25,
+            scale: 1.1,
             scrollTrigger: {
               trigger: sectionRef.current,
               start: 'top-=80 top',
