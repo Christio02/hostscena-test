@@ -19,8 +19,8 @@ export default async function Home() {
   })
 
   const homeData: HomeProps = {
-    startDate: home?.startDate || 'Dato kommer',
-    endDate: home?.endDate || 'Dato kommer',
+    startDate: home?.startDate || 'Dato kommer-1-1',
+    endDate: home?.endDate || 'Dato kommer-1-1',
     location: home?.location || 'Lokasjon Kommer',
     imageSnake: home?.imageSnake || [],
     backgroundVideo: home?.backgroundVideo || null,
