@@ -154,7 +154,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
     intervalRef.current = setInterval(addNewSegment, ADD_INTERVAL)
     return () => {
       if (intervalRef.current !== null) {
-        clearInterval(intervalRef.c)
+        clearInterval(intervalRef.current)
       }
     }
   }, [addNewSegment, mounted])
