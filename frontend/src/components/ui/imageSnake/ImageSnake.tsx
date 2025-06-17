@@ -1,7 +1,6 @@
 // ImageSnake.tsx
 'use client'
 import { ImageSnakeItem } from '@/interfaces/home'
-import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -37,12 +36,12 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
     pathTimeRef.current = 0
   }, [])
 
-  const sampleImages = Array.from(
-    { length: 18 },
-    (_, i) =>
-      `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
-  )
   const getNextImage = useCallback((): string => {
+    const sampleImages = Array.from(
+      { length: 18 },
+      (_, i) =>
+        `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
+    )
     if (!sampleImages.length) return ''
     const img = sampleImages[imageIndexRef.current % sampleImages.length]
     imageIndexRef.current += 1
