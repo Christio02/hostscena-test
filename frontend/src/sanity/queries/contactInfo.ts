@@ -2,7 +2,7 @@ import { defineQuery } from 'next-sanity'
 
 //  single contact info document
 export const SINGLE_CONTACT_INFO_QUERY = defineQuery(`
-  *[_type == "contactinfo"][0] {
+  *[_type == "contactinfo" && !(_id in path("drafts.**"))][0] {
     _id,
     _type,
     address,
@@ -35,7 +35,7 @@ export const SINGLE_CONTACT_INFO_QUERY = defineQuery(`
 
 // query for contact persons
 export const CONTACT_PERSONS_QUERY = defineQuery(`
-  *[_type == "contactinfo"][0].contactPersons[] {
+  *[_type == "contactinfo"&& !(_id in path("drafts.**"))][0].contactPersons[] {
     _key,
     namePerson,
     position,
@@ -46,7 +46,7 @@ export const CONTACT_PERSONS_QUERY = defineQuery(`
 
 // query just social links
 export const SOCIAL_LINKS_QUERY = defineQuery(`
-  *[_type == "contactinfo"][0].socialLinks[] {
+  *[_type == "contactinfo" && !(_id in path("drafts.**"))][0].socialLinks[] {
     _key,
     someUrl,
     image {

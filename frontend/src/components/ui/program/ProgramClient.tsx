@@ -4,7 +4,7 @@ import DayContainer from '@/components/ui/program/day/DayContainer'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import Event from '@/interfaces/event'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 interface ProgramProps {
   events: Event[]
@@ -13,6 +13,12 @@ interface ProgramProps {
 export default function ProgramClient({ events }: ProgramProps) {
   const [mode, setMode] = useState<'day' | 'week'>('day')
   const [direction, setDirection] = useState(1)
+
+  const validEvents = useMemo(() => {
+    if (!events) return []
+
+    return events.filter((event) => event && event.slug && event.slug.current && event.title)
+  }, [events])
 
   const switchToDay = async () => {
     setDirection(-1)
@@ -51,8 +57,8 @@ export default function ProgramClient({ events }: ProgramProps) {
     )
   }
 
-  if (events.length === 0) {
-    console.warn('⚠️ Events array is empty')
+  if (validEvents.length === 0) {
+    console.warn('⚠️ No valid events found')
     return (
       <div className="relative w-full h-[calc(100vh-268px)] overflow-hidden flex items-center justify-center">
         <div className="text-center p-8">
@@ -64,7 +70,6 @@ export default function ProgramClient({ events }: ProgramProps) {
       </div>
     )
   }
-
   return (
     <section className="relative w-full">
       <BlackTitleBar title="Program" />
@@ -79,9 +84,9 @@ export default function ProgramClient({ events }: ProgramProps) {
           transition={{ duration: 0.2 }}
         >
           {mode === 'day' ? (
-            <DayContainer onSwitch={switchToWeek} events={events} />
+            <DayContainer onSwitch={switchToWeek} events={validEvents} />
           ) : (
-            <WeekContainer onSwitch={switchToDay} events={events} />
+            <WeekContainer onSwitch={switchToDay} events={validEvents} />
           )}
         </motion.div>
       </AnimatePresence>

@@ -8,189 +8,104 @@ import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 import { SINGLE_MAP_QUERY } from '@/sanity/queries/map'
 import { ALL_NEWS_QUERY } from '@/sanity/queries/news'
 import { TICKETS_QUERY } from '@/sanity/queries/tickets'
-import { unstable_cache } from 'next/cache'
+import { revalidateTag, unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 
-// Cached Events Query
+// caching
+
+/**
+ * Generic cache function for Sanity queries
+ * @param query - GROQ query string
+ * @param key - Unique cache key
+ * @param revalidate - Cache duration in seconds
+ * @param tags - Additional cache tags for invalidation
+ */
+export async function createSanityCache<T>(
+  query: string,
+  key: string,
+  revalidate: number = 60,
+  tags: string[] = [],
+): Promise<T | null> {
+  const { isEnabled: isDraftMode } = await draftMode()
+
+  // bypass caching
+  if (isDraftMode) {
+    try {
+      const { data } = await sanityFetch({ query })
+      return data || null
+    } catch (error) {
+      console.error(`Error fetching ${key} in draft mode:`, error)
+      return null
+    }
+  }
+
+  const cachedFn = unstable_cache(
+    async () => {
+      try {
+        const { data } = await sanityFetch({ query })
+        return data || null
+      } catch (error) {
+        console.error(`Error fetching ${key}:`, error)
+        return null
+      }
+    },
+    [key],
+    {
+      revalidate,
+      tags: [key, 'sanity', ...tags],
+    },
+  )
+
+  return cachedFn()
+}
+
+export async function invalidateSanityCache(tags: string | string[]) {
+  const tagsArray = Array.isArray(tags) ? tags : [tags]
+  tagsArray.forEach((tag) => revalidateTag(tag))
+}
+
+export async function invalidateAllSanityCache() {
+  revalidateTag('sanity')
+}
+
 export async function getCachedEvents(): Promise<Event[]> {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({
-          query: EVENT_QUERY,
-        })
-        return data || []
-      } catch (error) {
-        console.error('Error fetching events:', error)
-        return []
-      }
-    },
-    ['events', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 60, // No cache in draft mode
-      tags: ['events', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  const result = await createSanityCache<Event[]>(EVENT_QUERY, 'events', 60, ['events'])
+  return result || []
 }
 
-// Cached Home Query
 export async function getCachedHome(): Promise<HomeProps | null> {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({ query: SINGLE_HOME_QUERY })
-        return data || null
-      } catch (error) {
-        console.error('Error fetching home:', error)
-        return null
-      }
-    },
-    ['home', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 300,
-      tags: ['home', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  return createSanityCache<HomeProps>(SINGLE_HOME_QUERY, 'home', 300, ['home'])
 }
 
-// Cached News Query
 export async function getCachedNews(): Promise<News[]> {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({ query: ALL_NEWS_QUERY })
-        return data || []
-      } catch (error) {
-        console.error('Error fetching news:', error)
-        return []
-      }
-    },
-    ['news', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 120,
-      tags: ['news', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  const result = await createSanityCache<News[]>(ALL_NEWS_QUERY, 'news', 120, ['news'])
+  return result || []
 }
 
-// Cached Contact Info Query
 export async function getCachedContactInfo() {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({ query: SINGLE_CONTACT_INFO_QUERY })
-        return data || null
-      } catch (error) {
-        console.error('Error fetching contact info:', error)
-        return null
-      }
-    },
-    ['contact-info', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 600,
-      tags: ['contact', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  return createSanityCache(SINGLE_CONTACT_INFO_QUERY, 'contact-info', 600, ['contact'])
 }
 
-// Cached Tickets Query
 export async function getCachedTickets() {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({ query: TICKETS_QUERY })
-        return data || null
-      } catch (error) {
-        console.error('Error fetching tickets:', error)
-        return null
-      }
-    },
-    ['tickets', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 300,
-      tags: ['tickets', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  return createSanityCache(TICKETS_QUERY, 'tickets', 300, ['tickets'])
 }
 
-// Cached Map Query
 export async function getCachedMap() {
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const cachedFn = unstable_cache(
-    async () => {
-      try {
-        const { data } = await sanityFetch({ query: SINGLE_MAP_QUERY })
-        return data || null
-      } catch (error) {
-        console.error('Error fetching map:', error)
-        return null
-      }
-    },
-    ['map', isDraftMode ? 'draft' : 'published'],
-    {
-      revalidate: isDraftMode ? false : 600,
-      tags: ['map', 'sanity'],
-    },
-  )
-
-  return cachedFn()
+  return createSanityCache(SINGLE_MAP_QUERY, 'map', 600, ['map'])
 }
 
-// Utility function to get a specific event by slug
 export async function getCachedEventBySlug(slug: string): Promise<Event | null> {
   const events = await getCachedEvents()
   return events.find((event: Event) => event.slug.current === slug) || null
 }
 
-// Utility function to get a specific news item by slug
 export async function getCachedNewsBySlug(slug: string): Promise<News | null> {
   const news = await getCachedNews()
   return news.find((item: News) => item.slug.current === slug) || null
 }
 
-// Generic cache function for custom queries
 export function createCachedQuery<T>(query: string, key: string, revalidate: number = 60) {
   return async (): Promise<T | null> => {
-    const { isEnabled: isDraftMode } = await draftMode()
-
-    const cachedFn = unstable_cache(
-      async () => {
-        try {
-          const { data } = await sanityFetch({ query })
-          return data || null
-        } catch (error) {
-          console.error(`Error fetching ${key}:`, error)
-          return null
-        }
-      },
-      [key, isDraftMode ? 'draft' : 'published'],
-      {
-        revalidate: isDraftMode ? false : revalidate,
-        tags: [key, 'sanity'],
-      },
-    )
-
-    return cachedFn()
+    return createSanityCache<T>(query, key, revalidate)
   }
 }

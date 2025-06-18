@@ -12,6 +12,19 @@ interface Props {
 export default function WeekCell({ event, isLast }: Props) {
   const [hover, setHover] = useState(false)
 
+  if (!event || !event.slug || !event.slug.current) {
+    return (
+      <div
+        className={`min-w-[256px] text-center border-t border-x border-secondary p-[10px] ${
+          isLast ? 'border-b' : ''
+        }`}
+      >
+        <div className="animate-pulse bg-gray-200 h-6 rounded mb-2"></div>
+        <div className="animate-pulse bg-gray-200 h-4 rounded"></div>
+      </div>
+    )
+  }
+
   return (
     <Link href={`/program/${event.slug.current}`} className="block">
       <div
