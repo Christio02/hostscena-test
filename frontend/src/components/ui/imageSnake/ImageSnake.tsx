@@ -1,6 +1,6 @@
+// ImageSnake.tsx
 'use client'
 import { ImageSnakeItem } from '@/interfaces/home'
-import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -22,17 +22,31 @@ const MAX_ATTEMPTS = 10
 
 const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
+  const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const pathTimeRef = useRef<number>(0)
-  const angleDirectionRef = useRef<number>(Math.random() > 0.5 ? 1 : -1)
+  const angleDirectionRef = useRef<number>(0)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
 
+  // Runs to make sure client has mounted
+  useEffect(() => {
+    setMounted(true)
+    angleDirectionRef.current = Math.random() > 0.5 ? 1 : -1
+    pathTimeRef.current = 0
+  }, [])
+
   const getNextImage = useCallback((): string => {
-    const img = images[imageIndexRef.current % images.length]
+    const sampleImages = Array.from(
+      { length: 18 },
+      (_, i) =>
+        `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
+    )
+    if (!sampleImages.length) return ''
+    const img = sampleImages[imageIndexRef.current % sampleImages.length]
     imageIndexRef.current += 1
-    return urlFor(img.asset).url()
-  }, [images])
+    return img
+  }, [])
 
   const calculateNextPosition = (
     lastPosition: { x: number; y: number } | null,
@@ -134,6 +148,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   }, [getNextImage])
 
   useEffect(() => {
+    if (!mounted) return
     addNewSegment()
     intervalRef.current = setInterval(addNewSegment, ADD_INTERVAL)
     return () => {
@@ -141,7 +156,14 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
         clearInterval(intervalRef.current)
       }
     }
-  }, [addNewSegment])
+  }, [addNewSegment, mounted])
+
+  // Only render the snake after mount (client-side)
+  if (!mounted) {
+    return (
+      <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden" />
+    )
+  }
 
   if (!images || images.length === 0) {
     return (
@@ -178,7 +200,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
               width={SEGMENT_SIZE}
               height={SEGMENT_SIZE}
               alt={`Segment ${i}`}
-              className="w-full h-full object-contain" //object-cover to change images to square
+              className="w-full h-full object-contain"
             />
           </div>
         ))}
