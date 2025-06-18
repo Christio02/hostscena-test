@@ -8,15 +8,15 @@ import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
 import NewsGrid from '@/components/ui/news/NewsGrid'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import { HomeProps } from '@/interfaces/home'
-import mockNews from '@/mockdata/news'
+import { getCachedEvents, getCachedHome, getCachedNews } from '@/lib/sanity-cache'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
-import { sanityFetch } from '@/sanity/lib/live'
-import { EVENT_QUERY } from '@/sanity/queries/event'
-import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 
 export default async function Home() {
-  const { data: home } = await sanityFetch({ query: SINGLE_HOME_QUERY })
-  const { data: events } = await sanityFetch({ query: EVENT_QUERY })
+  const [events, home, news] = await Promise.all([
+    getCachedEvents(),
+    getCachedHome(),
+    getCachedNews(),
+  ])
 
   const homeData: HomeProps = {
     ...home,
@@ -70,7 +70,7 @@ export default async function Home() {
         }
       />
       <BlackTitleBar title="Nyheter" linkText="alle nyheter" linkUrl="/nyheter" />
-      <NewsGrid news={mockNews} limitMobile={3} limitTablet={4} limitDesktop={6} />
+      <NewsGrid news={news} limitMobile={3} limitTablet={4} limitDesktop={6} />
     </>
   )
 }

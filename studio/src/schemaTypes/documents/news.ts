@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'news',
@@ -9,7 +9,7 @@ export default defineType({
       name: 'image',
       title: 'Bilde',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     }),
     defineField({

@@ -25,7 +25,7 @@ export default function WeekCell({ event, isLast }: Props) {
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-200 ${
             hover ? 'opacity-60' : 'opacity-0'
           }`}
-          style={{ backgroundImage: `url(${event.image})` }}
+          style={{ backgroundImage: `url(${event.image.asset.url})` }}
         />
 
         <h3 className="relative z-10 text-calendar-title">{event.title}</h3>

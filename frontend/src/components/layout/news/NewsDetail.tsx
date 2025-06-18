@@ -22,7 +22,7 @@ export default function NewsDetail({ news }: Props) {
   return (
     <>
       <div className="relative w-full h-[300px] mobile:h-[400px] tablet:h-[500px]">
-        <Image src={image} alt={title} fill className="object-cover" priority />
+        <Image src={image.asset.url} alt={title} fill className="object-cover" priority />
       </div>
 
       <div className="px-[20px]">

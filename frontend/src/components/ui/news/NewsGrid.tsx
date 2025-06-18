@@ -1,8 +1,8 @@
 'use client'
 
+import type News from '@/interfaces/news'
 import { useEffect, useState } from 'react'
 import NewsCard from './NewsCard'
-import type News from '@/interfaces/news'
 
 interface NewsGridProps {
   news: News[]
