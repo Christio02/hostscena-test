@@ -186,20 +186,23 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
 
-  @keyframes marquee-bounce {
-    0% {
+  @keyframes marquee-pingpong {
+    0%,
+    4% {
       transform: translateX(0);
     }
-    50% {
+    46%,
+    54% {
       transform: translateX(var(--marquee-translate));
     }
+    96%,
     100% {
       transform: translateX(0);
     }
   }
 
   .animate-marquee {
-    animation: marquee-bounce 10s ease-in-out infinite;
+    animation: marquee-pingpong 10s ease-in-out infinite alternate;
     will-change: transform;
   }
 }
