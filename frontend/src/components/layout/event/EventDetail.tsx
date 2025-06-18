@@ -93,14 +93,14 @@ export default function EventDetail({ event }: Props) {
               {video.videoType === 'youtube' && video.youtubeUrl ? (
                 <iframe
                   src={video.youtubeUrl.replace('watch?v=', 'embed/')}
-                  title={video.title || 'Video'}
+                  title="Video"
                   className="w-full h-full rounded-lg"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               ) : video.videoType === 'upload' && video.videoFile ? (
-                <video controls className="w-full h-full rounded-lg" title={video.title || 'Video'}>
-                  <source src={video.videoFile} type="video/mp4" />
+                <video controls className="w-full h-full rounded-lg" title="Video">
+                  <source src={video.videoFile.asset.url} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               ) : null}
@@ -112,7 +112,6 @@ export default function EventDetail({ event }: Props) {
         <div className="flex flex-col items-center justify-center w-full pb-[40px] px-[20px]">
           {' '}
           <div className="max-w-[800px] w-full">
-            <h2 className="text-h4 mb-[20px] text-center">Galleri</h2>
             <ImageCarousel images={imageCarousel.map((slide) => slide.image)} />
           </div>
         </div>
@@ -120,13 +119,11 @@ export default function EventDetail({ event }: Props) {
       {spotifyLink && (
         <div className="flex flex-col items-center justify-center w-full pb-[40px] px-[20px]">
           <div className="max-w-[650px] w-full">
-            <h2 className="text-h4 mb-[20px] text-center">Musikk</h2>
             <div className="w-full">
               <iframe
                 src={spotifyLink}
                 width="100%"
                 height="352"
-                frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
                 className="rounded-lg"

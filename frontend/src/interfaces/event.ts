@@ -9,10 +9,16 @@ interface Contributor {
 }
 
 interface Video {
-  title?: string
   videoType: 'youtube' | 'upload'
   youtubeUrl?: string
-  videoFile?: string
+  videoFile?: {
+    asset: {
+      _id: string
+      url: string
+      originalFilename: string
+      mimeType: string
+    }
+  }
 }
 
 export interface Slide {
@@ -32,7 +38,7 @@ export default interface Event {
   performer: string
   date: string
   startTime: string
-  endTime: string
+  endTime?: string
   location: string
   link?: string
   tag?: string

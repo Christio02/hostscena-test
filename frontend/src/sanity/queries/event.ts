@@ -2,19 +2,13 @@ import { defineQuery } from 'next-sanity'
 
 export const EVENT_QUERY = defineQuery(`
   *[_type == "event"] | order(date asc) {
+    _type,
+    title,
     slug {
       _id,
       current
     },
-    _type,
-    title,
-    date,
-    startTime,
-    endTime,
-    location,
-    link,
-    tag,
-    image {
+      image {
       asset->{
         _id,
         url,
@@ -26,6 +20,12 @@ export const EVENT_QUERY = defineQuery(`
       hotspot,
       crop
     },
+    date,
+    startTime,
+    endTime,
+    location,
+    link,
+    tag,
     content,
     contributors[] {
       _key,
@@ -46,7 +46,6 @@ export const EVENT_QUERY = defineQuery(`
       }
     },
     video {
-      title,
       videoType,
       youtubeUrl,
       videoFile {

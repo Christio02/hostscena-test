@@ -2,9 +2,15 @@ import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'event',
-  title: 'Event',
+  title: 'Arrangement',
   type: 'document',
   fields: [
+    defineField({
+      name: 'title',
+      title: 'Tittel',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -22,12 +28,6 @@ export default defineType({
       type: 'image',
       description: 'Hovedbilde for arrangementet',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'title',
-      title: 'Tittel',
-      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -142,11 +142,6 @@ export default defineType({
       type: 'object',
       fields: [
         {
-          name: 'title',
-          title: 'Video tittel',
-          type: 'string',
-        },
-        {
           name: 'videoType',
           title: 'Video type',
           type: 'string',
@@ -193,13 +188,11 @@ export default defineType({
       ],
       preview: {
         select: {
-          title: 'title',
           videoType: 'videoType',
           youtubeUrl: 'youtubeUrl',
         },
-        prepare({title, videoType, youtubeUrl}) {
+        prepare({videoType, youtubeUrl}) {
           return {
-            title: title || 'Uten tittel',
             subtitle: videoType === 'youtube' ? `YouTube: ${youtubeUrl}` : 'Opplastet fil',
           }
         },
@@ -210,8 +203,8 @@ export default defineType({
       title: 'Spotify lenke',
       type: 'url',
       description:
-        'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`)',
-      validation: (Rule) => Rule.uri({allowRelative: false}).required(),
+        'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`). Ikke påkrevd',
+      validation: (Rule) => Rule.uri({allowRelative: false}),
     }),
     defineField({
       name: 'imageCarousel',
