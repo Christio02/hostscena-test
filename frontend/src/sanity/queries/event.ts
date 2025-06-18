@@ -2,7 +2,10 @@ import { defineQuery } from 'next-sanity'
 
 export const EVENT_QUERY = defineQuery(`
   *[_type == "event"] | order(date asc) {
-    _id,
+    slug {
+      _id,
+      current
+    },
     _type,
     title,
     date,

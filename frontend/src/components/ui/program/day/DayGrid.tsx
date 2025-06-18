@@ -11,7 +11,7 @@ export default function DayGrid({ events }: Props) {
   return (
     <div className="grid grid-cols-1 phone:grid-cols-2 desktop:grid-cols-3 gap-[20px] px-[20px] pt-[20px] tablet:pt-[10px]">
       {sorted.map((event) => (
-        <DayCard key={event.slug} event={event} />
+        <DayCard key={event.slug.current} event={event} />
       ))}
     </div>
   )

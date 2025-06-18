@@ -1,7 +1,8 @@
 import type { PortableTextBlock } from '@portabletext/types'
+import { SanityImage } from './sanityImage'
 
 interface Contributor {
-  image: string
+  image: SanityImage
   name: string
   artistType: string
   bio?: string
@@ -14,14 +15,19 @@ interface Video {
   videoFile?: string
 }
 
-interface CarouselImage {
-  image: string
+export interface Slide {
+  _key: string
   caption?: string
   alt?: string
+  image: SanityImage
 }
 
 export default interface Event {
-  image: string
+  slug: {
+    _id: string
+    current: string
+  }
+  image: SanityImage
   title: string
   performer: string
   date: string
@@ -30,10 +36,9 @@ export default interface Event {
   location: string
   link?: string
   tag?: string
-  slug: string
   content?: PortableTextBlock[]
   contributors?: Contributor[]
   video?: Video
   spotifyLink?: string
-  imageCarousel?: CarouselImage[]
+  imageCarousel?: Slide[]
 }

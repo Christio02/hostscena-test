@@ -20,11 +20,6 @@ const MARGIN = -100
 const MIN_DISTANCE = SEGMENT_SIZE * 0.2
 const MAX_ATTEMPTS = 10
 
-const sampleImages = Array.from(
-  { length: 18 },
-  (_, i) => `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
-)
-
 const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
@@ -32,26 +27,6 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const angleDirectionRef = useRef<number>(Math.random() > 0.5 ? 1 : -1)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
-
-  if (!images || images.length === 0) {
-    return (
-      <div className="relative w-full h-[calc(100vh-268px)] overflow-hidden flex items-center justify-center">
-        <div className="text-center p-8">
-          <p className="text-lg font-source text-gray-500">
-            Ingen bilder tilgjengelig for bildeslangen.
-          </p>
-          <p className="text-sm font-source text-gray-400 mt-2">
-            Legg til bilder i Sanity Studio for å vise bildeslangen.
-          </p>
-        </div>
-      </div>
-    )
-  }
-  // const getNextImage = (): string => {
-  //   const img = sampleImages[imageIndexRef.current % sampleImages.length]
-  //   imageIndexRef.current += 1
-  //   return img
-  // }
 
   const getNextImage = useCallback((): string => {
     const img = images[imageIndexRef.current % images.length]
@@ -167,6 +142,21 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
       }
     }
   }, [addNewSegment])
+
+  if (!images || images.length === 0) {
+    return (
+      <div className="relative w-full h-[calc(100vh-268px)] overflow-hidden flex items-center justify-center">
+        <div className="text-center p-8">
+          <p className="text-lg font-source text-gray-500">
+            Ingen bilder tilgjengelig for bildeslangen.
+          </p>
+          <p className="text-sm font-source text-gray-400 mt-2">
+            Legg til bilder i Sanity Studio for å vise bildeslangen.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div ref={containerRef} className="relative w-full h-[calc(100vh-268px)] overflow-hidden">

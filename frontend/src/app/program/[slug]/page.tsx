@@ -9,7 +9,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const { data: events } = await sanityFetch({
     query: EVENT_QUERY,
   })
-  const event = events.find((e: Event) => e.slug === slug)
+  const event = events.find((e: Event) => e.slug.current === slug)
 
   if (!event) return notFound()
 

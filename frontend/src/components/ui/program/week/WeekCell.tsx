@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import type Event from '@/interfaces/event'
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface Props {
   event: Event
@@ -13,7 +13,7 @@ export default function WeekCell({ event, isLast }: Props) {
   const [hover, setHover] = useState(false)
 
   return (
-    <Link href={`/program/${event.slug}`} className="block">
+    <Link href={`/program/${event.slug.current}`} className="block">
       <div
         className={`min-w-[256px] text-center relative overflow-hidden border-t border-x border-secondary p-[10px] cursor-pointer group ${
           isLast ? 'border-b' : ''

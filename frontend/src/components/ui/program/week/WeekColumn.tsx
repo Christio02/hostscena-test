@@ -1,6 +1,6 @@
-import WeekCell from './WeekCell'
-import type Event from '@/interfaces/event'
 import DateBadge from '@/components/ui/program/dateBadge/DateBadge'
+import type Event from '@/interfaces/event'
+import WeekCell from './WeekCell'
 
 interface Props {
   date: string
