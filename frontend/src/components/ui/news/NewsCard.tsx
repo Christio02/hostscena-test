@@ -9,7 +9,7 @@ interface Props {
 
 export default function NewsCard({ news }: Props) {
   return (
-    <Link href={`/nyheter/${news.slug}`}>
+    <Link href={`/nyheter/${news.slug.current}`}>
       <div className="w-full hover-lift">
         <div className="relative w-full h-[190px] mobile:h-[260px]">
           <Image

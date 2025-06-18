@@ -1,10 +1,6 @@
 import { HomeProps } from '@/interfaces/home'
 import { sanityFetch } from '@/sanity/lib/live'
-import {
-  CONTACT_PERSONS_QUERY,
-  SINGLE_CONTACT_INFO_QUERY,
-  SOCIAL_LINKS_QUERY,
-} from '@/sanity/queries/contactInfo'
+import { FOOTER_CONTACT_QUERY, SINGLE_CONTACT_INFO_QUERY } from '@/sanity/queries/contactInfo'
 import { EVENT_BY_ID_QUERY, EVENT_QUERY, UPCOMING_EVENTS_QUERY } from '@/sanity/queries/event'
 import {
   BACKGROUND_VIDEO_QUERY,
@@ -106,26 +102,18 @@ export function useImageSnake() {
   })
 }
 
-export function useContactPersons() {
+export function useFullContact() {
   return useQuery({
     queryKey: ['contact-persons'],
-    queryFn: () => sanityFetch({ query: CONTACT_PERSONS_QUERY }),
+    queryFn: () => sanityFetch({ query: SINGLE_CONTACT_INFO_QUERY }),
     staleTime: 30 * 60 * 1000, // 30 minutes for contact info
   })
 }
 
-export function useSingleContactInfo() {
+export function useFooterContact() {
   return useQuery({
-    queryKey: ['contact-info'],
-    queryFn: () => sanityFetch({ query: SINGLE_CONTACT_INFO_QUERY }),
-    staleTime: 30 * 60 * 1000,
-  })
-}
-
-export function useSocialLinks() {
-  return useQuery({
-    queryKey: ['social-links'],
-    queryFn: () => sanityFetch({ query: SOCIAL_LINKS_QUERY }),
+    queryKey: ['footer-contact'],
+    queryFn: () => sanityFetch({ query: FOOTER_CONTACT_QUERY }),
     staleTime: 30 * 60 * 1000,
   })
 }

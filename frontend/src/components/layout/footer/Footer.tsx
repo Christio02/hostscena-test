@@ -1,20 +1,38 @@
-'use client'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
-import { email, postalAddress, visitingAddress } from '@/mockdata/text'
+import { ContactFooter } from '@/interfaces/contact'
+import { createCachedSanityQuery } from '@/lib/sanity-cache'
+import { FOOTER_CONTACT_QUERY } from '@/sanity/queries/contactInfo'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { HiArrowLongRight } from 'react-icons/hi2'
 const logo = '/assets/images/logo/logo_no_border.svg'
 
 const footerImage = '/assets/images/footer_image.png'
 
-export default function Footer() {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  if (!mounted) return null
+const getSocialIcon = (platform: string, size: number = 48) => {
+  const iconProps = { size }
+
+  switch (platform.toLowerCase()) {
+    case 'facebook':
+      return <FaFacebook {...iconProps} />
+    case 'instagram':
+      return <FaInstagram {...iconProps} />
+    case 'youtube':
+      return <FaYoutube {...iconProps} />
+    case 'twitter':
+    case 'x':
+      return <FaTwitter {...iconProps} />
+    case 'linkedin':
+      return <FaLinkedin {...iconProps} />
+    case 'tiktok':
+      return <FaTiktok {...iconProps} />
+    default:
+      return <FaFacebook {...iconProps} />
+  }
+}
+
+export default async function Footer() {
+  const footerData = await createCachedSanityQuery<ContactFooter>(FOOTER_CONTACT_QUERY)()
 
   return (
     <footer className="pt-[60px] px-[20px]">
@@ -33,13 +51,12 @@ export default function Footer() {
           <div className="w-[1px] h-full bg-black hidden tablet:block" />
           <div className="flex flex-col justify-center">
             <h2 className="text-h4">Kontakt:</h2>
-            <p className="text-s">{email}</p>
-            <p className="text-s">{visitingAddress}</p>
-            <p className="text-s">{postalAddress}</p>
+            <p className="text-s">{footerData?.email}</p>
+            <p className="text-s">{footerData?.address}</p>
+            <p className="text-s">{footerData?.postbox}</p>
           </div>
         </div>
 
-        {/* TODO: add link to festival pass purchase page  */}
         {/* Festivalpass knapp */}
         <div className="order-2 tablet:order-3  flex items-center justify-center py-[20px] tablet:pr-[20px]">
           <BuyFestivalPass
@@ -56,8 +73,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* Logo + SoMe */}
-        {/*TODO: Add links to social media accounts */}
+        {/* Logo + SoMe (Mobile) */}
         <div className="order-3 tablet:order-none flex justify-between items-center gap-[20px] py-[20px] border-t border-secondary tablet:py-0 tablet:hidden">
           <Image
             src={logo}
@@ -67,29 +83,35 @@ export default function Footer() {
             className="border-secondary border-[1px] px-[8.77px] py-[8.29px]"
           />
           <div className="flex gap-[20px]">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <FaFacebook size={48} />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FaInstagram size={48} />
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-              <FaYoutube size={48} />
-            </a>
+            {footerData?.socialLinks?.map((sm, index) => (
+              <a
+                href={sm?.someUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={index}
+                aria-label={`Visit our ${sm.platform} page`}
+              >
+                {getSocialIcon(sm.platform, 48)}
+              </a>
+            ))}
           </div>
         </div>
 
         {/* Desktop/Tablet SoMe */}
-        <div className="hidden order-3 tablet:order-2  desktop:flex gap-[20px] justify-center items-center pr-[20px]">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <FaFacebook size={48} />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <FaInstagram size={48} />
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-            <FaYoutube size={48} />
-          </a>
+        <div className="hidden order-3 tablet:order-2 desktop:flex gap-[20px] justify-center items-center pr-[20px]">
+          <div className="flex gap-[20px]">
+            {footerData?.socialLinks?.map((sm, index) => (
+              <a
+                href={sm?.someUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={index}
+                aria-label={`Visit our ${sm.platform} page`}
+              >
+                {getSocialIcon(sm.platform, 48)}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

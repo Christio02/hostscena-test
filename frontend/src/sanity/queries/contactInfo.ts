@@ -5,6 +5,7 @@ export const SINGLE_CONTACT_INFO_QUERY = defineQuery(`
   *[_type == "contactinfo" && !(_id in path("drafts.**"))][0] {
     _id,
     _type,
+    email,
     address,
     postbox,
     contactPersons[] {
@@ -16,50 +17,22 @@ export const SINGLE_CONTACT_INFO_QUERY = defineQuery(`
     },
     socialLinks[] {
       _key,
-      someUrl,
-      image {
-        asset->{
-          _id,
-          url,
-          metadata {
-            dimensions,
-            lqip
-          }
-        },
-        hotspot,
-        crop
-      }
+      platform,
+      someUrl
     }
   }
 `)
 
-// query for contact persons
-export const CONTACT_PERSONS_QUERY = defineQuery(`
-  *[_type == "contactinfo"&& !(_id in path("drafts.**"))][0].contactPersons[] {
-    _key,
-    namePerson,
-    position,
+// query for contact persons and social links
+export const FOOTER_CONTACT_QUERY = defineQuery(`
+  *[_type == "contactinfo" && !(_id in path("drafts.**"))][0] {
     email,
-    phone
-  }
-`)
-
-// query just social links
-export const SOCIAL_LINKS_QUERY = defineQuery(`
-  *[_type == "contactinfo" && !(_id in path("drafts.**"))][0].socialLinks[] {
-    _key,
-    someUrl,
-    image {
-      asset->{
-        _id,
-        url,
-        metadata {
-          dimensions,
-          lqip
-        }
-      },
-      hotspot,
-      crop
+    address,
+    postbox,
+    socialLinks[] {
+      _key,
+      platform,
+      someUrl
     }
   }
 `)

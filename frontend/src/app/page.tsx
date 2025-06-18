@@ -8,15 +8,11 @@ import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
 import NewsGrid from '@/components/ui/news/NewsGrid'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import { HomeProps } from '@/interfaces/home'
-import { getCachedEvents, getCachedHome, getCachedNews } from '@/lib/sanity-cache'
+import { getEvents, getHome, getNews } from '@/lib/sanity-cache'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
 
 export default async function Home() {
-  const [events, home, news] = await Promise.all([
-    getCachedEvents(),
-    getCachedHome(),
-    getCachedNews(),
-  ])
+  const [events, home, news] = await Promise.all([getEvents(), getHome(), getNews()])
 
   const homeData: HomeProps = {
     ...home,

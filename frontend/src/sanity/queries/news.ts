@@ -10,7 +10,18 @@ export const NEWS_QUERY = defineQuery(`
       person,
       date,
       time,
-      image,
+      image {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      },
+      hotspot,
+      crop
+    },
       content
     }
 `)
@@ -23,7 +34,18 @@ export const NEWS_DETAIL_QUERY = defineQuery(`
     tag,
     person,
     date,
-    time,
+    image {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      },
+      hotspot,
+      crop
+    },
     image,
     content
   }
@@ -39,7 +61,18 @@ export const ALL_NEWS_QUERY = defineQuery(`
       person,
       date,
       time,
-      image,
+      image {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      },
+      hotspot,
+      crop
+    },
       content
     }
 `)

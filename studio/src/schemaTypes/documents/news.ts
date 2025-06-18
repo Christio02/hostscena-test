@@ -6,23 +6,42 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'image',
-      title: 'Bilde',
-      type: 'image',
-      options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'title',
       title: 'Tittel',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 200,
+        slugify: (input) =>
+          input
+            .toLowerCase()
+            .replace(/ø/g, 'o')
+            .replace(/æ/g, 'ae')
+            .replace(/å/g, 'a')
+            .replace(/\s+/g, '-')
+            .slice(0, 200),
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Bilde',
+      type: 'image',
+      options: {hotspot: true},
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: 'tag',
       title: 'Tagg',
       type: 'string',
-      description: 'Valgfri kort tagg (f.eks. “Arrangement” eller “Frivillig”)',
+      description: 'Valgfri kort tagg (f.eks. "Arrangement" eller "Frivillig")',
     }),
     defineField({
       name: 'person',

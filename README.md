@@ -111,6 +111,8 @@ npx sanity dataset export production backup-$(date +%Y%m%d).tar.gz
 
 # 2. Export specific document types from testing
 npx sanity dataset export testing --types article,event,person --output changes.tar.gz
+# or export all content
+npx sanity dataset export testing --output changes.tar.gz
 
 # 3. Import to production (merges, doesn't replace)
 npx sanity dataset import changes.tar.gz production

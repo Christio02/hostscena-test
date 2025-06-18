@@ -1,7 +1,7 @@
 import NewsClient from '@/components/ui/news/NewsClient'
-import { getCachedNews } from '@/lib/sanity-cache'
+import { getNews } from '@/lib/sanity-cache'
 
 export default async function Nyheter() {
-  const news = await getCachedNews()
+  const news = await getNews()
   return <NewsClient news={news} />
 }
