@@ -241,7 +241,7 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
   const angleDirectionRef = useRef<number>(0)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const imageIndexRef = useRef(0)
-  const offsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
+  // const offsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
 
   useEffect(() => {
     setMounted(true)
@@ -366,7 +366,11 @@ const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
     if (!mounted) return
     addNewSegment()
     intervalRef.current = setInterval(addNewSegment, ADD_INTERVAL)
-    return () => intervalRef.current && clearInterval(intervalRef.current)
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
   }, [addNewSegment, mounted])
 
   if (!mounted)
