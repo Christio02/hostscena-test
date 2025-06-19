@@ -1,5 +1,5 @@
 'use client'
-import ImageCarousel from '@/components/shared/Carousel'
+import EventImageCarousel from '@/components/layout/event/EventImageCarousel'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
 import type Event from '@/interfaces/event'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
@@ -112,7 +112,7 @@ export default function EventDetail({ event }: Props) {
         <div className="flex flex-col items-center justify-center w-full pb-[40px] px-[20px]">
           {' '}
           <div className="max-w-[800px] w-full">
-            <ImageCarousel images={imageCarousel.map((slide) => slide.image)} />
+            <EventImageCarousel images={imageCarousel.map((slide) => slide.image)} />
           </div>
         </div>
       )}

@@ -13,10 +13,10 @@ import 'swiper/css/autoplay'
 
 const IMAGE_HEIGHT = 200
 const GAP = 10
-const sampleImages = Array.from(
-  { length: 18 },
-  (_, i) => `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
-)
+// const sampleImages = Array.from(
+//   { length: 18 },
+//   (_, i) => `/assets/images/snake/Hostscena-bildeslange-bilde${String(i + 1).padStart(2, '0')}.jpg`,
+// )
 
 interface Props {
   images?: SanityImage[]
