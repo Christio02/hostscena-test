@@ -4,6 +4,7 @@ import HomeNavbar from '@/components/layout/navbar/homepage/HomeNavbar'
 import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
+import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
 import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
 import NewsGrid from '@/components/ui/news/NewsGrid'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
@@ -30,6 +31,7 @@ export default async function Home() {
         endDate={homeData.endDate}
         location={homeData.location}
       />
+      <ImageCarousel />
       <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />

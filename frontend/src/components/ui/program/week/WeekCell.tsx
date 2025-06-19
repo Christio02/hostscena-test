@@ -34,18 +34,25 @@ export default function WeekCell({ event, isLast }: Props) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-200 ${
-            hover ? 'opacity-60' : 'opacity-0'
-          }`}
-          style={{ backgroundImage: `url(${event.image.asset.url})` }}
-        />
-
-        <h3 className="relative z-10 text-calendar-title">{event.title}</h3>
-        {event.performer && (
-          <p className="relative z-10 text-calendar-time font-bold">{event.performer}</p>
+        {hover && (
+          <div className="absolute inset-0">
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${event.image.asset.url})` }}
+            />
+            <div className="absolute inset-0 bg-black opacity-50" />
+          </div>
         )}
-        <p className="relative z-10 text-calendar-time">
+
+        <h3 className={`relative z-10 text-calendar-title  ${hover ? 'text-white' : ''}`}>
+          {event.title}
+        </h3>
+        {event.performer && (
+          <p className={`relative z-10 text-calendar-time font-bold ${hover ? 'text-white' : ''}`}>
+            {event.performer}
+          </p>
+        )}
+        <p className={`relative z-10 text-calendar-time  ${hover ? 'text-white' : ''}`}>
           <span className="font-bold">{event.startTime}</span> {event.location}
         </p>
       </div>

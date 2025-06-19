@@ -16,7 +16,12 @@ export default function WeekContainer({ hasLink = true, onSwitch, events }: Prop
   return (
     <>
       {hasLink ? (
-        <BorderTitleBar title="Ukeoversikt" linkText="Dagsoversikt" onClick={onSwitch} />
+        <BorderTitleBar
+          title="Ukeoversikt"
+          linkText="Dagsoversikt"
+          onClick={onSwitch}
+          isArrowReversed={true}
+        />
       ) : (
         <BorderTitleBar title="Ukeoversikt" />
       )}
