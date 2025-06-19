@@ -19,7 +19,6 @@ const wittgenstein = Wittgenstein({
   variable: '--font-wittgenstein',
   weight: ['400', '500', '600', '700', '800', '900'],
 })
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="no" className={`${sourceSans.variable} ${wittgenstein.variable}`}>
@@ -28,6 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <LayoutPadding />
         <main>{children}</main>
         <Footer />
+
         <SanityLive />
         {(await draftMode()).isEnabled && (
           <>

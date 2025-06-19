@@ -4,7 +4,7 @@ const logo = '/assets/images/logo/logo_no_border.svg'
 
 export default function HomeHeader({ startDate, endDate, location }: HomeHeaderProps) {
   const [startYear, startMonth, startDay] = startDate.split('-')
-  const [endMonth, endDay] = endDate.split('-')
+  const [, endMonth, endDay] = endDate.split('-')
 
   const startDateFormatted = `${startDay}.${startMonth}`
   const endDateFormatted = `${endDay}.${endMonth}`

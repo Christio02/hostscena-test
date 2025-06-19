@@ -4,28 +4,24 @@ import HomeNavbar from '@/components/layout/navbar/homepage/HomeNavbar'
 import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import BuyFestivalPassHome from '@/components/ui/buyFestivalPass/BuyFestivalPassHome'
+import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
 import ImageSnake from '@/components/ui/imageSnake/ImageSnake'
 import NewsGrid from '@/components/ui/news/NewsGrid'
 import WeekContainer from '@/components/ui/program/week/WeekContainer'
 import { HomeProps } from '@/interfaces/home'
-import mockNews from '@/mockdata/news'
+import { getEvents, getHome, getNews } from '@/lib/sanity-cache'
 import { buyTickets1, buyTickets2 } from '@/mockdata/text'
-import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
-import { sanityFetch } from '@/sanity/lib/live'
-import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 
 export default async function Home() {
-  const { data: home } = await sanityFetch({
-    query: SINGLE_HOME_QUERY,
-  })
+  const [events, home, news] = await Promise.all([getEvents(), getHome(), getNews()])
 
   const homeData: HomeProps = {
-    startDate: home?.startDate || 'Dato kommer-1-1',
-    endDate: home?.endDate || 'Dato kommer-1-1',
+    ...home,
+    startDate: home?.startDate || 'Dato kommer',
+    endDate: home?.endDate || 'Dato kommer',
     location: home?.location || 'Lokasjon Kommer',
     imageSnake: home?.imageSnake || [],
-    backgroundVideo: home?.backgroundVideo || null,
-    ...home,
+    backgroundVideo: home?.backgroundVideo || undefined,
   }
 
   return (
@@ -35,7 +31,7 @@ export default async function Home() {
         endDate={homeData.endDate}
         location={homeData.location}
       />
-      <ImageCarousel />
+      <ImageCarousel className="block tablet:hidden" />
       <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />
@@ -45,7 +41,7 @@ export default async function Home() {
         linkUrl="/program"
         hideLinkOnMobile={true}
       />
-      <WeekContainer hasLink={false} />
+      <WeekContainer hasLink={false} events={events} />
       <BlackTitleBar title="Billetter" linkText="mer info" linkUrl="/billetter" />
       <BuyFestivalPassHome
         imageSrc="/assets/images/snake/Hostscena-bildeslange-bilde07.jpg"
@@ -72,7 +68,7 @@ export default async function Home() {
         }
       />
       <BlackTitleBar title="Nyheter" linkText="alle nyheter" linkUrl="/nyheter" />
-      <NewsGrid news={mockNews} limitMobile={3} limitTablet={4} limitDesktop={6} />
+      <NewsGrid news={news} limitMobile={3} limitTablet={4} limitDesktop={6} />
     </>
   )
 }

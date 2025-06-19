@@ -41,8 +41,6 @@ export interface BackgroundVideo {
 }
 
 export interface HomeProps extends HomeHeaderProps {
-  _id: string
-  _type: string
   imageSnake?: ImageSnakeItem[]
   backgroundVideo?: BackgroundVideo
 }

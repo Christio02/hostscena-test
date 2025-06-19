@@ -1,12 +1,7 @@
-import NewsGrid from '@/components/ui/news/NewsGrid'
-import mockNews from '@/mockdata/news'
-import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
+import NewsClient from '@/components/ui/news/NewsClient'
+import { getNews } from '@/lib/sanity-cache'
 
-export default function Nyheter() {
-  return (
-    <section>
-      <BlackTitleBar title="Nyheter" />
-      <NewsGrid news={mockNews} />
-    </section>
-  )
+export default async function Nyheter() {
+  const news = await getNews()
+  return <NewsClient news={news} />
 }

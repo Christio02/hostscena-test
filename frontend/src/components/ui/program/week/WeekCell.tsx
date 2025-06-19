@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import type Event from '@/interfaces/event'
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface Props {
   event: Event
@@ -12,8 +12,21 @@ interface Props {
 export default function WeekCell({ event, isLast }: Props) {
   const [hover, setHover] = useState(false)
 
+  if (!event || !event.slug || !event.slug.current) {
+    return (
+      <div
+        className={`min-w-[256px] text-center border-t border-x border-secondary p-[10px] ${
+          isLast ? 'border-b' : ''
+        }`}
+      >
+        <div className="animate-pulse bg-gray-200 h-6 rounded mb-2"></div>
+        <div className="animate-pulse bg-gray-200 h-4 rounded"></div>
+      </div>
+    )
+  }
+
   return (
-    <Link href={`/program/${event.slug}`} className="block">
+    <Link href={`/program/${event.slug.current}`} className="block">
       <div
         className={`min-w-[256px] text-center relative overflow-hidden border-t border-x border-secondary p-[10px] cursor-pointer group ${
           isLast ? 'border-b' : ''
@@ -25,7 +38,7 @@ export default function WeekCell({ event, isLast }: Props) {
           <div className="absolute inset-0">
             <div
               className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${event.image})` }}
+              style={{ backgroundImage: `url(${event.image.asset.url})` }}
             />
             <div className="absolute inset-0 bg-black opacity-50" />
           </div>

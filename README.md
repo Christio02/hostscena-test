@@ -51,13 +51,15 @@ Studio (mange.sanity.io) → connects to production dataset
 
 ## Environment Variables
 
+#### Remember to set these
+
 ### Frontend (.env.local) - Local Development
 
 ```bash
-NEXT_PUBLIC_SANITY_PROJECT_ID=<id>
-NEXT_PUBLIC_SANITY_DATASET=testing
-NEXT_PUBLIC_SANITY_API_VERSION=2025-06-12
-SANITY_API_READ_TOKEN=your-token-here
+NEXT_PUBLIC_SANITY_PROJECT_ID="jbwzfx7e"
+NEXT_PUBLIC_SANITY_DATASET="testing"
+NEXT_PUBLIC_SANITY_API_VERSION="2025-06-12"
+SANITY_API_READ_TOKEN="your-token-here"
 ```
 
 ### Studio (.env.local) - Local Development
@@ -72,7 +74,7 @@ SANITY_STUDIO_PREVIEW_URL="http://localhost:3000"
 ### Studio (.env.production) - Production Deployment
 
 ```bash
-SANITY_STUDIO_PROJECT_ID="<id>"
+SANITY_STUDIO_PROJECT_ID="jbwzfx7e"
 SANITY_STUDIO_DATASET="production"
 SANITY_STUDIO_API_VERSION="2025-06-12"
 SANITY_STUDIO_PREVIEW_URL="https://hostscena.netlify.app"
@@ -91,6 +93,8 @@ SANITY_API_READ_TOKEN=your-token-here
 ```
 
 ## Moving Changes from Testing to Production
+
+Navigate to /studio directory to run these commands
 
 ### For Schema Changes (Recommended)
 
@@ -111,6 +115,8 @@ npx sanity dataset export production backup-$(date +%Y%m%d).tar.gz
 
 # 2. Export specific document types from testing
 npx sanity dataset export testing --types article,event,person --output changes.tar.gz
+# or export all content
+npx sanity dataset export testing --output changes.tar.gz
 
 # 3. Import to production (merges, doesn't replace)
 npx sanity dataset import changes.tar.gz production
@@ -125,6 +131,7 @@ The `--replace` flag will completely overwrite your production data. Always use 
 
 ## Development
 
+Navigate to root
 Start both frontend and studio in development mode:
 
 ```bash
@@ -164,6 +171,12 @@ npm run dev:studio
 ```bash
 cd studio
 npx sanity deploy
+```
+
+or from root:
+
+```bash
+npm run deploy:studio
 ```
 
 ### Deploy Frontend

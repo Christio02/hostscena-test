@@ -1,15 +1,50 @@
 import type { PortableTextBlock } from '@portabletext/types'
+import { SanityImage } from './sanityImage'
+
+interface Contributor {
+  image: SanityImage
+  name: string
+  artistType: string
+  bio?: string
+}
+
+interface Video {
+  videoType: 'youtube' | 'upload'
+  youtubeUrl?: string
+  videoFile?: {
+    asset: {
+      _id: string
+      url: string
+      originalFilename: string
+      mimeType: string
+    }
+  }
+}
+
+export interface Slide {
+  _key: string
+  caption?: string
+  alt?: string
+  image: SanityImage
+}
 
 export default interface Event {
-  image: string
+  slug: {
+    _id: string
+    current: string
+  }
+  image: SanityImage
   title: string
   performer: string
   date: string
   startTime: string
-  endTime: string
+  endTime?: string
   location: string
   link?: string
   tag?: string
-  slug: string
   content?: PortableTextBlock[]
+  contributors?: Contributor[]
+  video?: Video
+  spotifyLink?: string
+  imageCarousel?: Slide[]
 }

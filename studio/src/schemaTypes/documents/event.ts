@@ -1,22 +1,40 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'event',
-  title: 'Event',
+  title: 'Arrangement',
   type: 'document',
   fields: [
+    defineField({
+      name: 'title',
+      title: 'Tittel',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 200,
+        slugify: (input) =>
+          input
+            .toLowerCase()
+            .replace(/ø/g, 'o')
+            .replace(/æ/g, 'ae')
+            .replace(/å/g, 'a')
+            .replace(/\s+/g, '-')
+            .slice(0, 200),
+      },
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'image',
       title: 'Bilde',
       type: 'image',
       description: 'Hovedbilde for arrangementet',
-      options: { hotspot: true },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'title',
-      title: 'Tittel',
-      type: 'string',
+      options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -131,18 +149,13 @@ export default defineType({
       type: 'object',
       fields: [
         {
-          name: 'title',
-          title: 'Video tittel',
-          type: 'string',
-        },
-        {
           name: 'videoType',
           title: 'Video type',
           type: 'string',
           options: {
             list: [
-              { title: 'YouTube lenke', value: 'youtube' },
-              { title: 'Opplastet fil', value: 'upload' },
+              {title: 'YouTube lenke', value: 'youtube'},
+              {title: 'Opplastet fil', value: 'upload'},
             ],
           },
         },
@@ -151,10 +164,10 @@ export default defineType({
           title: 'YouTube URL',
           type: 'url',
           description: 'Lim inn YouTube lenke',
-          hidden: ({ parent }) => parent?.videoType !== 'youtube',
+          hidden: ({parent}) => parent?.videoType !== 'youtube',
           validation: (Rule) =>
             Rule.custom((url, context) => {
-              const parent = context.parent as { videoType?: string }
+              const parent = context.parent as {videoType?: string}
               if (parent?.videoType === 'youtube' && !url) {
                 return 'YouTube URL er påkrevd når video type er YouTube'
               }
@@ -169,10 +182,10 @@ export default defineType({
           options: {
             accept: 'video/*',
           },
-          hidden: ({ parent }) => parent?.videoType !== 'upload',
+          hidden: ({parent}) => parent?.videoType !== 'upload',
           validation: (Rule) =>
             Rule.custom((file, context) => {
-              const parent = context.parent as { videoType?: string }
+              const parent = context.parent as {videoType?: string}
               if (parent?.videoType === 'upload' && !file) {
                 return 'Video fil er påkrevd når video type er opplastet fil'
               }
@@ -182,13 +195,11 @@ export default defineType({
       ],
       preview: {
         select: {
-          title: 'title',
           videoType: 'videoType',
           youtubeUrl: 'youtubeUrl',
         },
-        prepare({ title, videoType, youtubeUrl }) {
+        prepare({videoType, youtubeUrl}) {
           return {
-            title: title || 'Uten tittel',
             subtitle: videoType === 'youtube' ? `YouTube: ${youtubeUrl}` : 'Opplastet fil',
           }
         },
@@ -199,8 +210,8 @@ export default defineType({
       title: 'Spotify lenke',
       type: 'url',
       description:
-        'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`)',
-      validation: (Rule) => Rule.uri({ allowRelative: false }).required(),
+        'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`). Ikke påkrevd',
+      validation: (Rule) => Rule.uri({allowRelative: false}),
     }),
     defineField({
       name: 'imageCarousel',
@@ -216,7 +227,7 @@ export default defineType({
               name: 'image',
               title: 'Bilde',
               type: 'image',
-              options: { hotspot: true },
+              options: {hotspot: true},
               validation: (Rule) => Rule.required(),
             },
             {
@@ -238,7 +249,7 @@ export default defineType({
               subtitle: 'alt',
               media: 'image',
             },
-            prepare({ title, subtitle, media }) {
+            prepare({title, subtitle, media}) {
               return {
                 title: title || 'Uten bildetekst',
                 subtitle: subtitle,

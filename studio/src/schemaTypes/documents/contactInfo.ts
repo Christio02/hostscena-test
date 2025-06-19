@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'contactinfo',
@@ -44,6 +44,12 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'email',
+      title: 'KontaktEmail',
+      type: 'string',
+      validation: (Rule) => Rule.email().required(),
+    }),
+    defineField({
       name: 'address',
       title: 'Besøksadresse',
       type: 'string',
@@ -59,7 +65,7 @@ export default defineType({
     defineField({
       name: 'socialLinks',
       title: 'Sosiale Medier lenker',
-      description: 'Her kan du legge til flere sosiale medier lenker og logo',
+      description: 'Her kan du legge til flere sosiale medier lenker',
       type: 'array',
       of: [
         {
@@ -67,14 +73,19 @@ export default defineType({
           title: 'Sosiale medie',
           fields: [
             {
-              name: 'image',
-              title: 'Bilde',
-              type: 'image',
-              description: 'Logo for sosiale mediet',
+              name: 'platform',
+              title: 'Plattform',
+              type: 'string',
               options: {
-                hotspot: true,
-                sources: [],
-                accept: 'image/*',
+                list: [
+                  {title: 'Facebook', value: 'facebook'},
+                  {title: 'Instagram', value: 'instagram'},
+                  {title: 'YouTube', value: 'youtube'},
+                  {title: 'Twitter/X', value: 'twitter'},
+                  {title: 'LinkedIn', value: 'linkedin'},
+                  {title: 'TikTok', value: 'tiktok'},
+                ],
+                layout: 'dropdown',
               },
               validation: (Rule) => Rule.required(),
             },
@@ -83,6 +94,7 @@ export default defineType({
               title: 'Lenke',
               type: 'url',
               description: 'Legg inn lenken til sosiale mediet',
+              validation: (Rule) => Rule.required(),
             },
           ],
         },
