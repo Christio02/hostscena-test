@@ -3,85 +3,135 @@ import type { SanityImage } from '@/interfaces/sanityImage'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import React, { useCallback, useEffect, useState } from 'react'
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react'
+import { IoMdClose } from 'react-icons/io'
+import Modal from 'react-modal'
+
+const IMAGE_HEIGHT = 200
+const GAP = 10
 
 interface Props {
   images: SanityImage[]
 }
 
 export default function ImageCarousel({ images }: Props) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: images.length >= 4,
+      dragFree: true,
+      containScroll: 'trimSnaps',
+    },
+    images.length >= 4
+      ? [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })]
+      : [],
+  )
+
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalSrc, setModalSrc] = useState<string | null>(null)
+
+  const openImage = (src: string) => {
+    setModalSrc(src)
+    setModalIsOpen(true)
+  }
+
+  const closeModal = () => setModalIsOpen(false)
+
+  const showAsGrid = images.length < 4
 
   useEffect(() => {
-    if (!emblaApi) return
-    setScrollSnaps(emblaApi.scrollSnapList())
-    const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-      setPrevBtnEnabled(emblaApi.canScrollPrev())
-      setNextBtnEnabled(emblaApi.canScrollNext())
+    const node = document.getElementById('__next')
+    if (typeof window !== 'undefined' && node) {
+      Modal.setAppElement(node)
     }
-    emblaApi.on('select', onSelect)
-    onSelect()
-  }, [emblaApi])
+  }, [])
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
-  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi])
+  const getContainerClass = () => {
+    return 'flex flex-col gap-[10px] pt-[20px] z-0 relative'
+  }
 
   if (!images || images.length === 0) return null
 
   return (
-    <div className="relative">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {images.map((img) => (
-            <div key={img.asset._id} className="flex-shrink-0 w-full h-[50vh] relative">
-              <Image
-                src={img.asset.url}
-                alt={img.asset.altText ?? 'Bilde'}
-                fill
-                style={{ objectFit: 'contain' }}
-                sizes="(max-width: 640px) 100vw, 50vw"
-              />
+    <>
+      <div className={getContainerClass()}>
+        {showAsGrid ? (
+          // Grid layout for less than 4 images
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
+            {images.map((img) => (
+              <button
+                key={img.asset._id}
+                onClick={() => openImage(img.asset.url)}
+                className="p-0 border-none m-0"
+              >
+                <div className="relative" style={{ height: `${IMAGE_HEIGHT}px`, width: 'auto' }}>
+                  <Image
+                    src={img.asset.url}
+                    alt={img.asset.altText ?? 'Bilde'}
+                    height={IMAGE_HEIGHT}
+                    width={0}
+                    className="h-full w-auto object-contain"
+                    unoptimized
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          // Carousel layout for 4+ images
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex" style={{ gap: `${GAP}px` }}>
+              {images.map((img) => (
+                <div
+                  key={img.asset._id}
+                  className="flex-none"
+                  style={{ height: `${IMAGE_HEIGHT}px`, width: 'auto' }}
+                >
+                  <button
+                    onClick={() => openImage(img.asset.url)}
+                    className="p-0 border-none m-0 h-full"
+                  >
+                    <div className="relative h-full">
+                      <Image
+                        src={img.asset.url}
+                        alt={img.asset.altText ?? 'Bilde'}
+                        height={IMAGE_HEIGHT}
+                        width={0}
+                        className="h-full w-auto object-contain"
+                        unoptimized
+                      />
+                    </div>
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
 
-      <button
-        onClick={scrollPrev}
-        disabled={!prevBtnEnabled}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition-opacity"
-        aria-label="Previous slide"
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        contentLabel="Bilde"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+        className="relative outline-none max-w-[90vw] max-h-[90vh]"
       >
-        <AiOutlineLeft className="text-2xl" />
-      </button>
-      <button
-        onClick={scrollNext}
-        disabled={!nextBtnEnabled}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition-opacity"
-        aria-label="Next slide"
-      >
-        <AiOutlineRight className="text-2xl" />
-      </button>
-
-      <div className="flex justify-center p-2 gap-2">
-        {scrollSnaps.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => scrollTo(idx)}
-            className={`h-3 w-3 rounded-full transition-colors duration-200 ${
-              idx === selectedIndex ? 'bg-gray-700' : 'bg-gray-300 hover:bg-gray-400'
-            }`}
-            aria-label={`Go to slide ${idx + 1}`}
+        {modalSrc && (
+          <Image
+            src={modalSrc}
+            alt="Forstørret bilde"
+            width={800}
+            height={800}
+            className="object-contain max-h-[80vh]"
           />
-        ))}
-      </div>
-    </div>
+        )}
+        <button
+          onClick={closeModal}
+          className="absolute top-4 right-4 text-4xl text-secondary bg-primary rounded-full"
+        >
+          <IoMdClose />
+        </button>
+      </Modal>
+    </>
   )
 }
