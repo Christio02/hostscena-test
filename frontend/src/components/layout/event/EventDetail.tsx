@@ -1,6 +1,6 @@
 'use client'
-import ImageCarousel from '@/components/shared/Carousel'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
+import ImageCarousel from '@/components/ui/imageCarousel/ImageCarousel'
 import type Event from '@/interfaces/event'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import { PortableText } from '@portabletext/react'

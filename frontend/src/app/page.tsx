@@ -31,7 +31,7 @@ export default async function Home() {
         endDate={homeData.endDate}
         location={homeData.location}
       />
-      <ImageCarousel />
+      <ImageCarousel className="block tablet:hidden" />
       <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />
