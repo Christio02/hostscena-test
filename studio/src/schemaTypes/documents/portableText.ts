@@ -37,7 +37,8 @@ export default defineType({
                 type: 'reference',
                 title: 'Reference',
                 to: [
-                  {type: 'document'},
+                  {type: 'event'},
+                  {type: 'news'},
                   // other types you may want to link to
                 ],
               },

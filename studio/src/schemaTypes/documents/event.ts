@@ -58,7 +58,6 @@ export default defineType({
       name: 'endTime',
       title: 'Sluttid',
       type: 'string',
-      validation: (Rule) => Rule.required(),
       placeholder: 'Enten når arrangementet slutter eller ca. hvor lenge det varer',
     }),
     defineField({
@@ -84,7 +83,13 @@ export default defineType({
       name: 'content',
       title: 'Innhold',
       type: 'portableText',
-      description: 'Trykk Enter for nytt avsnitt, Shift+Enter for linjeskift',
+      description: 'Trykk Enter for nytt avsnitt',
+    }),
+    defineField({
+      name: 'credits',
+      title: 'Credits',
+      type: 'portableText',
+      description: 'Trykk enter for nytt avsnitt',
     }),
     defineField({
       name: 'contributors',

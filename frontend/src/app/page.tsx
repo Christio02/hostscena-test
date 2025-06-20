@@ -19,7 +19,7 @@ export default async function Home() {
     ...home,
     startDate: home?.startDate || 'Dato kommer',
     endDate: home?.endDate || 'Dato kommer',
-    imageSnake: home?.imageSnake || [],
+    imageGallery: home?.imageGallery || [],
     backgroundVideo: home?.backgroundVideo || undefined,
   }
 
@@ -27,7 +27,7 @@ export default async function Home() {
     <>
       <HomeHeader startDate={homeData.startDate} endDate={homeData.endDate} />
       <ImageCarousel className="block tablet:hidden" />
-      <ImageSnake images={homeData.imageSnake ?? []} />
+      <ImageSnake images={homeData.imageGallery ?? []} />
       <HomeNavbar />
       <HomeMobileNavbar />
       <BlackTitleBar

@@ -27,7 +27,7 @@ export default defineType({
     }),
     defineField({
       name: 'imageGallery',
-      title: 'Bilder for bildeslange',
+      title: 'Bilder for galleri',
       type: 'array',
       of: [
         {

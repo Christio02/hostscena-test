@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import type {PortableTextBlock, PortableTextSpan} from '@portabletext/types'
 
 export default defineType({
   name: 'tickets',
@@ -7,7 +8,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'section',
-      title: 'Første avsnitt',
+      title: 'Avsnitt',
       type: 'portableText',
       description:
         'Første avsnittet på billettsiden. ' +
@@ -17,29 +18,27 @@ export default defineType({
     }),
   ],
   preview: {
-    // 1) grab the raw blocks array
     select: {
       blocks: 'section',
     },
-    // 2) flatten them to plain text and trim
-    prepare({blocks}) {
-      const text = Array.isArray(blocks)
-        ? blocks
-            .filter((blk) => blk._type === 'block')
-            .map((blk) =>
-              blk.children
-                .filter((child) => child._type === 'span')
-                .map((span) => span.text)
-                .join(''),
-            )
-            .join(' ')
-        : ''
-
-      const excerpt = text.length > 20 ? text.slice(0, 20) + '…' : text
-
-      return {
-        title: excerpt || 'Ingen tekst',
+    prepare({blocks}: {blocks?: PortableTextBlock[]}) {
+      if (!Array.isArray(blocks)) {
+        return {title: 'Ingen tekst'}
       }
+      const onlyBlocks = blocks.filter((blk): blk is PortableTextBlock => blk._type === 'block')
+      // filter for spans
+      const paragraphs = onlyBlocks.map((blk) => {
+        const spans = blk.children.filter(
+          (child): child is PortableTextSpan => child._type === 'span',
+        )
+        return spans.map((span) => span.text).join('')
+      })
+
+      // join the texts
+      const fullText = paragraphs.join(' ')
+      const excerpt = fullText.length > 20 ? fullText.slice(0, 20) + '…' : fullText || 'Ingen tekst'
+
+      return {title: excerpt}
     },
   },
 })

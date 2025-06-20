@@ -43,7 +43,7 @@ export const HOME_HEADER_QUERY = defineQuery(`
 
 // query for the image snake
 export const IMAGE_SNAKE_QUERY = defineQuery(`
-  *[_type == "home" && !(_id in path("drafts.**"))][0].imageSnake[] {
+  *[_type == "home" && !(_id in path("drafts.**"))][0].imageGallery[] {
     _key,
     alt,
     asset->{

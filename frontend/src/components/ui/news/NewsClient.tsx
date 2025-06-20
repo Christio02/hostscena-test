@@ -5,8 +5,8 @@ import NewsGrid from './NewsGrid'
 interface NewsProps {
   news: News[]
 }
+
 export default function NewsClient({ news }: NewsProps) {
-  console.log('news:', news)
   return (
     <section>
       <BlackTitleBar title="Nyheter" />

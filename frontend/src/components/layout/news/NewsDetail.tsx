@@ -2,8 +2,8 @@
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
 import type News from '@/interfaces/news'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
-import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
+import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
 interface Props {
   news: News
@@ -40,16 +40,7 @@ export default function NewsDetail({ news }: Props) {
 
       <div className="flex flex-col items-center justify-center w-full pt-[20px] px-[20px]">
         <div className="max-w-[650px] space-y-[40px]">
-          {content && (
-            <PortableText
-              value={content}
-              components={{
-                block: {
-                  normal: ({ children }) => <p className="mb-4">{children}</p>,
-                },
-              }}
-            />
-          )}
+          {content && <CustomPortableText value={content} />}
         </div>
       </div>
 

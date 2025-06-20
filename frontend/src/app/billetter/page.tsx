@@ -2,7 +2,7 @@ import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
 import { Tickets } from '@/interfaces/tickets'
 import { getTickets } from '@/lib/sanity-cache'
-import { PortableText } from '@portabletext/react'
+import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
 export default async function Billetter() {
   const ticketsData: Tickets = await getTickets()
@@ -19,22 +19,7 @@ export default async function Billetter() {
         }
         content={
           <div className="bg-white flex flex-col gap-[40px] p-[20px] font-source text-[1.188rem] tablet:max-w-[594px] tablet:border border-secondary">
-            <PortableText
-              value={ticketsData.firstSection}
-              components={{
-                block: {
-                  normal: ({ children }) => <p>{children}</p>,
-                },
-              }}
-            />
-            <PortableText
-              value={ticketsData.secondSection}
-              components={{
-                block: {
-                  normal: ({ children }) => <p>{children}</p>,
-                },
-              }}
-            />
+            <CustomPortableText value={ticketsData.section} />
           </div>
         }
       />

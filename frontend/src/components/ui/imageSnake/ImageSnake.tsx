@@ -208,7 +208,7 @@ export default ImageSnake
 
 // SMALLER IMAGES, FASTER IMAGE APPEARING, SQUARED IMAGES
 
-import { ImageSnakeItem } from '@/interfaces/home'
+import { ImageGalleryItem } from '@/interfaces/home'
 import { urlFor } from '@/sanity/lib/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
@@ -233,7 +233,7 @@ const MIN_DISTANCE = SEGMENT_SIZE * 0.2
 const MAX_ATTEMPTS = 10
 const FADE_DURATION = 0.75
 
-const ImageSnake = ({ images }: { images: ImageSnakeItem[] }) => {
+const ImageSnake = ({ images }: { images: ImageGalleryItem[] }) => {
   const [segments, setSegments] = useState<Segment[]>([])
   const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
