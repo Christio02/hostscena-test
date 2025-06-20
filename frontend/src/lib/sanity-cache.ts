@@ -10,6 +10,7 @@ import { TICKETS_QUERY } from '@/sanity/queries/tickets'
 import { cache } from 'react'
 import { SINGLE_CONTACT_FOOTER_QUERY } from '@/sanity/queries/contactFooter'
 import { CONTACT_PERSONS_QUERY } from '@/sanity/queries/contactPersons'
+import { ARCHIVE_QUERY } from '@/sanity/queries/archive'
 
 export const getEvents = cache(async (): Promise<Event[]> => {
   try {
@@ -46,7 +47,7 @@ export const getContactFooterInfo = cache(async () => {
     const { data } = await sanityFetch({ query: SINGLE_CONTACT_FOOTER_QUERY })
     return data || null
   } catch (error) {
-    console.error('Error fetching contact info:', error)
+    console.error('Error fetching contact footer:', error)
     return null
   }
 })
@@ -56,7 +57,7 @@ export const getContactPersons = cache(async () => {
     const { data } = await sanityFetch({ query: CONTACT_PERSONS_QUERY })
     return data || null
   } catch (error) {
-    console.error('Error fetching contact info:', error)
+    console.error('Error fetching contact persons:', error)
     return null
   }
 })
@@ -81,6 +82,15 @@ export const getMap = cache(async () => {
   }
 })
 
+export const getArchive = cache(async () => {
+  try {
+    const { data } = await sanityFetch({ query: ARCHIVE_QUERY })
+    return data || null
+  } catch (error) {
+    console.error('Error fetching archive:', error)
+    return null
+  }
+})
 // Utility functions
 export const getEventBySlug = cache(async (slug: string): Promise<Event | null> => {
   const events = await getEvents()

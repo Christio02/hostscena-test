@@ -7,6 +7,7 @@ import news from './documents/news'
 import portableText from './documents/portableText'
 import tickets from './documents/tickets'
 import contactFooter from './documents/contactFooter'
+import archive from './documents/archive'
 
 export const schemaTypes = [
   portableText,
@@ -17,4 +18,5 @@ export const schemaTypes = [
   map,
   tickets,
   contactFooter,
+  archive,
 ]
