@@ -1,38 +1,16 @@
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
-import { ContactFooter } from '@/interfaces/contact'
-import { createCachedSanityQuery } from '@/lib/sanity-cache'
-import { FOOTER_CONTACT_QUERY } from '@/sanity/queries/contactInfo'
+import { getContactFooterInfo } from '@/lib/sanity-cache'
 import Image from 'next/image'
-import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { HiArrowLongRight } from 'react-icons/hi2'
+import SocialLinks from '@/components/layout/footer/SocialLinks'
+import { ContactFooter } from '@/interfaces/contact'
+
 const logo = '/assets/images/logo/logo_no_border.svg'
 
 const footerImage = '/assets/images/footer_image.png'
 
-const getSocialIcon = (platform: string, size: number = 48) => {
-  const iconProps = { size }
-
-  switch (platform.toLowerCase()) {
-    case 'facebook':
-      return <FaFacebook {...iconProps} />
-    case 'instagram':
-      return <FaInstagram {...iconProps} />
-    case 'youtube':
-      return <FaYoutube {...iconProps} />
-    case 'twitter':
-    case 'x':
-      return <FaTwitter {...iconProps} />
-    case 'linkedin':
-      return <FaLinkedin {...iconProps} />
-    case 'tiktok':
-      return <FaTiktok {...iconProps} />
-    default:
-      return <FaFacebook {...iconProps} />
-  }
-}
-
 export default async function Footer() {
-  const footerData = await createCachedSanityQuery<ContactFooter>(FOOTER_CONTACT_QUERY)()
+  const footerData: ContactFooter = await getContactFooterInfo()
 
   return (
     <footer className="pt-[60px] px-[20px]">
@@ -83,34 +61,14 @@ export default async function Footer() {
             className="border-secondary border-[1px] px-[8.77px] py-[8.29px]"
           />
           <div className="flex gap-[20px]">
-            {footerData?.socialLinks?.map((sm, index) => (
-              <a
-                href={sm?.someUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}
-                aria-label={`Visit our ${sm.platform} page`}
-              >
-                {getSocialIcon(sm.platform, 48)}
-              </a>
-            ))}
+            <SocialLinks links={footerData.socialLinks} size={48} />
           </div>
         </div>
 
         {/* Desktop/Tablet SoMe */}
         <div className="hidden order-3 tablet:order-2 desktop:flex gap-[20px] justify-center items-center pr-[20px]">
           <div className="flex gap-[20px]">
-            {footerData?.socialLinks?.map((sm, index) => (
-              <a
-                href={sm?.someUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}
-                aria-label={`Visit our ${sm.platform} page`}
-              >
-                {getSocialIcon(sm.platform, 48)}
-              </a>
-            ))}
+            <SocialLinks links={footerData.socialLinks} size={48} />
           </div>
         </div>
       </div>

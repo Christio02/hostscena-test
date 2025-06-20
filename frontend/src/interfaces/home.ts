@@ -1,7 +1,6 @@
 export interface HomeHeaderProps {
   startDate: string
   endDate: string
-  location: string
 }
 
 export interface ImageDimensions {

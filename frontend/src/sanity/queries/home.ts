@@ -6,8 +6,7 @@ export const SINGLE_HOME_QUERY = defineQuery(`
     _type,
     startDate,
     endDate,
-    location,
-    imageSnake[] {
+    imageGallery[] {
       _key,
       alt,
       asset->{

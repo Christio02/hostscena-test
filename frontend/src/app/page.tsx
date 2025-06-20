@@ -19,18 +19,13 @@ export default async function Home() {
     ...home,
     startDate: home?.startDate || 'Dato kommer',
     endDate: home?.endDate || 'Dato kommer',
-    location: home?.location || 'Lokasjon Kommer',
     imageSnake: home?.imageSnake || [],
     backgroundVideo: home?.backgroundVideo || undefined,
   }
 
   return (
     <>
-      <HomeHeader
-        startDate={homeData.startDate}
-        endDate={homeData.endDate}
-        location={homeData.location}
-      />
+      <HomeHeader startDate={homeData.startDate} endDate={homeData.endDate} />
       <ImageCarousel className="block tablet:hidden" />
       <ImageSnake images={homeData.imageSnake ?? []} />
       <HomeNavbar />

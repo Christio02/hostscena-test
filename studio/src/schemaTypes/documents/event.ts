@@ -9,7 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Tittel',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().uppercase(),
     }),
     defineField({
       name: 'slug',
@@ -58,9 +58,8 @@ export default defineType({
       name: 'endTime',
       title: 'Sluttid',
       type: 'string',
-      validation: (Rule) =>
-        Rule.regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).error('Må være i HH:mm format'),
-      placeholder: 'HH:mm (eks: 21:00)',
+      validation: (Rule) => Rule.required(),
+      placeholder: 'Enten når arrangementet slutter eller ca. hvor lenge det varer',
     }),
     defineField({
       name: 'location',
