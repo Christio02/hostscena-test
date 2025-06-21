@@ -9,7 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Tittel',
       type: 'string',
-      validation: (Rule) => Rule.required().uppercase().error('Tittle må kun ha store bokstaver'),
+      validation: (Rule) => Rule.required().uppercase().error('Tittel må kun ha store bokstaver'),
     }),
     defineField({
       name: 'slug',

@@ -9,9 +9,7 @@ import {structure} from './src/structure'
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'jbwzfx7e'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 const apiVersion = process.env.SANITY_STUDIO_API_VERSION || '2025-06-03'
-console.log('Environment variables:')
-console.log('SANITY_STUDIO_DATASET:', process.env.SANITY_STUDIO_DATASET)
-console.log('SANITY_STUDIO_PROJECT_ID:', process.env.SANITY_STUDIO_PROJECT_ID)
+
 export default defineConfig({
   name: 'default',
   title: 'Høstscena',

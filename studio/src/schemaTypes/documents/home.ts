@@ -42,7 +42,7 @@ export default defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt tekst',
-              validation: (Rule) => Rule.required().error('Må legge til minst 1 bilde!').min(1),
+              validation: (Rule) => Rule.required().min(1).error('Må legge til minst 1 bilde!'),
             },
           ],
         },

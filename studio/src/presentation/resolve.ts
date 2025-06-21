@@ -7,7 +7,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
       type,
       defineLocations({
         select,
-        resolve: (doc) => ({locations: buildSingle(doc ?? [])}),
+        resolve: (doc) => ({locations: buildSingle(doc ?? {})}),
       }),
     ]),
   ),
