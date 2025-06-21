@@ -8,7 +8,7 @@ export const SINGLE_CONTACT_FOOTER_QUERY = defineQuery(`
     email,
     address,
     postbox,
-    socialLinks[] {
+    "socialLinks": coalesce(socialLinks, [])[]{
       _key,
       platform,
       someUrl

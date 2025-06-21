@@ -1,9 +1,9 @@
+import SocialLinks from '@/components/layout/footer/SocialLinks'
 import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
+import { ContactFooter } from '@/interfaces/contact'
 import { getContactFooterInfo } from '@/lib/sanity-cache'
 import Image from 'next/image'
 import { HiArrowLongRight } from 'react-icons/hi2'
-import SocialLinks from '@/components/layout/footer/SocialLinks'
-import { ContactFooter } from '@/interfaces/contact'
 
 const logo = '/assets/images/logo/logo_no_border.svg'
 
@@ -11,6 +11,7 @@ const footerImage = '/assets/images/footer_image.png'
 
 export default async function Footer() {
   const footerData: ContactFooter = await getContactFooterInfo()
+  const { email = '', address = '', postbox = '', socialLinks = [] } = footerData
 
   return (
     <footer className="pt-[60px] px-[20px]">
@@ -29,9 +30,9 @@ export default async function Footer() {
           <div className="w-[1px] h-full bg-black hidden tablet:block" />
           <div className="flex flex-col justify-center">
             <h2 className="text-h4">Kontakt:</h2>
-            <p className="text-s">{footerData?.email}</p>
-            <p className="text-s">{footerData?.address}</p>
-            <p className="text-s">{footerData?.postbox}</p>
+            <p className="text-s">{email}</p>
+            <p className="text-s">{address}</p>
+            <p className="text-s">{postbox}</p>
           </div>
         </div>
 
@@ -61,14 +62,14 @@ export default async function Footer() {
             className="border-secondary border-[1px] px-[8.77px] py-[8.29px]"
           />
           <div className="flex gap-[20px]">
-            <SocialLinks links={footerData.socialLinks} size={48} />
+            <SocialLinks links={socialLinks} size={48} />
           </div>
         </div>
 
         {/* Desktop/Tablet SoMe */}
         <div className="hidden order-3 tablet:order-2 desktop:flex gap-[20px] justify-center items-center pr-[20px]">
           <div className="flex gap-[20px]">
-            <SocialLinks links={footerData.socialLinks} size={48} />
+            <SocialLinks links={socialLinks} size={48} />
           </div>
         </div>
       </div>
