@@ -1,13 +1,12 @@
 'use client'
 import type { SanityImage } from '@/interfaces/sanityImage'
-import { EmblaCarouselType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import React, { useCallback, useEffect, useState } from 'react'
-import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
+import React, { useEffect, useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import Modal from 'react-modal'
+
 const IMAGE_HEIGHT = 200
 const GAP = 10
 
@@ -16,7 +15,7 @@ interface Props {
 }
 
 export default function EventImageCarousel({ images }: Props) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  const [emblaRef] = useEmblaCarousel(
     {
       loop: images.length >= 4,
       dragFree: true,
@@ -29,40 +28,6 @@ export default function EventImageCarousel({ images }: Props) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSrc, setModalSrc] = useState<string | null>(null)
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) {
-      emblaApi.plugins().autoplay?.stop()
-      emblaApi.scrollPrev()
-      setTimeout(() => {
-        emblaApi.plugins().autoplay?.play()
-      }, 5000)
-    }
-  }, [emblaApi])
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) {
-      emblaApi.plugins().autoplay?.stop()
-      emblaApi.scrollNext()
-      setTimeout(() => {
-        emblaApi.plugins().autoplay?.play()
-      }, 5000)
-    }
-  }, [emblaApi])
-
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev())
-    setNextBtnDisabled(!emblaApi.canScrollNext())
-  }, [])
-
-  useEffect(() => {
-    if (!emblaApi) return
-
-    onSelect(emblaApi)
-    emblaApi.on('reInit', onSelect)
-    emblaApi.on('select', onSelect)
-  }, [emblaApi, onSelect])
 
   const openImage = (src: string) => {
     setModalSrc(src)
@@ -141,28 +106,6 @@ export default function EventImageCarousel({ images }: Props) {
                 ))}
               </div>
             </div>
-
-            <button
-              className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all duration-200 z-10 ${
-                prevBtnDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'
-              }`}
-              onClick={scrollPrev}
-              disabled={prevBtnDisabled}
-              aria-label="Previous image"
-            >
-              <GrLinkPrevious className="w-5 h-5 text-gray-700" />
-            </button>
-
-            <button
-              className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all duration-200 z-10 ${
-                nextBtnDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'
-              }`}
-              onClick={scrollNext}
-              disabled={nextBtnDisabled}
-              aria-label="Next image"
-            >
-              <GrLinkNext className="w-5 h-5 text-gray-700" />
-            </button>
           </div>
         )}
       </div>

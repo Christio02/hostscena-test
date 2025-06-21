@@ -26,8 +26,32 @@ export const EVENT_QUERY = defineQuery(`
     location,
     link,
     tag,
-    content,
-    credits,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
     sponsor,
     contributors[] {
       _key,
@@ -104,8 +128,32 @@ export const EVENT_BY_ID_QUERY = defineQuery(`
       hotspot,
       crop
     },
-    content,
-    credits,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
     sponsor
     contributors[] {
       _key,
@@ -183,8 +231,32 @@ export const UPCOMING_EVENTS_QUERY = defineQuery(`
       hotspot,
       crop
     },
-    content,
-    credits,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
     sponsor,
     contributors[] {
       _key,
