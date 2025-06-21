@@ -5,7 +5,7 @@ import { getTickets } from '@/lib/sanity-cache'
 import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
 export default async function Billetter() {
-  const ticketsData: Tickets = await getTickets()
+  const ticketsData: Tickets = (await getTickets()) || []
   return (
     <section>
       <BlackTitleBar title="Billetter" />
@@ -19,7 +19,7 @@ export default async function Billetter() {
         }
         content={
           <div className="bg-white flex flex-col gap-[40px] p-[20px] font-source text-[1.188rem] tablet:max-w-[594px] tablet:border border-secondary">
-            <CustomPortableText value={ticketsData.section} />
+            <CustomPortableText value={ticketsData?.section} />
           </div>
         }
       />

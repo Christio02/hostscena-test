@@ -7,11 +7,10 @@ export default async function ContactBox() {
   const socialLinksData: SocialLinks[] | null = await createCachedSanityQuery<SocialLinks[] | null>(
     SOCIAL_LINKS,
   )()
-  const contactPersonsData: ContactPersons[] = await getContactPersons()
-  console.log(contactPersonsData)
+  const contactPersonsData: ContactPersons[] = (await getContactPersons()) || []
   return (
     <div className="flex flex-col gap-[20px]">
-      {contactPersonsData.map((person, idx) => (
+      {contactPersonsData?.map((person, idx) => (
         <div
           className="flex flex-col py-[20px] px-[40px] border border-secondary items-center min-w-[300px] text-h5"
           key={person._key || person.email || idx}
