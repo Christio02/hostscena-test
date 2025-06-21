@@ -23,6 +23,8 @@ export default function EventDetail({ event }: Props) {
     location,
     link,
     content,
+    // credits, to be used
+    // sponsor, to be used
     contributors,
     video,
     spotifyLink,

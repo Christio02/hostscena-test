@@ -10,7 +10,8 @@ interface Props {
 }
 
 export default function NewsDetail({ news }: Props) {
-  const { title, tag, person, image, date, time, content } = news
+  const { title, tag, person, image, date, time, content /*video, imageCarousel -> To be used*/ } =
+    news
   const formattedDate = capitalizeFirstLetter(
     new Date(date).toLocaleDateString('no-NO', {
       weekday: 'long',

@@ -4,6 +4,8 @@ export default defineType({
   name: 'portableText',
   title: 'Rich Text Content',
   type: 'array',
+  description:
+    'Husk å kopiere tekst som ren tekst (Ctrl+Shift+V) for å unngå formateringsproblemer fra nettsider.',
   of: [
     {
       type: 'block',

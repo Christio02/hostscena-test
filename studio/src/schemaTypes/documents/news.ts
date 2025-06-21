@@ -73,5 +73,115 @@ export default defineType({
       type: 'portableText',
       description: 'Trykk Enter for å legge til nytt avsnitt',
     }),
+    defineField({
+      name: 'video',
+      title: 'Video',
+      description: 'Legg til video som YouTube lenke eller last oppe en video!',
+      type: 'object',
+      fields: [
+        {
+          name: 'videoType',
+          title: 'Video type',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'YouTube lenke', value: 'youtube'},
+              {title: 'Opplastet fil', value: 'upload'},
+            ],
+          },
+        },
+        {
+          name: 'youtubeUrl',
+          title: 'YouTube URL',
+          type: 'url',
+          description: 'Lim inn YouTube lenke',
+          hidden: ({parent}) => parent?.videoType !== 'youtube',
+          validation: (Rule) =>
+            Rule.custom((url, context) => {
+              const parent = context.parent as {videoType?: string}
+              if (parent?.videoType === 'youtube' && !url) {
+                return 'YouTube URL er påkrevd når video type er YouTube'
+              }
+              return true
+            }),
+        },
+        {
+          name: 'videoFile',
+          title: 'Video fil',
+          type: 'file',
+          description: 'Last opp video fil',
+          options: {
+            accept: 'video/*',
+          },
+          hidden: ({parent}) => parent?.videoType !== 'upload',
+          validation: (Rule) =>
+            Rule.custom((file, context) => {
+              const parent = context.parent as {videoType?: string}
+              if (parent?.videoType === 'upload' && !file) {
+                return 'Video fil er påkrevd når video type er opplastet fil'
+              }
+              return true
+            }),
+        },
+      ],
+      preview: {
+        select: {
+          videoType: 'videoType',
+          youtubeUrl: 'youtubeUrl',
+        },
+        prepare({videoType, youtubeUrl}) {
+          return {
+            subtitle: videoType === 'youtube' ? `YouTube: ${youtubeUrl}` : 'Opplastet fil',
+          }
+        },
+      },
+    }),
+    defineField({
+      name: 'imageCarousel',
+      title: 'Bildekarusell',
+      type: 'array',
+      description: 'Legg til bilder for karusell',
+      of: [
+        {
+          type: 'object',
+          title: 'Bilde',
+          fields: [
+            {
+              name: 'image',
+              title: 'Bilde',
+              type: 'image',
+              options: {hotspot: true},
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Bildetekst',
+              type: 'string',
+              description: 'Valgfri beskrivelse av bildet',
+            },
+            {
+              name: 'alt',
+              title: 'Alt-tekst',
+              type: 'string',
+              description: 'Beskrivelse for skjermlesere',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'caption',
+              subtitle: 'alt',
+              media: 'image',
+            },
+            prepare({title, subtitle, media}) {
+              return {
+                title: title || 'Uten bildetekst',
+                subtitle: subtitle,
+                media: media,
+              }
+            },
+          },
+        },
+      ],
+    }),
   ],
 })

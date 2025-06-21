@@ -264,5 +264,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'sponsor',
+      title: 'Sponsor',
+      type: 'string',
+      description: 'En liten tekst om sponsor',
+    }),
   ],
 })

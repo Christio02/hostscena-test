@@ -23,6 +23,35 @@ export const NEWS_QUERY = defineQuery(`
       crop
     },
       content
+      video {
+      videoType,
+      youtubeUrl,
+      videoFile {
+        asset->{
+          _id,
+          url,
+          originalFilename,
+          mimeType
+        }
+      }
+    },
+    imageCarousel[] {
+      _key,
+      caption,
+      alt,
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions,
+            lqip
+          }
+        },
+        hotspot,
+        crop
+      }
+    }
     }
 `)
 

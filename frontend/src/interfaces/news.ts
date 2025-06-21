@@ -1,5 +1,6 @@
 import { PortableTextBlock } from '@portabletext/types'
 import { SanityImage } from './sanityImage'
+import { Slide, Video } from '@/interfaces/event'
 
 export default interface News {
   slug: {
@@ -13,4 +14,6 @@ export default interface News {
   date: string
   time: string
   content?: PortableTextBlock[]
+  video: Video
+  imageCarousel: Slide[]
 }
