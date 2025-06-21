@@ -3,7 +3,6 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import Link from 'next/link'
 import { PortableTextBlock } from '@portabletext/types'
-import { stegaClean } from '@sanity/client/stega'
 
 const ptComponents: PortableTextComponents = {
   block: {
@@ -51,26 +50,26 @@ const ptComponents: PortableTextComponents = {
     },
   },
 }
-
-function cleanBlock(block: PortableTextBlock): PortableTextBlock {
-  // clean stega, so does not cause error
-  if (block._type === 'block' && Array.isArray(block.children)) {
-    return {
-      ...block,
-      children: block.children.map((child) => {
-        // only clean spans with text
-        if (child._type === 'span' && typeof child.text === 'string') {
-          return {
-            ...child,
-            text: stegaClean(child.text),
-          }
-        }
-        return child
-      }),
-    }
-  }
-  return block
-}
+//
+// function cleanBlock(block: PortableTextBlock): PortableTextBlock {
+//   // clean stega, so does not cause error
+//   if (block._type === 'block' && Array.isArray(block.children)) {
+//     return {
+//       ...block,
+//       children: block.children.map((child) => {
+//         // only clean spans with text
+//         if (child._type === 'span' && typeof child.text === 'string') {
+//           return {
+//             ...child,
+//             text: stegaClean(child.text),
+//           }
+//         }
+//         return child
+//       }),
+//     }
+//   }
+//   return block
+// }
 
 // quick fix, should probably be updated. Problem stems from when user copies text from another website
 // this causes stega encoding error
