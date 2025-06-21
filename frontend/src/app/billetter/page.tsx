@@ -1,8 +1,11 @@
-import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
-import { buyTickets1, buyTickets2 } from '@/mockdata/text'
 import BlackTitleBar from '@/components/ui/blackTitleBar/BlackTitleBar'
+import BuyFestivalPass from '@/components/ui/buyFestivalPass/BuyFestivalPass'
+import { Tickets } from '@/interfaces/tickets'
+import { getTickets } from '@/lib/sanity-cache'
+import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
-export default function Billetter() {
+export default async function Billetter() {
+  const ticketsData: Tickets = (await getTickets()) || []
   return (
     <section>
       <BlackTitleBar title="Billetter" />
@@ -16,8 +19,7 @@ export default function Billetter() {
         }
         content={
           <div className="bg-white flex flex-col gap-[40px] p-[20px] font-source text-[1.188rem] tablet:max-w-[594px] tablet:border border-secondary">
-            <p>{buyTickets1}</p>
-            <p>{buyTickets2}</p>
+            <CustomPortableText value={ticketsData?.section} />
           </div>
         }
       />

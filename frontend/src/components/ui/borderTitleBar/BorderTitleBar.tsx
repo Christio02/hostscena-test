@@ -1,4 +1,4 @@
-import { HiArrowLongRight } from 'react-icons/hi2'
+import { HiArrowLongLeft, HiArrowLongRight } from 'react-icons/hi2'
 import Link from 'next/link'
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
   onClick?: () => void
   borderTop?: boolean
   noPadding?: boolean
+  isArrowReversed?: boolean
 }
 
 export default function BorderTitleBar({
@@ -17,6 +18,7 @@ export default function BorderTitleBar({
   onClick,
   borderTop = true,
   noPadding = false,
+  isArrowReversed = false,
 }: Props) {
   const showLink = linkText && (linkUrl || onClick)
 
@@ -37,7 +39,7 @@ export default function BorderTitleBar({
           ) : (
             <button onClick={onClick} className="flex items-center gap-1 text-h6">
               {linkText!.toUpperCase()}
-              <HiArrowLongRight size={30} />
+              {isArrowReversed ? <HiArrowLongLeft size={30} /> : <HiArrowLongRight size={30} />}
             </button>
           ))}
       </div>

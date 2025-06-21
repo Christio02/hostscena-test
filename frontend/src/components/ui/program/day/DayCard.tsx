@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import SanityImage from '@/components/shared/CardImage'
 import Event from '@/interfaces/event'
 import Link from 'next/link'
 
@@ -8,11 +8,12 @@ interface Props {
 
 export default function DayCard({ event }: Props) {
   const { title, image, performer, startTime, endTime, location, slug } = event
+
   return (
-    <Link href={`/program/${slug}`} className="block">
+    <Link href={`/program/${slug.current}`} className="block">
       <div className="w-full border border-secondary hover-lift">
         <div className="relative w-full h-[190px] phone:h-[170px] tablet:h-[260px]">
-          <Image src={image} alt={title} fill className="object-cover w-full" priority />
+          <SanityImage imageData={image} title={title} />
         </div>
         <div className="flex flex-col justify-between px-[10px]">
           <div className="py-[10px] border-b border-secondary">

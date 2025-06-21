@@ -1,7 +1,7 @@
+import Marquee from '@/components/ui/marquee/Marquee'
+import type Location from '@/interfaces/location'
 import Image from 'next/image'
 import Link from 'next/link'
-import type Location from '@/interfaces/location'
-import Marquee from '@/components/ui/marquee/Marquee'
 
 interface Props {
   location: Location

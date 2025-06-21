@@ -20,7 +20,7 @@ export default function LocationContainer() {
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
-      speed={5000}
+      speed={8000}
     >
       {locations.map((loc) => (
         <SwiperSlide key={loc.name} style={{ width: '172px' }}>

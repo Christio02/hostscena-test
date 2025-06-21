@@ -2,15 +2,16 @@
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
 import type News from '@/interfaces/news'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
-import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
+import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
 interface Props {
   news: News
 }
 
 export default function NewsDetail({ news }: Props) {
-  const { title, tag, person, image, date, time, content } = news
+  const { title, tag, person, image, date, time, content /*video, imageCarousel -> To be used*/ } =
+    news
   const formattedDate = capitalizeFirstLetter(
     new Date(date).toLocaleDateString('no-NO', {
       weekday: 'long',
@@ -22,7 +23,7 @@ export default function NewsDetail({ news }: Props) {
   return (
     <>
       <div className="relative w-full h-[300px] mobile:h-[400px] tablet:h-[500px]">
-        <Image src={image} alt={title} fill className="object-cover" priority />
+        <Image src={image.asset.url} alt={title} fill className="object-cover" priority />
       </div>
 
       <div className="px-[20px]">
@@ -40,16 +41,7 @@ export default function NewsDetail({ news }: Props) {
 
       <div className="flex flex-col items-center justify-center w-full pt-[20px] px-[20px]">
         <div className="max-w-[650px] space-y-[40px]">
-          {content && (
-            <PortableText
-              value={content}
-              components={{
-                block: {
-                  normal: ({ children }) => <p className="mb-4">{children}</p>,
-                },
-              }}
-            />
-          )}
+          {content && <CustomPortableText value={content} />}
         </div>
       </div>
 

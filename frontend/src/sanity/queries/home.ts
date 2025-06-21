@@ -1,12 +1,12 @@
 import { defineQuery } from 'next-sanity'
 
 export const SINGLE_HOME_QUERY = defineQuery(`
-  *[_type == "home"][0] {
+  *[_type == "home" && !(_id in path("drafts.**"))][0] {
     _id,
     _type,
-    date,
-    location,
-    imageSnake[] {
+    startDate,
+    endDate,
+    imageGallery[] {
       _key,
       alt,
       asset->{
@@ -34,15 +34,16 @@ export const SINGLE_HOME_QUERY = defineQuery(`
 
 // query for just the header info
 export const HOME_HEADER_QUERY = defineQuery(`
-  *[_type == "home"][0] {
-    date,
-    location
+  *[_type == "home" && !(_id in path("drafts.**"))][0] {
+  startDate,
+  endDate,
+  location
   }
 `)
 
 // query for the image snake
 export const IMAGE_SNAKE_QUERY = defineQuery(`
-  *[_type == "home"][0].imageSnake[] {
+  *[_type == "home" && !(_id in path("drafts.**"))][0].imageGallery[] {
     _key,
     alt,
     asset->{
@@ -60,7 +61,7 @@ export const IMAGE_SNAKE_QUERY = defineQuery(`
 
 // query for the background video
 export const BACKGROUND_VIDEO_QUERY = defineQuery(`
-  *[_type == "home"][0].backgroundVideo {
+  *[_type == "home" && !(_id in path("drafts.**"))][0].backgroundVideo {
     asset->{
       _id,
       url,

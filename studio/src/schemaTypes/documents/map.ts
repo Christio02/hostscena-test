@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'map',
@@ -10,7 +10,10 @@ export default defineType({
       title: 'Lenke til Google Maps kart',
       type: 'url',
       description: 'Lim inn lenke til Google maps kart',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required()
+          .uri({scheme: ['http', 'https']})
+          .error('URLen må være i gyldig format'),
     }),
   ],
 })
