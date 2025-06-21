@@ -49,7 +49,7 @@ export default defineType({
                 ],
                 layout: 'dropdown',
               },
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Platform må velges'),
             },
             {
               name: 'someUrl',
@@ -58,7 +58,7 @@ export default defineType({
               description: 'Legg inn lenken til sosiale mediet',
               validation: (Rule) =>
                 Rule.required()
-                  .regex(/^https:\/\//)
+                  .uri({scheme: ['http', 'https']})
                   .error('Du må legge til hele lenken, med https:// foran'),
             },
           ],

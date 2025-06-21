@@ -9,7 +9,8 @@ export default defineType({
       name: 'title',
       title: 'Tittel',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().uppercase().error('Tittel er påkrevd og må være i store bokstaver'),
     }),
     defineField({
       name: 'slug',
@@ -27,14 +28,14 @@ export default defineType({
             .replace(/\s+/g, '-')
             .slice(0, 200),
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Slug må være generert'),
     }),
     defineField({
       name: 'image',
       title: 'Bilde',
       type: 'image',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Hovedbilde er påkrevd'),
     }),
 
     defineField({
@@ -56,7 +57,7 @@ export default defineType({
       options: {
         dateFormat: 'YYYY-MM-DD',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Dato er påkrevd'),
     }),
     defineField({
       name: 'time',
@@ -151,7 +152,7 @@ export default defineType({
               title: 'Bilde',
               type: 'image',
               options: {hotspot: true},
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Bilde er påkrevd'),
             },
             {
               name: 'caption',
@@ -164,6 +165,7 @@ export default defineType({
               title: 'Alt-tekst',
               type: 'string',
               description: 'Beskrivelse for skjermlesere',
+              validation: (Rule) => Rule.required().error('Alt-tekst er påkrevd'),
             },
           ],
           preview: {

@@ -29,7 +29,10 @@ export default defineType({
               name: 'url',
               title: 'Lenke',
               type: 'url',
-              validation: (Rule) => Rule.required().uri().error('Må være en gyldig url'),
+              validation: (Rule) =>
+                Rule.required()
+                  .uri({scheme: ['http', 'https']})
+                  .error('Må være en gyldig url'),
             },
           ],
         },

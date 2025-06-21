@@ -9,7 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Tittel',
       type: 'string',
-      validation: (Rule) => Rule.required().uppercase(),
+      validation: (Rule) => Rule.required().uppercase().error('Tittle må kun ha store bokstaver'),
     }),
     defineField({
       name: 'slug',
@@ -27,7 +27,7 @@ export default defineType({
             .replace(/\s+/g, '-')
             .slice(0, 200),
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('En slug må genereres'),
     }),
     defineField({
       name: 'image',
@@ -35,7 +35,7 @@ export default defineType({
       type: 'image',
       description: 'Hovedbilde for arrangementet',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Hovedbilde er påkrevd'),
     }),
     defineField({
       name: 'date',
@@ -44,7 +44,7 @@ export default defineType({
       options: {
         dateFormat: 'YYYY-MM-DD',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Startdato er påkrevd'),
     }),
     defineField({
       name: 'startTime',
@@ -65,6 +65,7 @@ export default defineType({
       title: 'Sted',
       type: 'string',
       description: 'Navn på lokale',
+      validation: (Rule) => Rule.required().error('Lokasjon for arrangmentet er påkrevd'),
     }),
     defineField({
       name: 'link',
@@ -96,7 +97,7 @@ export default defineType({
       title: 'Medvirkende',
       type: 'array',
       description: 'Legg til opptil 4 medvirkende personer',
-      validation: (Rule) => Rule.max(4),
+      validation: (Rule) => Rule.max(4).error('Maks 4 medvirkende'),
       of: [
         {
           type: 'object',
@@ -113,27 +114,27 @@ export default defineType({
                 sources: [],
                 accept: 'image/*',
               },
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Bilde av personen er påkrevd'),
             },
             {
               name: 'name',
               title: 'Navn',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Navn er påkrevd'),
             },
             {
               name: 'artistType',
               title: 'Artisttype',
               type: 'string',
               description: 'F.eks: "Vokalist", "Sanger", "Komponist", etc.',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Artisttype er påkrevd'),
             },
             {
               name: 'bio',
               title: 'Biografi',
               type: 'text',
               description: 'Kort beskrivelse av personen',
-              validation: (Rule) => Rule.max(500),
+              validation: (Rule) => Rule.max(500).error('Maks 500 bokstaver'),
             },
           ],
           preview: {
@@ -215,7 +216,7 @@ export default defineType({
       type: 'url',
       description:
         'Lim inn hele Spotify embed URL (eks `https://open.spotify.com/embed/playlist/…`). Ikke påkrevd',
-      validation: (Rule) => Rule.uri({allowRelative: false}),
+      validation: (Rule) => Rule.uri({scheme: ['http', 'https']}).error('Må ha riktig url'),
     }),
     defineField({
       name: 'imageCarousel',
@@ -232,7 +233,7 @@ export default defineType({
               title: 'Bilde',
               type: 'image',
               options: {hotspot: true},
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Bilde må legges til'),
             },
             {
               name: 'caption',
