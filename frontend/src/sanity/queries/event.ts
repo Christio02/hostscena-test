@@ -26,7 +26,33 @@ export const EVENT_QUERY = defineQuery(`
     location,
     link,
     tag,
-    content,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    sponsor,
     contributors[] {
       _key,
       name,
@@ -102,7 +128,33 @@ export const EVENT_BY_ID_QUERY = defineQuery(`
       hotspot,
       crop
     },
-    content,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    sponsor
     contributors[] {
       _key,
       name,
@@ -158,7 +210,7 @@ export const EVENT_BY_ID_QUERY = defineQuery(`
 // upcoming events
 export const UPCOMING_EVENTS_QUERY = defineQuery(`
   *[_type == "event" && date >= now() && !(_id in path("drafts.**"))] | order(date asc) {
-    _id,
+     _id,
     _type,
     title,
     date,
@@ -178,6 +230,82 @@ export const UPCOMING_EVENTS_QUERY = defineQuery(`
       },
       hotspot,
       crop
+    },
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    credits[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "reference": @.reference->{
+            _id,
+            _type,
+            slug
+          }
+        }
+      }
+    },
+    sponsor,
+    contributors[] {
+      _key,
+      name,
+      artistType,
+      bio,
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions,
+            lqip
+          }
+        },
+        hotspot,
+        crop
+      }
+    },
+    video {
+      title,
+      videoType,
+      youtubeUrl,
+      videoFile {
+        asset->{
+          _id,
+          url,
+          originalFilename,
+          mimeType
+        }
+      }
+    },
+    spotifyLink,
+    imageCarousel[] {
+      _key,
+      caption,
+      alt,
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions,
+            lqip
+          }
+        },
+        hotspot,
+        crop
+      }
     }
   }
 `)

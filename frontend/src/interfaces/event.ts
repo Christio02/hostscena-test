@@ -8,7 +8,7 @@ interface Contributor {
   bio?: string
 }
 
-interface Video {
+export interface Video {
   videoType: 'youtube' | 'upload'
   youtubeUrl?: string
   videoFile?: {
@@ -43,6 +43,8 @@ export default interface Event {
   link?: string
   tag?: string
   content?: PortableTextBlock[]
+  credits?: PortableTextBlock[]
+  sponsor?: string
   contributors?: Contributor[]
   video?: Video
   spotifyLink?: string

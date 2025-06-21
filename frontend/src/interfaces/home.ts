@@ -1,7 +1,6 @@
 export interface HomeHeaderProps {
   startDate: string
   endDate: string
-  location: string
 }
 
 export interface ImageDimensions {
@@ -20,7 +19,7 @@ export interface ImageAsset {
   metadata: ImageMetadata
 }
 
-export interface ImageSnakeItem {
+export interface ImageGalleryItem {
   _key: string
   alt: string
   asset: ImageAsset
@@ -41,6 +40,6 @@ export interface BackgroundVideo {
 }
 
 export interface HomeProps extends HomeHeaderProps {
-  imageSnake?: ImageSnakeItem[]
+  imageGallery?: ImageGalleryItem[]
   backgroundVideo?: BackgroundVideo
 }

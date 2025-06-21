@@ -3,10 +3,10 @@ import EventImageCarousel from '@/components/layout/event/EventImageCarousel'
 import BorderTitleBar from '@/components/ui/borderTitleBar/BorderTitleBar'
 import type Event from '@/interfaces/event'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
-import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HiArrowLongRight } from 'react-icons/hi2'
+import { CustomPortableText } from '@/components/shared/CustomPortableText'
 
 interface Props {
   event: Event
@@ -23,6 +23,8 @@ export default function EventDetail({ event }: Props) {
     location,
     link,
     content,
+    // credits, to be used
+    // sponsor, to be used
     contributors,
     video,
     spotifyLink,
@@ -73,16 +75,7 @@ export default function EventDetail({ event }: Props) {
       </div>
       <div className="flex flex-col items-center justify-center w-full pt-[40px] pb-[20px] px-[20px]">
         <div className="max-w-[650px] space-y-[40px]">
-          {content && (
-            <PortableText
-              value={content}
-              components={{
-                block: {
-                  normal: ({ children }) => <p>{children}</p>,
-                },
-              }}
-            />
-          )}
+          {content && <CustomPortableText value={content} />}
         </div>
       </div>
       {video && (

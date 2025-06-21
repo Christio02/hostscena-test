@@ -13,7 +13,7 @@ export default defineType({
       options: {
         dateFormat: 'DD-MM-YYYY',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Må ha startdato satt!'),
     }),
     defineField({
       name: 'endDate',
@@ -23,18 +23,11 @@ export default defineType({
       options: {
         dateFormat: 'DD-MM-YYYY',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Må ha sluttdato satt!'),
     }),
     defineField({
-      name: 'location',
-      title: 'Sted',
-      type: 'string',
-      description: 'Stedet til festivalen som vises i header',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'imageSnake',
-      title: 'Bilder for bildeslange',
+      name: 'imageGallery',
+      title: 'Bilder for galleri',
       type: 'array',
       of: [
         {
@@ -49,7 +42,7 @@ export default defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt tekst',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.required().error('Må legge til minst 1 bilde!').min(1),
             },
           ],
         },
@@ -66,7 +59,18 @@ export default defineType({
       options: {
         accept: 'video/*',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Bakgrunnsvideo må legges til!'),
     }),
   ],
+  preview: {
+    select: {
+      startDate: 'startDate',
+      endDate: 'endDate',
+    },
+    prepare: ({startDate, endDate}) => {
+      return {
+        title: `${startDate} - ${endDate}`,
+      }
+    },
+  },
 })

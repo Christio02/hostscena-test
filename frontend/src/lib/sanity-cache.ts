@@ -2,13 +2,15 @@ import Event from '@/interfaces/event'
 import type { HomeProps } from '@/interfaces/home'
 import News from '@/interfaces/news'
 import { sanityFetch } from '@/sanity/lib/live'
-import { SINGLE_CONTACT_INFO_QUERY } from '@/sanity/queries/contactInfo'
 import { EVENT_QUERY } from '@/sanity/queries/event'
 import { SINGLE_HOME_QUERY } from '@/sanity/queries/home'
 import { SINGLE_MAP_QUERY } from '@/sanity/queries/map'
 import { ALL_NEWS_QUERY } from '@/sanity/queries/news'
 import { TICKETS_QUERY } from '@/sanity/queries/tickets'
 import { cache } from 'react'
+import { SINGLE_CONTACT_FOOTER_QUERY } from '@/sanity/queries/contactFooter'
+import { CONTACT_PERSONS_QUERY } from '@/sanity/queries/contactPersons'
+import { ARCHIVE_QUERY } from '@/sanity/queries/archive'
 
 export const getEvents = cache(async (): Promise<Event[]> => {
   try {
@@ -40,12 +42,22 @@ export const getNews = cache(async (): Promise<News[]> => {
   }
 })
 
-export const getContactInfo = cache(async () => {
+export const getContactFooterInfo = cache(async () => {
   try {
-    const { data } = await sanityFetch({ query: SINGLE_CONTACT_INFO_QUERY })
+    const { data } = await sanityFetch({ query: SINGLE_CONTACT_FOOTER_QUERY })
     return data || null
   } catch (error) {
-    console.error('Error fetching contact info:', error)
+    console.error('Error fetching contact footer:', error)
+    return null
+  }
+})
+
+export const getContactPersons = cache(async () => {
+  try {
+    const { data } = await sanityFetch({ query: CONTACT_PERSONS_QUERY })
+    return data || null
+  } catch (error) {
+    console.error('Error fetching contact persons:', error)
     return null
   }
 })
@@ -70,6 +82,15 @@ export const getMap = cache(async () => {
   }
 })
 
+export const getArchive = cache(async () => {
+  try {
+    const { data } = await sanityFetch({ query: ARCHIVE_QUERY })
+    return data || null
+  } catch (error) {
+    console.error('Error fetching archive:', error)
+    return null
+  }
+})
 // Utility functions
 export const getEventBySlug = cache(async (slug: string): Promise<Event | null> => {
   const events = await getEvents()

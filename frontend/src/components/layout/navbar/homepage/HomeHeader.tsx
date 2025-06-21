@@ -1,8 +1,9 @@
 import { HomeHeaderProps } from '@/interfaces/home'
 import Image from 'next/image'
+
 const logo = '/assets/images/logo/logo_no_border.svg'
 
-export default function HomeHeader({ startDate, endDate, location }: HomeHeaderProps) {
+export default function HomeHeader({ startDate, endDate }: HomeHeaderProps) {
   const [startYear, startMonth, startDay] = startDate.split('-')
   const [, endMonth, endDay] = endDate.split('-')
 
@@ -25,7 +26,7 @@ export default function HomeHeader({ startDate, endDate, location }: HomeHeaderP
             <span className="hidden mobile:inline">{year}</span>
           </p>
           <p className="phone:text-[40px] mobile:text-[29px] text-[27px] phone:px-[15px] px-[12px] pt-[5px] phone:py-[3px] border border-secondary mobile:w-fit">
-            {location}
+            Ålesund
           </p>
         </div>
       </div>
