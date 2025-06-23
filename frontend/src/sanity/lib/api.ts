@@ -20,6 +20,3 @@ export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-06
 
 export const studioUrl =
   process.env.NEXT_PUBLIC_SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
-// token.ts
-export const serverToken = process.env.SANITY_API_READ_TOKEN! // only on the server
-export const browserToken = process.env.NEXT_PUBLIC_SANITY_LIVE_TOKEN! // in the client
