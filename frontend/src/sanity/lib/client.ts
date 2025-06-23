@@ -1,7 +1,7 @@
 import { createClient } from 'next-sanity'
 
 import { apiVersion, dataset, projectId, studioUrl } from './api'
-import { token } from './token'
+import { serverToken } from './token'
 
 export const client = createClient({
   projectId,
@@ -9,7 +9,7 @@ export const client = createClient({
   apiVersion,
   useCdn: true,
   perspective: 'published',
-  token,
+  token: serverToken,
   stega: {
     studioUrl,
     // Set logger to 'console' for more verbose logging
