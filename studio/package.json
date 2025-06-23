@@ -18,12 +18,14 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/assist": "^4.3.2",
     "@sanity/vision": "^3.93.0",
     "react": "^19.1",
     "react-dom": "^19.1",
     "react-is": "^19.1.0",
     "sanity": "^3.93.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "sanity-plugin-asset-source-unsplash": "^3.0.1"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
