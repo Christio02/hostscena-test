@@ -3,8 +3,9 @@ import { client } from './client'
 import { browserToken, serverToken } from './token'
 
 export const { sanityFetch, SanityLive } = defineLive({
-  client,
-
-  browserToken: browserToken,
-  serverToken: serverToken,
+  client: client.withConfig({
+    useCdn: false, // Important for live content
+  }),
+  browserToken,
+  serverToken,
 })
