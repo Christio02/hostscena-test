@@ -1,12 +1,12 @@
+import {assist} from '@sanity/assist'
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
+import {unsplashImageAsset} from 'sanity-plugin-asset-source-unsplash'
 import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 import {resolve} from './src/presentation/resolve'
 import {schemaTypes} from './src/schemaTypes'
 import {structure} from './src/structure'
-import {unsplashImageAsset} from 'sanity-plugin-asset-source-unsplash'
-import {assist} from '@sanity/assist'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'jbwzfx7e'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
@@ -24,7 +24,6 @@ export default defineConfig({
     structureTool({structure}),
     unsplashImageAsset(),
     assist(),
-    visionTool(),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
