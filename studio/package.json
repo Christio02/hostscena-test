@@ -23,13 +23,13 @@
     "react-dom": "^19.1",
     "react-is": "^19.1.0",
     "sanity": "^3.93.0",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
     "@types/react": "^19.1",
-    "eslint": "^9.28",
-    "prettier": "^3.5",
+    "eslint": "^9.29",
+    "prettier": "^3.6",
     "typescript": "^5.8"
   },
   "prettier": {
