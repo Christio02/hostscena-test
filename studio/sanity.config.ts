@@ -10,6 +10,7 @@ const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'jbwzfx7e'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 const apiVersion = process.env.SANITY_STUDIO_API_VERSION || '2025-06-03'
 const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
+
 export default defineConfig({
   name: 'default',
   title: 'Høstscena',
