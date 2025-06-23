@@ -31,7 +31,7 @@ export default defineConfig({
         preview: '/',
         previewMode: {
           enable: '/api/draft-mode/enable',
-          disable: 'api/draft-mode/disable',
+          disable: '/api/draft-mode/disable',
         },
       },
     }),
