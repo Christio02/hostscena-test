@@ -1,3 +1,4 @@
+'use client'
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
@@ -26,7 +27,7 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: previewOrigin,
+        origin: 'https://deploy-preview-25--hostscena.netlify.app',
         preview: '/',
         previewMode: {
           enable: '/api/draft-mode/enable',
