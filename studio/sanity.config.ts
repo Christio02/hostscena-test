@@ -9,7 +9,7 @@ import {structure} from './src/structure'
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'jbwzfx7e'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 const apiVersion = process.env.SANITY_STUDIO_API_VERSION || '2025-06-03'
-const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
+const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'http://localhost:3000'
 
 export default defineConfig({
   name: 'default',
@@ -27,6 +27,7 @@ export default defineConfig({
       resolve,
       previewUrl: {
         origin: previewOrigin,
+        preview: '/',
         previewMode: {
           enable: '/api/draft-mode/enable',
           disable: 'api/draft-mode/disable',
