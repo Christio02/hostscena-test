@@ -27,7 +27,7 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: 'https://deploy-preview-25--hostscena.netlify.app',
+        origin: 'https://deploy-preview-25--hostscena.netlify.app/',
         preview: '/',
         previewMode: {
           enable: '/api/draft-mode/enable',
