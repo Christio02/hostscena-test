@@ -114,7 +114,6 @@ export const getNewsBySlug = cache(async (slug: string): Promise<News | null> =>
   return news.find((item: News) => item.slug.current === slug) || null
 })
 
-// Generic cached query function
 export function createCachedSanityQuery<T>(query: string) {
   return cache(async (): Promise<T | null> => {
     try {

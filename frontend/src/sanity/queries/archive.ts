@@ -8,5 +8,4 @@ export const ARCHIVE_QUERY = defineQuery(`
      url
    }
   } | order(archiveUrls[0].year desc)
-
 `)
