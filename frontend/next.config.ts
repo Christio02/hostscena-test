@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN', // or 'ALLOWALL'
+            value: 'ALLOWALL', // or 'ALLOWALL'
           },
           {
             key: 'Access-Control-Allow-Origin',
@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            value: 'ALLOWALL',
           },
         ],
       },

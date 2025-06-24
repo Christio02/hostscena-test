@@ -30,7 +30,7 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: 'https://hostscena-test-frontend-9ddnwctuv-christio02s-projects.vercel.app/',
+        origin: 'https://hostscena-test-frontend.vercel.app/',
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
