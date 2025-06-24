@@ -16,23 +16,28 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            // the order here doesn’t matter—just make sure you cover everything:
             value: [
-              // allow your app & sanity CDN
+              // Allow your app & sanity CDN
               "default-src 'self' https://cdn.sanity.io",
-              // allow the Sanity Content-Lake & socket
-              "connect-src 'self' https://jbwzfx7e.api.sanity.io wss://jbwzfx7e.api.sanity.io",
-              // allow fonts & styles if you need them
+              // CRITICAL: Allow inline scripts for Next.js and Sanity
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io",
+              // Allow WebSocket connections to Sanity
+              "connect-src 'self' https://*.api.sanity.io wss://*.api.sanity.io https://jbwzfx7e.api.sanity.io wss://jbwzfx7e.api.sanity.io",
+              // Allow fonts & styles
               "font-src 'self' https://fonts.gstatic.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              // frame-ancestors lets Studio iframe you
+              // Allow images from Sanity CDN
+              "img-src 'self' data: https://cdn.sanity.io",
+              // Frame ancestors for Studio iframe
               "frame-ancestors 'self' https://hostscena.sanity.studio",
+              // Allow object and embed if needed
+              "object-src 'none'",
+              "base-uri 'self'",
             ].join('; '),
           },
         ],
       },
       {
-        // still need CORS on your draft-mode route
         source: '/api/draft-mode/:path*',
         headers: [
           {
