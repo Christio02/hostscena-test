@@ -1,8 +1,8 @@
 [build]
 base = "frontend"
 command = "npm ci && npm run build"
-[[plugins]]
-package = "@netlify/plugin-nextjs"
+publish = ".next"
+
 
 [[headers]]
 for = "/api/draft-mode/*"
