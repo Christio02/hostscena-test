@@ -1,0 +1,21 @@
+# └── netlify.toml  ← put this in the repo root
+
+[build]
+# point at your Next.js workspace
+base = "frontend"
+# install & build
+command = "npm ci && npm run build"
+# Next.js on Netlify will drop its prerendered site into ".netlify"
+# the plugin will automatically pick it up; you don't need to set `publish`
+# but if you have a custom publish dir:
+# publish = "frontend/.netlify"
+
+# use the official Next.js plugin to wire up SSR, Edge Functions, etc.
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = ""
+Content-Security-Policy = "frame-ancestors 'self' http://localhost:3333"
