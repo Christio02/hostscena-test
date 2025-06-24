@@ -16,4 +16,4 @@ Access-Control-Allow-Headers = "Content-Type, Authorization"
 for = "/*"
 [headers.values]
 X-Frame-Options = ""
-Content-Security-Policy = "frame-ancestors 'self' https://hostscena.sanity.studio; connect-src 'self' https://jbwzfx7e.api.sanity.io wss://jbwzfx7e.api.sanity.io"
+Content-Security-Policy = "frame-ancestors 'self' https://hostscena.sanity.studio http://localhost:3333; connect-src 'self' https://jbwzfx7e.api.sanity.io wss://jbwzfx7e.api.sanity.io"
