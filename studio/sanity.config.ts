@@ -30,7 +30,7 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: 'https://hostscena-test-frontend.vercel.app/',
+        origin: SANITY_STUDIO_PREVIEW_URL,
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
