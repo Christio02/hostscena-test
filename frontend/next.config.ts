@@ -1,7 +1,6 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -10,19 +9,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
   async headers() {
     return [
       {
+        // More specific path for draft mode API
         source: '/api/draft-mode/:path*',
         headers: [
           {
             key: 'X-Frame-Options',
-            value: 'ALLOWALL', // or 'ALLOWALL'
+            value: 'SAMEORIGIN', // Changed from ALLOWALL
           },
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*', // be more specific in production
+            value: 'https://hostscena.sanity.studio', // Specific origin instead of *
           },
           {
             key: 'Access-Control-Allow-Methods',
@@ -30,16 +29,33 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization',
+            value: 'Content-Type, Authorization, Cookie',
+          },
+          {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true', // Important for cookies
+          },
+          {
+            key: 'SameSite',
+            value: 'None', // Allow cross-site cookies
           },
         ],
       },
       {
+        // For the main site
         source: '/(.*)',
         headers: [
           {
             key: 'X-Frame-Options',
-            value: 'ALLOWALL',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://hostscena.sanity.studio',
+          },
+          {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true',
           },
         ],
       },
