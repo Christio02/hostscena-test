@@ -9,7 +9,7 @@ const { GET: enableDraftMode } = defineEnableDraftMode({
   client: client.withConfig({ token }),
 })
 
-const PREVIEW_SECRET = process.env.SANITY_PREVIEW_SECRET!
+const PREVIEW_SECRET = process.env.SANITY_STUDIO_PREVIEW_SECRET!
 
 /* public route export */
 export async function GET(req: NextRequest) {

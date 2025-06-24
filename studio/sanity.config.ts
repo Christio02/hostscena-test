@@ -32,7 +32,7 @@ export default defineConfig({
       previewUrl: {
         origin: SANITY_STUDIO_PREVIEW_URL,
         previewMode: {
-          enable: `/api/draft-mode/enable?secret=${process.env.SANITY_PREVIEW_SECRET!}`,
+          enable: `/api/draft-mode/enable?secret=${process.env.SANITY_STUDIO_PREVIEW_SECRET!}`,
         },
       },
     }),
