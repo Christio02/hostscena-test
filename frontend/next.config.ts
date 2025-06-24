@@ -12,11 +12,31 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            // the order here doesn’t matter—just make sure you cover everything:
+            value: [
+              // allow your app & sanity CDN
+              "default-src 'self' https://cdn.sanity.io",
+              // allow the Sanity Content-Lake & socket
+              "connect-src 'self' https://jbwzfx7e.api.sanity.io wss://jbwzfx7e.api.sanity.io",
+              // allow fonts & styles if you need them
+              "font-src 'self' https://fonts.gstatic.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              // frame-ancestors lets Studio iframe you
+              "frame-ancestors 'self' https://hostscena.sanity.studio",
+            ].join('; '),
+          },
+        ],
+      },
+      {
+        // still need CORS on your draft-mode route
         source: '/api/draft-mode/:path*',
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            // must exactly match your Studio origin (no wildcards!)
             value: 'https://hostscena.sanity.studio',
           },
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
@@ -24,16 +44,6 @@ const nextConfig: NextConfig = {
           {
             key: 'Access-Control-Allow-Headers',
             value: 'Content-Type, Authorization',
-          },
-        ],
-      },
-      {
-        // still need to let Studio iframe your pages
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://hostscena.sanity.studio",
           },
         ],
       },
