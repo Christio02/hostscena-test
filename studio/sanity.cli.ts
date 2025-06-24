@@ -9,6 +9,6 @@ const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
 export default defineCliConfig({
   api: {projectId, dataset},
-  studioHost: 'hostscena',
+  studioHost: 'https://hostscena.sanity.studio',
   autoUpdates: true,
 })
